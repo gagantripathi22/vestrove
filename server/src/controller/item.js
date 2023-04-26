@@ -6,6 +6,7 @@ const addItem = async (req, res) => {
     price: req.body.price,
     category: req.body.category,
     image: req.body.image,
+    addedAt: new Date(),
   });
   try {
     const dataToSave = await data.save();

@@ -18,6 +18,6 @@ router.delete(
   userController.removeFromWishlist
 );
 
-router.get("/login", userController.login);
+router.post("/login", userController.login);
 
 module.exports = router;

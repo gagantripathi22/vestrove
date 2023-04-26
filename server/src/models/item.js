@@ -16,6 +16,9 @@ const itemSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  addedAt: {
+    type: Date,
+  },
 });
 
 module.exports = mongoose.model("Item", itemSchema);

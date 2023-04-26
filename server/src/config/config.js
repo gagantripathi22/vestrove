@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const cors = require("cors");
 const userRoute = require("../routes/user.js");
 const itemRoute = require("../routes/item");
 const adminRoute = require("../routes/admin");
@@ -20,6 +21,8 @@ database.on("connected", () => {
 const app = express();
 
 app.use(express.json());
+
+app.use(cors());
 
 const port = 8080;
 
