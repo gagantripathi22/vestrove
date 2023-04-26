@@ -1,0 +1,64 @@
+.headerContainer {
+  height: 16vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.headerSpacing {
+  width: 100%;
+  max-width: 90rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.heading {
+  font-family: "Italiana";
+  font-size: 36px;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.userControls {
+  position: absolute;
+  margin-top: auto;
+  margin-bottom: auto;
+  right: 0px;
+}
+
+.userControlIcon:last-child {
+  margin-right: 0px;
+}
+
+.navbarContainer {
+  width: auto;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbarItem {
+  margin-right: 50px;
+  cursor: pointer;
+}
+
+.navbarItem:last-child {
+  margin-right: 0px;
+}
+
+.navbarItemTitle {
+  font-weight: 400;
+  font-family: "Jost";
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.userControlIcon {
+  margin-right: 25px;
+  cursor: pointer;
+}

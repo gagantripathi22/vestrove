@@ -1,0 +1,47 @@
+.footerContainer {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  background-color: #d9d9d9;
+  padding: 80px 0;
+}
+
+.footerSpacing {
+  width: 100%;
+  max-width: 90rem;
+  height: 100%;
+}
+
+.footerHeading {
+  font-family: "Italiana";
+  font-weight: 400;
+  font-size: 64px;
+  color: #787878;
+  cursor: pointer;
+}
+
+.navbarContainer {
+  width: auto;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbarItem {
+  margin-right: 50px;
+  cursor: pointer;
+}
+
+.navbarItem:last-child {
+  margin-right: 0px;
+}
+
+.navbarItemTitle {
+  font-weight: 400;
+  font-family: "Jost";
+  color: #787878;
+  font-size: 15px;
+  text-transform: uppercase;
+}
