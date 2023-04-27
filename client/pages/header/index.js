@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerSpacing}>
-        <h1 className={styles.heading}>sevenstop</h1>
+        <h1 className={styles.heading}>seven/stop</h1>
         <Navbar />
         <div className={styles.userControls}>
           <Image className={styles.userControlIcon} src={UserIcon} />

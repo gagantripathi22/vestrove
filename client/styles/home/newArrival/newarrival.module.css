@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  padding: 0 20px;
 }
 
 .newArrivalSpacing {
@@ -13,7 +14,7 @@
 
 .sectionTitle {
   font-family: "Jost";
-  font-weight: 500;
+  font-weight: 400;
   color: black;
   font-size: 24px;
 }
@@ -47,5 +48,5 @@
   padding: 10px 0px;
   font-family: "Jost";
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
 }

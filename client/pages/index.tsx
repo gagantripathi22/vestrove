@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import axios from "../services/axiosInstance";
 import styles from "../styles/home/index.module.css";
 import HomeComponent from "./home/index";
+import NormalCategory from "./normalCategoryPage/index";
 import Header from "./header/index";
 import Footer from "./footer/index";
 
@@ -33,6 +34,7 @@ export default function Home() {
     <div className={"mainContainer"}>
       <Header />
       <HomeComponent />
+      {/* <NormalCategory /> */}
       <Footer />
     </div>
   );

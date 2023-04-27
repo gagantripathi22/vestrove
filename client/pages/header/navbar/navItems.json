@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "women",
+    "subcategories": [
+      {
+        "id": 1,
+        "name": "Jeans"
+      },
+      {
+        "id": 2,
+        "name": "Shorts"
+      },
+      {
+        "id": 3,
+        "name": "Pants"
+      },
+      {
+        "id": 4,
+        "name": "Outwear"
+      },
+      {
+        "id": 5,
+        "name": "Sweatshirts"
+      },
+      {
+        "id": 6,
+        "name": "Tops"
+      },
+      {
+        "id": 7,
+        "name": "Jumpsuits"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "men",
+    "subcategories": [
+      {
+        "id": 1,
+        "name": "Jeans"
+      },
+      {
+        "id": 2,
+        "name": "Pants"
+      },
+      {
+        "id": 3,
+        "name": "Shorts"
+      },
+      {
+        "id": 4,
+        "name": "Jackets"
+      },
+      {
+        "id": 5,
+        "name": "Sweatshirts"
+      },
+      {
+        "id": 6,
+        "name": "Shirts"
+      },
+      {
+        "id": 7,
+        "name": "T-Shirts"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "watches"
+  }
+]

@@ -1,8 +1,9 @@
 .headerContainer {
-  height: 16vh;
+  height: 190px;
   width: 100%;
   display: flex;
   justify-content: center;
+  padding: 0 20px;
 }
 
 .headerSpacing {
@@ -18,8 +19,8 @@
 
 .heading {
   font-family: "Italiana";
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 42px;
+  /* font-weight: 400; */
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -29,6 +30,8 @@
   margin-top: auto;
   margin-bottom: auto;
   right: 0px;
+  display: flex;
+  align-items: center;
 }
 
 .userControlIcon:last-child {
@@ -37,13 +40,17 @@
 
 .navbarContainer {
   width: auto;
-  margin-top: 18px;
+  margin-top: 25px;
   display: flex;
   flex-direction: row;
 }
 
+.navbarItemContainer {
+  width: fit-content;
+}
+
 .navbarItem {
-  margin-right: 50px;
+  padding: 0 25px;
   cursor: pointer;
 }
 
@@ -61,4 +68,84 @@
 .userControlIcon {
   margin-right: 25px;
   cursor: pointer;
+}
+
+.navbarExpandSpacing {
+  height: 100%;
+  width: 100%;
+  max-width: 90rem;
+  margin: 0 auto;
+  padding: 40px 100px 0px 100px;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbarExpandContainer {
+  position: absolute;
+  height: 300px;
+  width: 100vw;
+  top: 145px;
+  background-color: white;
+  z-index: 99;
+  border-bottom: 3px solid rgb(240, 240, 240);
+  transition: 0.2s;
+  opacity: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.navbarExpandVisible {
+  opacity: 1;
+  z-index: 99;
+}
+
+.navSubItemContainer {
+  display: grid;
+  grid-template-rows: 50px 50px 50px 50px;
+  grid-template-columns: 250px 250px;
+  transition: 0.2s;
+}
+
+.navSubItem {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: "Jost";
+  font-weight: 400;
+}
+
+.navSubItemText {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.categoryNewArrivalContainer {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  padding-bottom: 20px;
+}
+
+.categoryNewArrivalItem {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(235, 235, 235);
+  position: relative;
+  cursor: pointer;
+}
+
+.categoryNewArrivalItemImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.categoryNewArrivalItemText {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-family: "Jost";
 }
