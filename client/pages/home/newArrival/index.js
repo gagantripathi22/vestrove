@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styles from "../../../styles/home/newArrival/newarrival.module.css";
+import ItemList from "../../components/listItem/index";
+import ListItem from "../../components/listItem/index";
 
 const NewArrivals = () => {
   const [newArrivalData, setNewArrivalData] = useState([{}, {}, {}, {}, {}]);
@@ -9,15 +11,7 @@ const NewArrivals = () => {
         <div className={styles.sectionTitle}>New Arrivals</div>
         <div className={styles.newArrivalList}>
           {newArrivalData.map((item) => {
-            return (
-              <div className={styles.newArrivalItem}>
-                <div className={styles.newArrivalItemImage}></div>
-                <div className={styles.newArrivalItemDetail}>
-                  <div className={styles.newArrivalItemTitle}>Men Short</div>
-                  <div className={styles.newArrivalItemPrice}>Rs. 1299</div>
-                </div>
-              </div>
-            );
+            return <ListItem />;
           })}
         </div>
       </div>

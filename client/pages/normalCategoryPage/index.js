@@ -1,8 +1,28 @@
-import React from "react";
-import styles from "../../styles/normalCategoryPage/normalcategorypage.module.css";
+import React, { useState } from "react";
+import styles from "../../styles/normalCategoryPage/normalcategorypage.module.scss";
 import CheckBoxArea from "../components/checkboxArea/index";
+import ListItem from "../components/listItem";
 
 const NormalCategoryPage = () => {
+  const [itemList, setItemList] = useState([
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ]);
   return (
     <div className={styles.normalCatContainer}>
       <div className={styles.sectionHeading}>women's clothing</div>
@@ -10,7 +30,68 @@ const NormalCategoryPage = () => {
         <div className={styles.filterSection}>
           <CheckBoxArea sectionTitle="Type" />
         </div>
-        <div className={styles.itemListSection}></div>
+        <div className={styles.itemListSection}>
+          {itemList.map((item) => {
+            return (
+              <div className={styles.listItem} style={{ width: 300 }}>
+                <div className={styles.listItemImage}></div>
+                <div className={styles.listItemDetail}>
+                  <div className={styles.newArrivalItemTitle}>Men Short</div>
+                  <div className={styles.newArrivalItemPrice}>Rs. 1299</div>
+                </div>
+              </div>
+            );
+          })}
+          {/* <div
+            style={{
+              height: 200,
+              width: 200,
+              margin: 20,
+              backgroundColor: "grey",
+            }}
+          ></div>
+
+          <div
+            style={{
+              height: 200,
+              width: 200,
+              margin: 20,
+              backgroundColor: "grey",
+            }}
+          ></div>
+          <div
+            style={{
+              height: 200,
+              width: 200,
+              margin: 20,
+              backgroundColor: "grey",
+            }}
+          ></div>
+          <div
+            style={{
+              height: 200,
+              width: 200,
+              margin: 20,
+              backgroundColor: "grey",
+            }}
+          ></div>
+          <div
+            style={{
+              height: 200,
+              width: 200,
+              margin: 20,
+              backgroundColor: "grey",
+            }}
+          ></div>
+          <div
+            style={{
+              height: 200,
+              width: 200,
+              margin: 20,
+              backgroundColor: "grey",
+            }}
+          ></div> */}
+        </div>
       </div>
     </div>
   );

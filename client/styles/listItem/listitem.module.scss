@@ -1,0 +1,33 @@
+@keyframes itemRenderAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.listItem {
+  width: 234px;
+  margin-right: 30px;
+  cursor: pointer;
+  // animation: itemRenderAnimation 2s;
+  // animation-fill-mode: forwards;
+}
+
+.listItem:last-child {
+  margin-right: 0;
+}
+
+.listItemImage {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background-color: rgb(235, 235, 235);
+}
+
+.listItemDetail {
+  padding: 10px 0px;
+  font-family: "Jost";
+  font-size: 14px;
+  font-weight: 400;
+}

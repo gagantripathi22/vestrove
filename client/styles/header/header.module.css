@@ -32,6 +32,7 @@
   right: 0px;
   display: flex;
   align-items: center;
+  margin-right: 13px;
 }
 
 .userControlIcon:last-child {
@@ -65,8 +66,12 @@
   text-transform: uppercase;
 }
 
+.useControlIconSpacing {
+  padding: 0 10px;
+}
+
 .userControlIcon {
-  margin-right: 25px;
+  /* margin-right: 10px; */
   cursor: pointer;
 }
 
@@ -84,7 +89,7 @@
   position: absolute;
   height: 300px;
   width: 100vw;
-  top: 145px;
+  top: 140px;
   background-color: white;
   z-index: 99;
   border-bottom: 3px solid rgb(240, 240, 240);
@@ -105,6 +110,7 @@
   grid-template-rows: 50px 50px 50px 50px;
   grid-template-columns: 250px 250px;
   transition: 0.2s;
+  margin-right: 30px;
 }
 
 .navSubItem {
@@ -112,11 +118,28 @@
   margin-bottom: 10px;
   font-family: "Jost";
   font-weight: 400;
+  /* background-color: aqua; */
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.navSubItem:hover .navSubItemHoverEffect {
+  width: 100%;
+}
+.navSubItemHoverEffect {
+  position: absolute;
+  height: 100%;
+  width: 0px;
+  background-color: rgb(242, 242, 242);
+  transition: 0.2s;
 }
 
 .navSubItemText {
-  cursor: pointer;
   width: fit-content;
+  z-index: 69;
+  margin-left: 10px;
 }
 
 .categoryNewArrivalContainer {
@@ -148,4 +171,105 @@
   background-color: black;
   color: white;
   font-family: "Jost";
+}
+
+.userControlExpand {
+  position: absolute;
+  /* height: 300px; */
+  width: 250px;
+  right: -15px;
+  top: 35px;
+  border: 1px solid rgb(235, 235, 235);
+  /* border-top: 1px solid rgb(235, 235, 235);
+  border-bottom: 1px solid rgb(235, 235, 235); */
+  background-color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+  z-index: 69;
+  transition: 0.2s;
+  opacity: 0;
+}
+
+.userControlExpandVisible {
+  opacity: 1;
+}
+
+.userControlExpandArrow {
+  position: absolute;
+  background-color: white;
+  border: 1px solid rgb(235, 235, 235);
+  height: 45px;
+  width: 45px;
+  top: -3px;
+  transform: rotate(45deg);
+  transition: 0.2s;
+}
+
+.arrowExtraFiller {
+  position: absolute;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  z-index: 65;
+}
+
+.userControlExpandContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  z-index: 79;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+}
+
+.userControlExpandHeading {
+  font-family: "Jost";
+  font-weight: 500;
+  font-size: 14px;
+  width: 100%;
+  text-align: center;
+  margin-top: 25px;
+  text-transform: uppercase;
+  height: fit-content;
+}
+
+.userControlExpandItemList {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 25px;
+}
+
+.userControlExpandItem {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.userControlExpandItem:hover .useControlExpandItemHover {
+  width: 100%;
+}
+
+.userControlExpandItemName {
+  font-family: "Jost";
+  font-size: 14px;
+  z-index: 55;
+}
+
+.useControlExpandItemHover {
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background-color: rgb(242, 242, 242);
+  left: 0;
+  transition: 0.2s;
+  z-index: 50;
 }

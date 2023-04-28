@@ -33,8 +33,8 @@ export default function Home() {
   return (
     <div className={"mainContainer"}>
       <Header />
-      <HomeComponent />
-      {/* <NormalCategory /> */}
+      {/* <HomeComponent /> */}
+      <NormalCategory />
       <Footer />
     </div>
   );

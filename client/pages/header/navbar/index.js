@@ -30,6 +30,7 @@ const Navbar = () => {
           return (
             <div className={styles.navSubItem}>
               <div className={styles.navSubItemText}>{subcat.name}</div>
+              <div className={styles.navSubItemHoverEffect}></div>
             </div>
           );
         })}
