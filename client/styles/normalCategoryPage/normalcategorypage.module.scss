@@ -40,12 +40,7 @@
 @for $i from 1 through 50 {
   .listItem:nth-child(#{$i}) {
     animation-delay: 100ms * $i;
-    // opacity: 0.1 * $i;
   }
-
-  // .listItem:nth-child(#{$i + 1}) {
-  //   background-color: rgb($i, $i, $i);
-  // }
 }
 
 .sectionHeading {

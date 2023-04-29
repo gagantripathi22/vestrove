@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "../../styles/normalCategoryPage/normalcategorypage.module.scss";
 import CheckBoxArea from "../components/checkboxArea/index";
-import ListItem from "../components/listItem";
 
 const NormalCategoryPage = () => {
   const [itemList, setItemList] = useState([
@@ -42,55 +41,6 @@ const NormalCategoryPage = () => {
               </div>
             );
           })}
-          {/* <div
-            style={{
-              height: 200,
-              width: 200,
-              margin: 20,
-              backgroundColor: "grey",
-            }}
-          ></div>
-
-          <div
-            style={{
-              height: 200,
-              width: 200,
-              margin: 20,
-              backgroundColor: "grey",
-            }}
-          ></div>
-          <div
-            style={{
-              height: 200,
-              width: 200,
-              margin: 20,
-              backgroundColor: "grey",
-            }}
-          ></div>
-          <div
-            style={{
-              height: 200,
-              width: 200,
-              margin: 20,
-              backgroundColor: "grey",
-            }}
-          ></div>
-          <div
-            style={{
-              height: 200,
-              width: 200,
-              margin: 20,
-              backgroundColor: "grey",
-            }}
-          ></div>
-          <div
-            style={{
-              height: 200,
-              width: 200,
-              margin: 20,
-              backgroundColor: "grey",
-            }}
-          ></div> */}
         </div>
       </div>
     </div>

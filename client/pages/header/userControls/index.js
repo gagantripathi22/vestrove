@@ -44,16 +44,18 @@ const UserControls = () => {
   };
 
   return (
-    <div className={styles.userControls}>
+    <div
+      className={styles.userControls}
+      onMouseLeave={() => {
+        setCurrentControlItem(null);
+        setCurrentUserControlExpandState("userControlExpand");
+      }}
+    >
       <div
         className={styles.useControlIconSpacing}
         onMouseEnter={() => {
           setCurrentControlItem("profile");
           setCurrentUserControlExpandState("userControlExpandVisible");
-        }}
-        onMouseLeave={() => {
-          setCurrentControlItem(null);
-          setCurrentUserControlExpandState("userControlExpand");
         }}
       >
         <Image className={styles.userControlIcon} src={UserIcon} />
@@ -64,10 +66,6 @@ const UserControls = () => {
           setCurrentControlItem("wishlist");
           setCurrentUserControlExpandState("userControlExpandVisible");
         }}
-        onMouseLeave={() => {
-          setCurrentControlItem(null);
-          setCurrentUserControlExpandState("userControlExpand");
-        }}
       >
         <Image className={styles.userControlIcon} src={WishlistIcon} />
       </div>
@@ -77,11 +75,11 @@ const UserControls = () => {
           setCurrentControlItem("cart");
           setCurrentUserControlExpandState("userControlExpandVisible");
         }}
-        onMouseLeave={() => {
+      >
+        {/* onMouseLeave={() => {
           setCurrentControlItem(null);
           setCurrentUserControlExpandState("userControlExpand");
-        }}
-      >
+        }} */}
         <Image className={styles.userControlIcon} src={CartIcon} />
       </div>
       <div
@@ -93,7 +91,7 @@ const UserControls = () => {
               ? 180
               : currentControlItem === "wishlist" ||
                 currentControlItem === "cart"
-              ? 300
+              ? 75
               : 0,
         }}
       >
@@ -103,12 +101,20 @@ const UserControls = () => {
             position: "absolute",
             right:
               currentControlItem === "profile"
-                ? 88
+                ? 78
                 : currentControlItem === "wishlist"
-                ? 49
+                ? 43
                 : currentControlItem === "cart"
                 ? 8
                 : 8,
+          }}
+        ></div>
+        <div
+          className={styles.userControlIconAndExpandSpaceFiller}
+          onMouseEnter={() => {
+            if (currentControlItem !== null) {
+              setCurrentUserControlExpandState("userControlExpandVisible");
+            }
           }}
         ></div>
         <div className={styles.arrowExtraFiller}></div>

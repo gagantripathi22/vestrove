@@ -53,6 +53,7 @@
 .navbarItem {
   padding: 0 25px;
   cursor: pointer;
+  padding-top: 15px;
 }
 
 .navbarItem:last-child {
@@ -89,27 +90,28 @@
   position: absolute;
   height: 300px;
   width: 100vw;
-  top: 140px;
+  top: 148px;
   background-color: white;
   z-index: 99;
   border-bottom: 3px solid rgb(240, 240, 240);
   transition: 0.2s;
   opacity: 0;
-  z-index: 0;
+  z-index: -99;
   display: flex;
   flex-direction: row;
 }
 
 .navbarExpandVisible {
   opacity: 1;
-  z-index: 99;
+  z-index: 199;
+
+  /* height: 300px; */
 }
 
 .navSubItemContainer {
   display: grid;
   grid-template-rows: 50px 50px 50px 50px;
   grid-template-columns: 250px 250px;
-  transition: 0.2s;
   margin-right: 30px;
 }
 
@@ -272,4 +274,13 @@
   left: 0;
   transition: 0.2s;
   z-index: 50;
+}
+
+.userControlIconAndExpandSpaceFiller {
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  height: 50px;
+  top: -20px;
+  z-index: 99;
 }

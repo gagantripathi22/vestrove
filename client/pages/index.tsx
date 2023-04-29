@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import axios from "../services/axiosInstance";
 import styles from "../styles/home/index.module.css";
-import HomeComponent from "./home/index";
-import NormalCategory from "./normalCategoryPage/index";
 import Header from "./header/index";
 import Footer from "./footer/index";
+import HomePage from "./home/index";
+import NormalCategoryPage from "./normalCategoryPage/index";
+import ProfilePage from "./profile/index";
 
 export default function Home() {
   const getData = () => {
@@ -33,8 +34,9 @@ export default function Home() {
   return (
     <div className={"mainContainer"}>
       <Header />
-      {/* <HomeComponent /> */}
-      <NormalCategory />
+      {/* <HomePage /> */}
+      <NormalCategoryPage />
+      {/* <ProfilePage /> */}
       <Footer />
     </div>
   );
