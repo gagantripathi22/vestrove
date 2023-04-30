@@ -6,6 +6,7 @@ import Footer from "./footer/index";
 import HomePage from "./home/index";
 import NormalCategoryPage from "./normalCategoryPage/index";
 import ProfilePage from "./profile/index";
+import LoginPage from "./login/index";
 
 export default function Home() {
   const getData = () => {
@@ -35,8 +36,9 @@ export default function Home() {
     <div className={"mainContainer"}>
       <Header />
       {/* <HomePage /> */}
-      <NormalCategoryPage />
+      {/* <NormalCategoryPage /> */}
       {/* <ProfilePage /> */}
+      <LoginPage />
       <Footer />
     </div>
   );

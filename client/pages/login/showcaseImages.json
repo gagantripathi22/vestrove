@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "src": "/female.jpg",
+    "name": "Fresh Linen"
+  },
+  {
+    "id": 2,
+    "src": "/categoryNewArrival/female2.jpg",
+    "name": "Spring Collection"
+  },
+  {
+    "id": 3,
+    "src": "/categoryNewArrival/male1.jpg",
+    "name": "Summer Time"
+  },
+  {
+    "id": 4,
+    "src": "/male.jpg",
+    "name": "Light Layers"
+  },
+  {
+    "id": 5,
+    "src": "/categoryNewArrival/watch1.jpg",
+    "name": "Male Watches"
+  },
+  {
+    "id": 6,
+    "src": "/categoryNewArrival/watch2.jpg",
+    "name": "Female Watches"
+  }
+]

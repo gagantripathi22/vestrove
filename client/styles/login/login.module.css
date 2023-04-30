@@ -1,0 +1,156 @@
+.loginContainer {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+  z-index: 169;
+  padding-top: 50px;
+  padding-bottom: 101px;
+  height: calc(100vh - 190px);
+}
+
+.loginSpacing {
+  display: flex;
+  width: 100%;
+  max-width: 90rem;
+  margin-right: auto;
+  margin-left: auto;
+  flex-direction: row;
+  height: fit-content;
+}
+
+.showcaseSection {
+  width: 50%;
+  min-height: 280px;
+  height: fit-content;
+  border-right: 1px solid rgb(222, 222, 222);
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.loginSection {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  padding: 0 100px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+}
+
+.showcaseImageContainer {
+  height: 40rem;
+  aspect-ratio: 2/3;
+  background-color: rgb(236, 236, 236);
+  /* border-radius: 20px; */
+  overflow: hidden;
+  position: relative;
+}
+
+.loginFormContainer {
+  height: 40rem;
+  aspect-ratio: 2/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.plainInputName {
+  font-family: "Jost";
+  font-size: 14px;
+  color: rgb(107, 107, 107);
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.loginForm {
+  /* height: 100%; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 50px;
+  flex-direction: column;
+}
+
+.plainInputField {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgb(107, 107, 107);
+  padding: 10px 0;
+  font-size: 18px;
+  font-family: "Jost";
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+
+.plainInputContainer {
+  width: 100%;
+}
+
+.loginSectionHeading {
+  font-family: "Jost";
+  font-weight: 500;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.showcaseImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.categoryNewArrivalItemText {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-family: "Jost";
+}
+
+@keyframes imageChangeEffect {
+  0% {
+    width: 0%;
+  }
+  25% {
+    width: 100%;
+  }
+
+  80% {
+    /* width: 50%; */
+    right: 0;
+  }
+  100% {
+    width: 0;
+    right: 0;
+  }
+}
+
+.showcaseImageChangeEffectIdle {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: rgb(242, 242, 242);
+  z-index: 99;
+}
+
+.showcaseImageChangeEffect {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: rgb(242, 242, 242);
+  z-index: 99;
+  animation: imageChangeEffect 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+  /* animation-delay: 4000ms; */
+  animation-fill-mode: backwards;
+}

@@ -7,6 +7,25 @@
   padding: 0;
 }
 
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: black !important;
+  font-size: 18px;
+}
+
+input[type="password"] {
+  letter-spacing: 0.125em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 body,
 html,
 #__next {
