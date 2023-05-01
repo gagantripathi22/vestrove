@@ -32,4 +32,4 @@ app.listen(port, () => {
 
 app.use("/api/user", userRoute);
 app.use("/api/item", itemRoute);
-app.use("/api/admin/", adminRoute);
+app.use("/api/admin", adminRoute);

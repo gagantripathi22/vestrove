@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
     const decoded = Buffer.from(encoded, "base64").toString("ascii");
     const [username, password] = decoded.split(":");
     const authenticatedUser = await Admin.findOne({ username: username });
-    console.log("Authenticated User : ", authenticatedUser);
+    // console.log("Authenticated User : ", authenticatedUser);
     if (authenticatedUser) {
       const match = await bcrypt.compare(password, authenticatedUser.password);
       if (match) {

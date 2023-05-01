@@ -154,3 +154,12 @@
   /* animation-delay: 4000ms; */
   animation-fill-mode: backwards;
 }
+
+.createAccText {
+  margin-top: 26px;
+  font-family: "Jost";
+  font-size: 14px;
+  color: rgb(87, 87, 87);
+  cursor: pointer;
+  /* margin-left: auto; */
+}

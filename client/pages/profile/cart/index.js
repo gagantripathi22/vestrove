@@ -1,10 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/profile/profile.module.scss";
 
 const Cart = () => {
+  const [item, setItems] = useState([
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ]);
   return (
     <div className={styles.basicDetailSection}>
       <h3 className={styles.sectionTitle}>Cart</h3>
+      <div className={styles.sectionItemsGrid}>
+        {item.map((data) => {
+          return (
+            <div className={styles.sectionGridItem}>
+              <div className={styles.sectionGridItemImage}></div>
+              <div className={styles.sectoinGridItemDetail}>
+                <div className={styles.sectionGridItemName}>Mens Short</div>
+                <div className={styles.sectionGridItemPrice}>Rs. 699</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

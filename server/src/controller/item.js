@@ -1,6 +1,47 @@
 const Item = require("../models/item");
+const { db, firebaseConfig } = require("../config/firebase");
+const { initializeApp } = require("firebase/app");
+const {
+  getStorage,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} = require("firebase/storage");
+
+//Initialize a firebase application
+initializeApp(firebaseConfig);
+
+// Initialize Cloud Storage and get a reference to the service
+const storage = getStorage();
+
+const uploadImage = async (req, res, next) => {
+  const storageRef = ref(storage, `files/${req.file.originalname}`);
+  // Create file metadata including the content type
+  const metadata = {
+    contentType: req.file.mimetype,
+  };
+  // Upload the file in the bucket storage
+  const snapshot = await uploadBytesResumable(
+    storageRef,
+    req.file.buffer,
+    metadata
+  );
+  //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
+  // Grab the public url
+  const setReqImageUrl = async (imageUrl) => {
+    req.body.image = imageUrl;
+  };
+  const downloadURL = await getDownloadURL(snapshot.ref).then(async (data) => {
+    console.log(data);
+    await setReqImageUrl(data);
+    next();
+  });
+  console.log("File successfully uploaded.");
+  // req.body.image = downloadURL;
+};
 
 const addItem = async (req, res) => {
+  console.log("Add Item Called");
   const data = new Item({
     name: req.body.name,
     price: req.body.price,
@@ -9,7 +50,7 @@ const addItem = async (req, res) => {
     addedAt: new Date(),
   });
   try {
-    const dataToSave = await data.save();
+    const dataToSave = await data.save().then(() => {});
     res.status(200).json(dataToSave);
   } catch (error) {
     res.status(400).json(error);
@@ -72,6 +113,7 @@ const additemController = {
   getAllFemaleItem: getAllFemaleItem,
   getAll: getAll,
   updateItem: updateItem,
+  uploadImage: uploadImage,
 };
 
 module.exports = additemController;

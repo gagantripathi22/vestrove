@@ -8,6 +8,8 @@ const Login = () => {
   const [showcaseImages, setShowcaseImages] = useState(ShowcaseImagesList);
   const [currentShowcaseImage, setCurrentShowcaseImage] = useState(0);
   const [showImageChangeEffect, setShowImageChangeEffect] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+
   const renderPlainInput = (name) => {
     return (
       <div className={styles.plainInputContainer}>
@@ -101,15 +103,40 @@ const Login = () => {
           </div>
         </div>
         <div className={styles.loginSection}>
-          <div className={styles.loginFormContainer}>
-            <h2 className={styles.loginSectionHeading}>Login</h2>
+          {showLogin ? (
+            <div className={styles.loginFormContainer}>
+              <h2 className={styles.loginSectionHeading}>Log In</h2>
 
-            <form className={styles.loginForm}>
-              {renderPlainInput("email")}
-              {renderPasswordInput("password")}
-              <Button text="Login" />
-            </form>
-          </div>
+              <form className={styles.loginForm}>
+                {renderPlainInput("email")}
+                {renderPasswordInput("password")}
+                <Button text="Login" />
+                <div
+                  className={styles.createAccText}
+                  onClick={() => setShowLogin((prev) => !prev)}
+                >
+                  Create New Account ?
+                </div>
+              </form>
+            </div>
+          ) : (
+            <div className={styles.loginFormContainer}>
+              <h2 className={styles.loginSectionHeading}>Sign Up</h2>
+
+              <form className={styles.loginForm}>
+                {renderPlainInput("Full Name")}
+                {renderPlainInput("email")}
+                {renderPasswordInput("password")}
+                <Button text="Sign up" />
+                <div
+                  className={styles.createAccText}
+                  onClick={() => setShowLogin((prev) => !prev)}
+                >
+                  Already Have An Account ?
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       </div>
     </div>
