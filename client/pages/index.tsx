@@ -36,9 +36,9 @@ export default function Home() {
     <div className={"mainContainer"}>
       <Header />
       {/* <HomePage /> */}
-      {/* <NormalCategoryPage /> */}
+      <NormalCategoryPage />
       {/* <ProfilePage /> */}
-      <LoginPage />
+      {/* <LoginPage /> */}
       <Footer />
     </div>
   );

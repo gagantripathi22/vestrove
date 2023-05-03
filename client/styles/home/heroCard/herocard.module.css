@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   padding: 0 20px;
+  overflow: hidden;
 }
 
 .heroCardSpacing {
@@ -47,11 +48,37 @@
 
 .cardTitle {
   font-family: "Italiana";
-  font-size: 96px;
+  font-size: 7em;
   text-transform: uppercase;
   color: white;
   position: absolute;
   left: 40px;
   bottom: 40px;
   font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .cardTitle {
+    font-size: 3em;
+  }
+
+  .bigCardsContainer {
+    flex-direction: column;
+  }
+
+  .cardContainerBig {
+    height: 275px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  .cardContainerWide {
+    height: 150px;
+    margin-top: -5px;
+  }
+
+  .bigCard {
+    height: 100%;
+  }
 }

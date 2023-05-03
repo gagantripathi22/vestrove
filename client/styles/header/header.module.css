@@ -19,7 +19,7 @@
 
 .heading {
   font-family: "Italiana";
-  font-size: 42px;
+  font-size: 3em;
   /* font-weight: 400; */
   text-transform: uppercase;
   cursor: pointer;
@@ -234,6 +234,7 @@
   margin-top: 25px;
   text-transform: uppercase;
   height: fit-content;
+  cursor: pointer;
 }
 
 .userControlExpandItemList {
@@ -283,4 +284,19 @@
   height: 50px;
   top: -20px;
   z-index: 99;
+}
+
+@media (max-width: 768px) {
+  .headerContainer {
+    height: 108px;
+  }
+  .navbarContainer {
+    display: none;
+  }
+  .userControls {
+    display: none;
+  }
+  .heading {
+    font-size: 2.5em;
+  }
 }

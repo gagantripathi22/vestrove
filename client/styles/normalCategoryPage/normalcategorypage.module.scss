@@ -18,21 +18,28 @@
   margin-right: auto;
 }
 
+.filterSectionSpacing {
+  width: auto;
+  height: auto;
+  padding: 2em;
+}
+
 .filterSection {
-  width: 350px;
-  height: 900px;
+  width: 100%;
+  height: 100%;
   border-right: 2px solid rgb(224, 224, 224);
+  overflow: hidden;
 }
 
 .itemListSection {
   height: 100%;
   width: 100%;
   flex: 1;
-  padding: 0 100px;
+  padding: 0 4em;
   display: grid;
   /* grid-template-rows: 50px 50px 50px 50px; */
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 30px;
+  column-gap: 15px;
   row-gap: 40px;
   align-items: center;
 }
@@ -68,7 +75,7 @@
 }
 
 .listItem {
-  width: 234px;
+  width: 100%;
   margin-right: 30px;
   cursor: pointer;
   animation: itemRenderAnimation 500ms;
@@ -81,9 +88,11 @@
 }
 
 .listItemImage {
+  // aspect-ratio: 2 / 3;
   width: 100%;
-  aspect-ratio: 2 / 3;
+  height: 100%;
   background-color: rgb(235, 235, 235);
+  object-fit: contain;
 }
 
 .listItemDetail {
@@ -91,4 +100,80 @@
   font-family: "Jost";
   font-size: 14px;
   font-weight: 400;
+}
+
+.sectionFilterMobile {
+  // display: none;
+  width: 100%;
+  padding: 10px 4em;
+  display: flex;
+}
+
+.filterBtn {
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+  display: none;
+  cursor: pointer;
+}
+
+.filterIcon {
+  margin-left: auto;
+  height: 15px;
+  width: 20px;
+  margin-right: 7px;
+}
+
+.filterText {
+  font-family: "Jost";
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .normalCatSpacing {
+    flex-direction: column;
+  }
+  .filterSection {
+    border: none;
+  }
+  .itemListSection {
+    padding: 10px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sectionHeading {
+    margin-bottom: 0;
+  }
+
+  .filterSectionSpacing {
+    padding: 0;
+  }
+  .sectionFilterMobile {
+    padding: 10px 10px;
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 1110px) {
+  .normalCatSpacing {
+    flex-direction: column;
+  }
+  .filterSectionSpacing {
+    height: 0px;
+  }
+  .filterBtn {
+    display: flex;
+  }
+  .filterSectionSpacing {
+    padding: 0;
+  }
+  .sectionFilterMobile {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 1367px) {
+  .itemListSection {
+    // padding: 20px;
+  }
 }

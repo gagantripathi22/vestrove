@@ -45,9 +45,12 @@ const addItem = async (req, res) => {
   const data = new Item({
     name: req.body.name,
     price: req.body.price,
+    gender: req.body.gender,
     category: req.body.category,
     image: req.body.image,
     addedAt: new Date(),
+    size: req.body.size,
+    color: req.body.color,
   });
   try {
     const dataToSave = await data.save().then(() => {});

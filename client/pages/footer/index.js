@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className={styles.footerContainer}>
       <div className={styles.footerSpacing}>
-        <h1 className={styles.footerHeading}>7/STOP</h1>
+        <h1 className={styles.footerHeading}>SEVEN/STOP</h1>
         <div className={styles.navbarContainer}>
           <div className={styles.navbarItem}>
             <h5 className={styles.navbarItemTitle}>women</h5>

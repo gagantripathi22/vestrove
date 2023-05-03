@@ -9,6 +9,10 @@ const itemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  gender: {
+    type: String,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
@@ -18,6 +22,12 @@ const itemSchema = new mongoose.Schema({
   },
   addedAt: {
     type: Date,
+  },
+  size: {
+    type: String,
+  },
+  color: {
+    type: String,
   },
 });
 
