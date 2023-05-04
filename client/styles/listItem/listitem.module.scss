@@ -27,7 +27,8 @@
 
 .listItemDetail {
   padding: 10px 0px;
-  font-family: "Jost";
+  font-family: var(--jost-font);
+
   font-size: 14px;
   font-weight: 400;
 }

@@ -16,7 +16,7 @@
 }
 
 .footerHeading {
-  font-family: "Italiana";
+  font-family: var(--italiana-font);
   /* font-weight: 400; */
   font-size: 3em;
   color: #787878;
@@ -41,7 +41,7 @@
 
 .navbarItemTitle {
   font-weight: 400;
-  font-family: "Jost";
+  font-family: var(--jost-font);
   color: #787878;
   font-size: 15px;
   text-transform: uppercase;

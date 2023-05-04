@@ -4,7 +4,8 @@
 }
 
 .sectionTitle {
-  font-family: "Jost";
+  font-family: var(--jost-font);
+
   font-weight: 500;
   font-size: 16px;
   margin-bottom: 22px;
@@ -18,7 +19,7 @@
 }
 
 .checkBoxText {
-  font-family: "Jost";
+  font-family: var(--jost-font);
   font-weight: 400;
   font-size: 14px;
   margin-left: 20px;

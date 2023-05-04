@@ -60,7 +60,8 @@
 }
 
 .plainInputName {
-  font-family: "Jost";
+  font-family: var(--jost-font);
+
   font-size: 14px;
   color: rgb(107, 107, 107);
   font-weight: 400;
@@ -83,7 +84,8 @@
   border-bottom: 1px solid rgb(107, 107, 107);
   padding: 10px 0;
   font-size: 18px;
-  font-family: "Jost";
+  font-family: var(--jost-font);
+
   font-weight: 500;
   margin-bottom: 25px;
 }
@@ -93,7 +95,8 @@
 }
 
 .loginSectionHeading {
-  font-family: "Jost";
+  font-family: var(--jost-font);
+
   font-weight: 500;
   font-size: 24px;
   margin-bottom: 20px;
@@ -112,7 +115,7 @@
   padding: 10px;
   background-color: black;
   color: white;
-  font-family: "Jost";
+  font-family: var(--jost-font);
 }
 
 @keyframes imageChangeEffect {
@@ -157,9 +160,18 @@
 
 .createAccText {
   margin-top: 26px;
-  font-family: "Jost";
+  font-family: var(--jost-font);
+
   font-size: 14px;
   color: rgb(87, 87, 87);
   cursor: pointer;
   /* margin-left: auto; */
+}
+
+.userInputInfo {
+  font-family: var(--jost-font);
+  font-size: 14px;
+  margin-top: 10px;
+  color: red;
+  text-transform: capitalize;
 }

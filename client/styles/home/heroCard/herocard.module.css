@@ -47,7 +47,7 @@
 }
 
 .cardTitle {
-  font-family: "Italiana";
+  font-family: var(--italiana-font);
   font-size: 7em;
   text-transform: uppercase;
   color: white;
@@ -60,6 +60,8 @@
 @media (max-width: 768px) {
   .cardTitle {
     font-size: 3em;
+    left: 20px;
+    bottom: 20px;
   }
 
   .bigCardsContainer {

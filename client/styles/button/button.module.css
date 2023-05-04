@@ -27,7 +27,7 @@
 }
 
 .buttonText {
-  font-family: "Jost";
+  font-family: var(--jost-font);
   font-size: 14px;
   font-weight: 400;
   z-index: 79;

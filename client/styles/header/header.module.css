@@ -18,7 +18,7 @@
 }
 
 .heading {
-  font-family: "Italiana";
+  font-family: var(--italiana-font);
   font-size: 3em;
   /* font-weight: 400; */
   text-transform: uppercase;
@@ -62,7 +62,7 @@
 
 .navbarItemTitle {
   font-weight: 400;
-  font-family: "Jost";
+  font-family: var(--jost-font);
   font-size: 15px;
   text-transform: uppercase;
 }
@@ -88,13 +88,13 @@
 
 .navbarExpandContainer {
   position: absolute;
-  height: 300px;
+  height: 0px;
   width: 100%;
-  top: 148px;
+  top: 150px;
   background-color: white;
   z-index: 99;
   border-bottom: 3px solid rgb(240, 240, 240);
-  transition: 0.2s;
+  transition: 0.4s;
   opacity: 0;
   z-index: -99;
   display: flex;
@@ -104,6 +104,7 @@
 .navbarExpandVisible {
   opacity: 1;
   z-index: 199;
+  height: 300px;
 
   /* height: 300px; */
 }
@@ -118,7 +119,7 @@
 .navSubItem {
   padding: 10px;
   margin-bottom: 10px;
-  font-family: "Jost";
+  font-family: var(--jost-font);
   font-weight: 400;
   /* background-color: aqua; */
   display: flex;
@@ -165,6 +166,18 @@
   object-fit: cover;
 }
 
+@keyframes newArrivalTextAnimation {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .categoryNewArrivalItemText {
   position: absolute;
   bottom: 0;
@@ -172,7 +185,9 @@
   padding: 10px;
   background-color: black;
   color: white;
-  font-family: "Jost";
+  font-family: var(--jost-font);
+  opacity: 0;
+  animation: newArrivalTextAnimation 0.5s ease 1 forwards;
 }
 
 .userControlExpand {
@@ -226,7 +241,7 @@
 }
 
 .userControlExpandHeading {
-  font-family: "Jost";
+  font-family: var(--jost-font);
   font-weight: 500;
   font-size: 14px;
   width: 100%;
@@ -262,7 +277,7 @@
 }
 
 .userControlExpandItemName {
-  font-family: "Jost";
+  font-family: var(--jost-font);
   font-size: 14px;
   z-index: 55;
 }
