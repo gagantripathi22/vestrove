@@ -46,15 +46,40 @@
   object-fit: cover;
 }
 
+.cardContainerBig:hover .cardTitleUnderline {
+  width: 100%;
+}
+
+.cardContainerWide:hover .cardTitleUnderline {
+  width: 100%;
+}
+
+.cardTitleContainer {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+}
+
 .cardTitle {
   font-family: var(--italiana-font);
   font-size: 7em;
   text-transform: uppercase;
-  color: white;
-  position: absolute;
-  left: 40px;
-  bottom: 40px;
+  color: #242527;
   font-weight: 400;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.cardTitleUnderline {
+  height: 2px;
+  width: 0%;
+  background-color: #242527;
+  transition: 0.2s;
 }
 
 @media (max-width: 768px) {

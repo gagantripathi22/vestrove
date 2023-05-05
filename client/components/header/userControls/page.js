@@ -6,23 +6,45 @@ import UserIcon from "../../../public/user.svg";
 import CartIcon from "../../../public/cart.svg";
 import WishlistIcon from "../../../public/wishlist.svg";
 import styles from "../../../styles/header/header.module.css";
+import { useRouter } from "next/navigation";
 
 const UserControls = () => {
+  const router = useRouter();
+
   const [currentControlItem, setCurrentControlItem] = useState(null);
   const [currentUserControlExpandState, setCurrentUserControlExpandState] =
     useState("userControlExpand");
   const [currentControlIndex, setCurrentControlIndex] = useState(0);
+
+  const handleLogout = async () => {
+    const checkLogout = await localStorage.removeItem("access-token");
+    console.log("? : ", checkLogout);
+  };
+
+  const handleLoginRoute = () => {
+    router.push("/login");
+  };
+
   const [controlItems, setControlItems] = useState([
     {
       heading: "Profile",
-      items: [
+      loggedInItems: [
         {
           name: "View Profile",
           path: "/profile",
+          action: null,
         },
         {
           name: "Logout",
           path: "/logout",
+          action: "logout",
+        },
+      ],
+      loggedOutItems: [
+        {
+          name: "Sign in",
+          path: "/login",
+          action: "login",
         },
       ],
     },
@@ -133,9 +155,18 @@ const UserControls = () => {
           </div>
           {currentControlItem === "profile" ? (
             <div className={styles.userControlExpandItemList}>
-              {controlItems[0].items.map((item) => {
+              {controlItems[0].loggedInItems.map((item) => {
                 return (
-                  <div className={styles.userControlExpandItem}>
+                  <div
+                    className={styles.userControlExpandItem}
+                    onClick={() =>
+                      item.action === "logout"
+                        ? handleLogout()
+                        : item.action === "login"
+                        ? handleLoginRoute()
+                        : null
+                    }
+                  >
                     <div className={styles.userControlExpandItemName}>
                       {item.name}
                     </div>

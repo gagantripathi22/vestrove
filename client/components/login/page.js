@@ -5,19 +5,32 @@ import Button from "../items/button/page";
 import ShowcaseImagesList from "./showcaseImages.json";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import VerifyToken from "../../services/verifyToken";
 
 const Login = ({ handleLogin }) => {
   const router = useRouter();
+  const tokenVerification = async () => {
+    const tokenDecoded = await VerifyToken();
+    console.log("token decoded : ", tokenDecoded);
+    if (tokenDecoded) {
+      console.log("token decoded if");
+      router.replace("/");
+    }
+  };
+  useEffect(() => {
+    tokenVerification();
+  }, []);
   const [showcaseImages, setShowcaseImages] = useState(ShowcaseImagesList);
   const [currentShowcaseImage, setCurrentShowcaseImage] = useState(0);
   const [showImageChangeEffect, setShowImageChangeEffect] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [userInputInfo, setUserInputInfo] = useState("");
 
-  // user data
+  // user data login
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
+  // user data signup
   const [signupEmail, setSignupEmail] = useState("");
   const [signupName, setSignupName] = useState("");
   const [signupPassword, setSignupPassword] = useState("");

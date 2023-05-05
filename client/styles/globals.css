@@ -45,11 +45,29 @@ input[type="password"] {
 body,
 html,
 #__next {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 }
 
 .mainContainer {
   height: 100%;
   width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  /* this makes sure the padding and the border is included in the box sizing */
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+html body {
+  padding: 0;
+  margin: 0;
+  overflow-x: inherit;
 }
