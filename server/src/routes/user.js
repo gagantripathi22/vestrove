@@ -20,4 +20,6 @@ router.delete(
 
 router.post("/login", userController.login);
 
+router.post("/getUserData", verifyToken, userController.getUserInfo);
+
 module.exports = router;

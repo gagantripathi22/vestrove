@@ -1,5 +1,6 @@
 import { Italiana, Jost } from "next/font/google";
 import "../styles/globals.css";
+import { Providers } from "./Redux/provider";
 
 const jost = Jost({ subsets: ["latin"], variable: "--jost-font" });
 
@@ -17,7 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${italiana.variable} ${jost.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

@@ -5,26 +5,23 @@ import styles from "../../styles/normalCategoryPage/normalcategorypage.module.sc
 import CheckBoxArea from "../items/checkboxArea/page";
 import FilterIcon from "../../public/filter.svg";
 
-const NormalCategoryPage = async () => {
-  // const [itemList, setItemList] = useState([
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  //   {},
-  // ]);
+const NormalCategoryPage = () => {
+  const [itemList, setItemList] = useState([
+    { id: 1 },
+    { id: 2 },
+    { id: 3 },
+    { id: 4 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+    { id: 5 },
+  ]);
   return (
     <div className={styles.normalCatContainer}>
       <div className={styles.sectionHeading}>women's clothing</div>
@@ -41,7 +38,7 @@ const NormalCategoryPage = async () => {
           </div>
         </div>
         <div className={styles.itemListSection}>
-          {/* {itemList.map((item) => {
+          {itemList.map((item) => {
             return (
               <div className={styles.listItem}>
                 <Image
@@ -59,7 +56,7 @@ const NormalCategoryPage = async () => {
                 </div>
               </div>
             );
-          })} */}
+          })}
         </div>
       </div>
     </div>

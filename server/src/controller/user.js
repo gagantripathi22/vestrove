@@ -111,6 +111,23 @@ const removeFromWishlist = async (req, res) => {
   }
 };
 
+const getUserInfo = async (req, res) => {
+  try {
+    const userIdToFetch = req.body.userId;
+    const fetchUser = await User.find({ _id: userIdToFetch });
+    if (fetchUser) {
+      res.status(200).json({
+        name: fetchUser[0].name,
+        email: fetchUser[0].email,
+        wishlist: fetchUser[0].wishlist,
+        cart: fetchUser[0].cart,
+      });
+    }
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
+
 var userController = {
   signUp: signUp,
   login: login,
@@ -118,6 +135,7 @@ var userController = {
   removeFromCart: removeFromCart,
   addToWishlist: addToWishlist,
   removeFromWishlist: removeFromWishlist,
+  getUserInfo: getUserInfo,
 };
 
 module.exports = userController;
