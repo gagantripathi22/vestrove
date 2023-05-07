@@ -1,17 +1,17 @@
 import React from "react";
+import CategoryPage from "../../components/normalCategoryPage/page";
 import Header from "../../components/header/page";
 import Footer from "../../components/footer/page";
-import ProfilePage from "../../components/profile/page";
 
-const Profile = ({ wishList, cartList }) => {
-  console.log("profile route");
+const Men = () => {
+  console.log("womenroute");
   return (
     <>
       <Header />
-      <ProfilePage />
+      <CategoryPage />
       <Footer />
     </>
   );
 };
 
-export default Profile;
+export default Men;

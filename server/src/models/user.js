@@ -23,10 +23,10 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
   },
   cart: {
-    type: Array,
+    type: Array(mongoose.Types.ObjectId),
   },
   wishlist: {
-    type: Array,
+    type: Array(mongoose.Types.ObjectId),
   },
 });
 

@@ -22,4 +22,8 @@ router.post("/login", userController.login);
 
 router.post("/getUserData", verifyToken, userController.getUserInfo);
 
+router.post("/getWishlist", verifyToken, userController.getWishlist);
+
+router.post("/getCart", verifyToken, userController.getCart);
+
 module.exports = router;

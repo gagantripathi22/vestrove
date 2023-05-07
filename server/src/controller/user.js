@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const Item = require("../models/item");
 
 const saltRounds = 10;
 
@@ -59,7 +60,7 @@ const addToCard = async (req, res) => {
   try {
     const itemToAdd = await User.updateOne(
       { email: req.body.email },
-      { $addToSet: { cart: req.body.itemId } }
+      { $addToSet: { cart: { _id: req.body.itemId } } }
     );
     res.status(200).json({ itemToAdd });
   } catch (err) {
@@ -87,7 +88,7 @@ const addToWishlist = async (req, res) => {
   try {
     const itemToAdd = await User.updateOne(
       { email: req.body.email },
-      { $addToSet: { wishlist: req.body.itemId } }
+      { $addToSet: { wishlist: { _id: req.body.itemId } } }
     );
     res.status(200).json({ itemToAdd });
   } catch (err) {
@@ -128,6 +129,44 @@ const getUserInfo = async (req, res) => {
   }
 };
 
+const getWishlist = async (req, res) => {
+  try {
+    const IdToFetch = req.body.userId;
+    if (IdToFetch === req.authData.fetchedUser[0]._id) {
+      const fetchWishlist = await User.find({ _id: IdToFetch });
+      const getItemUsingId = await Item.find({
+        _id: { $in: fetchWishlist[0].wishlist },
+      });
+      if (getItemUsingId) {
+        res.status(200).json({
+          wishlist: getItemUsingId,
+        });
+      }
+    }
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
+
+const getCart = async (req, res) => {
+  try {
+    const IdToFetch = req.body.userId;
+    if (IdToFetch === req.authData.fetchedUser[0]._id) {
+      const fetchCart = await User.find({ _id: IdToFetch });
+      const getItemUsingId = await Item.find({
+        _id: { $in: fetchCart[0].cart },
+      });
+      if (getItemUsingId) {
+        res.status(200).json({
+          cart: getItemUsingId,
+        });
+      }
+    }
+  } catch (error) {
+    res.status(400).json(error.message);
+  }
+};
+
 var userController = {
   signUp: signUp,
   login: login,
@@ -136,6 +175,8 @@ var userController = {
   addToWishlist: addToWishlist,
   removeFromWishlist: removeFromWishlist,
   getUserInfo: getUserInfo,
+  getWishlist: getWishlist,
+  getCart: getCart,
 };
 
 module.exports = userController;

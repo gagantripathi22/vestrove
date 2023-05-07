@@ -5,21 +5,21 @@ import HeroCard from "./heroCard/page";
 import NewArrival from "./newArrival/page";
 import VerifyJwt from "@/services/verifyToken";
 import jwt_decode from "jwt-decode";
-import { RootState } from "@/app/Redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToWishlist,
   addToCart,
   addName,
   addEmail,
+  addToList,
+  addToken,
 } from "@/app/Redux/features/user/userSlice";
 
 const Home = () => {
   const mySelector = (state) => state.user;
-
-  // Use useSelector to extract the data from the store
   const myData = useSelector(mySelector);
   const dispatch = useDispatch();
+
   const tokenVerification = async () => {
     const tokenDecoded = await VerifyJwt();
     if (!tokenDecoded) {
@@ -49,11 +49,20 @@ const Home = () => {
     );
     if (getLoginUserData.status == 200) {
       const res = await getLoginUserData.json();
+      const email = res.email;
+      const name = res.name;
+      const wishlist = await Object.values(res.wishlist);
+      const cart = await Object.values(res.cart);
       console.log("success");
-      dispatch(addToCart(res.cart));
-      dispatch(addToWishlist(res.wishlist));
-      dispatch(addEmail(res.email));
-      dispatch(addName(res.name));
+      cart.map((item) => {
+        dispatch(addToCart(item));
+      });
+      wishlist.map((item) => {
+        dispatch(addToWishlist(item));
+      });
+      dispatch(addEmail(email));
+      dispatch(addName(name));
+      dispatch(addToken(getToken));
     } else {
       console.log("fail");
       return "invalid credentials";
@@ -65,7 +74,12 @@ const Home = () => {
   }, []);
   return (
     <div className={styles.homeContainer}>
-      <button onClick={() => console.log(myData)}>test redux</button>
+      <button onClick={() => console.log(JSON.stringify(myData))}>
+        test redux
+      </button>
+      <button onClick={() => dispatch(addToList("Hola"))}>
+        add wishlist test
+      </button>
       <HeroCard />
       <NewArrival />
     </div>

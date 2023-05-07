@@ -1,13 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/profile/profile.module.scss";
 import ProfileSection from "./profile/page";
 import ShipmentPaymentSection from "./shipmentpayment/page";
 import WishlistSection from "./wishlist/page";
 import CartSection from "./cart/page";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const Profile = () => {
-  const [currentSection, setCurrentSection] = useState("profile");
+  const router = useRouter();
+  const searchPathname = usePathname();
+
+  const [wishList, setWishList] = useState([]);
+  const [cartList, setCartList] = useState([]);
+  const [currentSection, setCurrentSection] = useState("");
   const [filterItems, setFilterItems] = useState([
     {
       name: "profile",
@@ -23,9 +30,17 @@ const Profile = () => {
     },
     {
       name: "shipping & payment",
-      alias: "shipnpay",
+      alias: "shipping",
     },
   ]);
+
+  useEffect(() => {
+    setCurrentSection(searchPathname.substring(1));
+  }, []);
+
+  const handleSectionChangeWithUrl = (sectionName) => {
+    router.push(`/${sectionName}`);
+  };
 
   return (
     <div className={styles.profileContainer}>
@@ -36,7 +51,7 @@ const Profile = () => {
             return (
               <div
                 className={styles.filterItem}
-                onClick={() => setCurrentSection(item.alias)}
+                onClick={() => handleSectionChangeWithUrl(item.alias)}
               >
                 <div
                   className={styles.filterItemText}
@@ -54,12 +69,12 @@ const Profile = () => {
         <div className={styles.optionSection}>
           {currentSection === "profile" ? (
             <ProfileSection />
-          ) : currentSection === "shipnpay" ? (
+          ) : currentSection === "shipping" ? (
             <ShipmentPaymentSection />
           ) : currentSection === "wishlist" ? (
-            <WishlistSection />
+            <WishlistSection wishList={wishList} />
           ) : currentSection === "cart" ? (
-            <CartSection />
+            <CartSection cartList={cartList} />
           ) : null}
         </div>
       </div>

@@ -15,8 +15,8 @@ router.post(
   Item.addItem
 );
 router.delete("/removeItem/:id", basicAuth, Item.removeItem);
-router.get("/male/all", basicAuth, Item.getAllMaleItem);
-router.get("/female/all", basicAuth, Item.getAllFemaleItem);
+router.get("/men/all", basicAuth, Item.getAllMaleItem);
+router.get("/women/all", basicAuth, Item.getAllFemaleItem);
 router.get("/getAll", basicAuth, Item.getAll);
 router.patch("/updateItem/:id", basicAuth, Item.updateItem);
 

@@ -26,7 +26,7 @@ const BigCard = () => {
         </div>
         <div style={{ width: 26 }}></div>
         <div className={styles.cardContainerBig}>
-          <Link href={"/women"}>
+          <Link href={"/men"}>
             <Image
               alt=""
               className={styles.bigCard}

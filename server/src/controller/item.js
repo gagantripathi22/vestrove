@@ -72,7 +72,7 @@ const removeItem = async (req, res) => {
 
 const getAllMaleItem = async (req, res) => {
   try {
-    const maleItem = await Item.find({}).where("category").equals("male");
+    const maleItem = await Item.find({}).where("gender").equals("men");
     res.status(200).json(maleItem);
   } catch (error) {
     res.status(400).json(error);
@@ -81,7 +81,7 @@ const getAllMaleItem = async (req, res) => {
 
 const getAllFemaleItem = async (req, res) => {
   try {
-    const femaleItem = await Item.find({}).where("category").equals("female");
+    const femaleItem = await Item.find({}).where("gender").equals("women");
     res.status(200).json(femaleItem);
   } catch (error) {
     res.status(400).json(error);
