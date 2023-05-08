@@ -8,26 +8,20 @@ const {
   uploadBytesResumable,
 } = require("firebase/storage");
 
-//Initialize a firebase application
 initializeApp(firebaseConfig);
 
-// Initialize Cloud Storage and get a reference to the service
 const storage = getStorage();
 
 const uploadImage = async (req, res, next) => {
   const storageRef = ref(storage, `files/${req.file.originalname}`);
-  // Create file metadata including the content type
   const metadata = {
     contentType: req.file.mimetype,
   };
-  // Upload the file in the bucket storage
   const snapshot = await uploadBytesResumable(
     storageRef,
     req.file.buffer,
     metadata
   );
-  //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
-  // Grab the public url
   const setReqImageUrl = async (imageUrl) => {
     req.body.image = imageUrl;
   };
@@ -37,7 +31,6 @@ const uploadImage = async (req, res, next) => {
     next();
   });
   console.log("File successfully uploaded.");
-  // req.body.image = downloadURL;
 };
 
 const addItem = async (req, res) => {
@@ -72,7 +65,17 @@ const removeItem = async (req, res) => {
 
 const getAllMaleItem = async (req, res) => {
   try {
-    const maleItem = await Item.find({}).where("gender").equals("men");
+    let query = {};
+    if (req.query.type) {
+      query.category = req.query.type;
+    }
+    if (req.query.color) {
+      query.color = req.query.color;
+    }
+    if (req.query.size) {
+      query.size = req.query.size;
+    }
+    const maleItem = await Item.find(query).where("gender").equals("men");
     res.status(200).json(maleItem);
   } catch (error) {
     res.status(400).json(error);
@@ -109,6 +112,36 @@ const updateItem = async (req, res) => {
   }
 };
 
+const getMaleItemByCategory = async (req, res) => {
+  const category = { _id: req.params.category };
+
+  try {
+    const maleItem = await Item.find({})
+      .where("gender")
+      .equals("men")
+      .where("category")
+      .equals(category);
+    res.status(200).json(maleItem);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
+const getWomenItemByCategory = async (req, res) => {
+  const category = { _id: req.params.category };
+
+  try {
+    const maleItem = await Item.find({})
+      .where("gender")
+      .equals("women")
+      .where("category")
+      .equals(category);
+    res.status(200).json(maleItem);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 const additemController = {
   addItem: addItem,
   removeItem: removeItem,
@@ -117,6 +150,8 @@ const additemController = {
   getAll: getAll,
   updateItem: updateItem,
   uploadImage: uploadImage,
+  getMaleItemByCategory: getMaleItemByCategory,
+  getWomenItemByCategory: getWomenItemByCategory,
 };
 
 module.exports = additemController;

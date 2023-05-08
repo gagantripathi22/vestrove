@@ -1,0 +1,75 @@
+/* input[type="checkbox"]:checked::before {
+  background-image: url("path/to/checked-checkmark.png");
+} */
+
+.checkBoxAreaContainer {
+  width: 300px;
+  padding-right: 50px;
+  margin-bottom: 70px;
+}
+
+.sectionTitle {
+  font-family: var(--jost-font);
+
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 22px;
+}
+
+.checkBoxesContainer {
+  width: 100%;
+}
+
+.checkBoxText {
+  font-family: var(--jost-font);
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 20px;
+  text-transform: capitalize;
+}
+
+.checkBoxItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+/* Style the select element */
+.checkBoxesContainer select {
+  appearance: none;
+  padding: 15px 15px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 12px;
+  width: 100%;
+  width: 100%;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.checkBoxesContainer select:focus {
+  outline: none;
+}
+
+/* Add a down arrow to the select input */
+.checkBoxesContainer select::after {
+  content: "\f107";
+  font-family: (--jost-font);
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+/* Change the appearance of the select input when it is in focus */
+.checkBoxesContainer select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 255, 0.2);
+}
+
+/* Change the appearance of the select input when the user hovers over it */
+.checkBoxesContainer select:hover {
+  border-color: #999;
+}

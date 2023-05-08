@@ -8,7 +8,6 @@ const Wishlist = () => {
 
   const getWishlist = async () => {
     const getToken = localStorage.getItem("access-token");
-
     const getTokenData = await jwt_decode(getToken);
     const getTokenUserId = getTokenData.fetchedUser[0]._id;
     const getWishlistUserData = await fetch(

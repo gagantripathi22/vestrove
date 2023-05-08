@@ -1,8 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../../styles/normalCategoryPage/normalcategorypage.module.scss";
 import CheckBoxArea from "../items/checkboxArea/page";
+import DropdownArea from "../items/dropdown/page";
 import FilterIcon from "../../public/filter.svg";
 import { usePathname } from "next/navigation";
 
@@ -10,9 +11,17 @@ const NormalCategoryPage = () => {
   const [category, setCategory] = useState("");
   const searchPathname = usePathname();
   const [itemList, setItemList] = useState([]);
+  const [subCategory, setSubCategory] = useState(new Set());
+  const [colorsList, setColorsList] = useState(new Set());
+  const [sizeList, setSizeList] = useState(new Set());
+  const [currentSubCategory, setCurrentSubCategory] = useState("all");
+  const [currentColor, setCurrentColor] = useState("all");
+  const [currentSize, setCurrentSize] = useState("all");
+  const [currentFilters, setCurrentFilters] = useState("");
+
   const fetchCategoryData = async () => {
     const getCategoryData = await fetch(
-      `http://localhost:8080/api/item/${category}/all`,
+      `http://localhost:8080/api/item/${category}/all` + currentFilters,
       {
         method: "GET",
         headers: {
@@ -23,21 +32,69 @@ const NormalCategoryPage = () => {
       }
     );
     if (getCategoryData.status == 200) {
-      // console.log(await getCategoryData.json());
-      // console.log("Now loaded");
       setItemList(await getCategoryData.json());
     } else {
       console.log("fail");
       return "invalid credentials";
     }
   };
+
+  const fetchSubCategoryData = async () => {
+    setItemList([]);
+    const getCategoryData = await fetch(
+      `http://localhost:8080/api/item/${category}/${currentSubCategory}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa("admingagan456:admingagan654"),
+        },
+      }
+    );
+    if (getCategoryData.status == 200) {
+      setItemList(await getCategoryData.json());
+    } else {
+      console.log("fail");
+      return "invalid credentials";
+    }
+  };
+
+  const fetchSubCategories = () => {
+    console.log(itemList.length);
+    const categorySet = new Set(subCategory);
+    const colorSet = new Set(colorsList);
+    const sizeSet = new Set(sizeList);
+    itemList.forEach((item) => {
+      console.log(item.color);
+      categorySet.add(item.category);
+      colorSet.add(item.color);
+      sizeSet.add(item.size);
+    });
+    setSubCategory(categorySet);
+    setColorsList(colorSet);
+    setSizeList(sizeSet);
+  };
+
   useEffect(() => {
     setCategory(searchPathname.substring(1));
   }, []);
+
   useEffect(() => {
     console.log("Cat updat : ", category);
     category !== "" && fetchCategoryData();
   }, [category]);
+
+  useEffect(() => {
+    if (currentSubCategory === "all" && itemList.length > 0)
+      fetchSubCategories();
+  }, [itemList]);
+
+  useEffect(() => {
+    if (currentSubCategory !== "all") fetchSubCategoryData();
+    console.log(currentSubCategory);
+  }, [currentSubCategory]);
+
   return (
     <div className={styles.normalCatContainer}>
       {category !== "" && (
@@ -52,7 +109,23 @@ const NormalCategoryPage = () => {
       <div className={styles.normalCatSpacing}>
         <div className={styles.filterSectionSpacing}>
           <div className={styles.filterSection}>
-            <CheckBoxArea sectionTitle="Type" />
+            {/* <CheckBoxArea sectionTitle="Type" checkboxItems={subCategory} /> */}
+            <DropdownArea
+              sectionTitle="Product Type"
+              dropboxItems={subCategory}
+              subCat={setCurrentSubCategory}
+            />
+            <DropdownArea
+              sectionTitle="Size"
+              dropboxItems={sizeList}
+              subCat={setCurrentColor}
+            />
+            <DropdownArea
+              sectionTitle="Color"
+              dropboxItems={colorsList}
+              subCat={setCurrentSize}
+            />
+            {/* <CheckBoxArea sectionTitle="Size" /> */}
           </div>
         </div>
         <div className={styles.itemListSection}>

@@ -45,7 +45,7 @@ const Cart = () => {
   }, []);
   return (
     <div className={styles.basicDetailSection}>
-      <h3 className={styles.sectionTitle}>Wishlist</h3>
+      <h3 className={styles.sectionTitle}>Cart</h3>
       <div className={styles.sectionItemsGrid}>
         {item.map((data) => {
           return (

@@ -1,47 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../../styles/checkBoxArea/checkboxarea.module.css";
 
 const CheckBoxArea = ({ sectionTitle, checkboxItems }) => {
-  const [checkItems, setCheckItems] = useState([
-    {
-      id: 1,
-      name: "Jeans",
-    },
-    {
-      id: 2,
-      name: "Shorts",
-    },
-    {
-      id: 3,
-      name: "Shorts",
-    },
-    {
-      id: 4,
-      name: "Shorts",
-    },
-    {
-      id: 5,
-      name: "Shorts",
-    },
-    {
-      id: 6,
-      name: "Shorts",
-    },
-    {
-      id: 7,
-      name: "Shorts",
-    },
-  ]);
+  const [checkItems, setCheckItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    console.log(name, checked);
+    setSelectedItems({ ...selectedItems, [name]: checked });
+  };
+  useEffect(() => {
+    console.log(checkItems);
+  }, [checkItems]);
+  useEffect(() => {
+    // checkboxItems.size > 0 && setCheckItems(checkboxItems);
+    checkboxItems && setCheckItems(checkboxItems);
+  }, [checkboxItems]);
+  useEffect(() => {
+    console.log(selectedItems);
+  }, [selectedItems]);
   return (
     <div className={styles.checkBoxAreaContainer}>
       <div className={styles.sectionTitle}>{sectionTitle}</div>
       <div className={styles.checkBoxesContainer}>
-        {checkItems.map((item) => {
+        {Array.from(checkItems).map((item) => {
           return (
             <div className={styles.checkBoxItem}>
-              <input type="checkbox"></input>
+              <input
+                name={item}
+                className="checkbox"
+                type="checkbox"
+                onChange={handleCheckboxChange}
+              ></input>
               <div className={styles.checkBoxText} id={item.id}>
-                {item.name}
+                {item}
               </div>
             </div>
           );

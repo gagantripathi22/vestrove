@@ -1,6 +1,11 @@
+/* input[type="checkbox"]:checked::before {
+  background-image: url("path/to/checked-checkmark.png");
+} */
+
 .checkBoxAreaContainer {
   width: 100%;
   padding-right: 20px;
+  margin-bottom: 70px;
 }
 
 .sectionTitle {
@@ -14,7 +19,7 @@
 .checkBoxesContainer {
   width: 100%;
   display: grid;
-  grid-template-rows: 50px 50px 50px 50px;
+  grid-template-rows: 35px 35px 35px 35px;
   grid-template-columns: 150px 150px;
 }
 
@@ -23,6 +28,7 @@
   font-weight: 400;
   font-size: 14px;
   margin-left: 20px;
+  text-transform: capitalize;
 }
 
 .checkBoxItem {
