@@ -134,6 +134,12 @@
   }
 }
 
+@for $i from 1 through 50 {
+  .removeBtn:nth-child(#{$i}) {
+    animation-delay: 200ms * $i;
+  }
+}
+
 @keyframes itemRenderAnimation {
   0% {
     opacity: 0;
@@ -153,7 +159,7 @@
   // grid-template-columns: repeat(auto-fit, 180px);
   // grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-columns: 180px 180px 180px;
-  grid-row-gap: 15px;
+  grid-row-gap: 80px;
   grid-column-gap: 20px;
   flex: 1;
 }
@@ -191,4 +197,22 @@
 
   font-weight: 400;
   font-size: 14px;
+}
+
+@keyframes removeBtnAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.removeBtn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  opacity: 0;
+  animation: removeBtnAnimation 1s ease forwards;
+  // animation-delay: ;
 }

@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../../styles/dropdown/dropdown.module.css";
 
-const DropdownArea = ({
-  sectionTitle,
-  dropboxItems,
-  subCat,
-  colorItems,
-  sizeItems,
-}) => {
+const DropdownArea = ({ sectionTitle, dropboxItems, subCat }) => {
   const [checkItems, setCheckItems] = useState([]);
   const [subCategory, setSubCategory] = useState(new Set());
   useEffect(() => {

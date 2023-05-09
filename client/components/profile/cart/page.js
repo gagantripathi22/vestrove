@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "../../../styles/profile/profile.module.scss";
 import jwt_decode from "jwt-decode";
+import RemoveBtn from "../../items/removeBtn/page";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "@/app/Redux/features/user/userSlice";
 
 const Cart = () => {
   const [item, setItems] = useState([]);
+  const mySelector = (state) => state.user;
+  const myData = useSelector(mySelector);
+  const dispatch = useDispatch();
 
   const getCart = async () => {
     const getToken = localStorage.getItem("access-token");
@@ -37,6 +43,36 @@ const Cart = () => {
   const updateCartState = async () => {
     setItems(await getCart());
   };
+  const handleRemoveFromWishlist = async (itemId, itemIndex) => {
+    const userEmail = await myData.email;
+    const userToken = await myData.token;
+    console.log(userEmail, itemId, userToken);
+    const tryLogin = await fetch(
+      `http://localhost:8080/api/user/removeFromCart`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-access-token": `Bearer ${userToken}`,
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          itemId: itemId,
+        }),
+      }
+    );
+    if (tryLogin.status == 200) {
+      console.log("success");
+      dispatch(removeFromCart(itemId));
+      const newItems = item.filter((item, i) => i !== itemIndex);
+      setItems(newItems);
+      return tryLogin.json();
+    } else {
+      console.log("fail");
+      return "invalid credentials";
+    }
+  };
   useEffect(() => {
     console.log("state : ", item);
   }, [item]);
@@ -47,7 +83,7 @@ const Cart = () => {
     <div className={styles.basicDetailSection}>
       <h3 className={styles.sectionTitle}>Cart</h3>
       <div className={styles.sectionItemsGrid}>
-        {item.map((data) => {
+        {item.map((data, index) => {
           return (
             <div className={styles.sectionGridItem}>
               <Image
@@ -59,6 +95,12 @@ const Cart = () => {
               <div className={styles.sectoinGridItemDetail}>
                 <div className={styles.sectionGridItemName}>{data.name}</div>
                 <div className={styles.sectionGridItemPrice}>{data.price}</div>
+              </div>
+              <div
+                className={styles.removeBtn}
+                onClick={() => handleRemoveFromWishlist(data._id, index)}
+              >
+                <RemoveBtn />
               </div>
             </div>
           );

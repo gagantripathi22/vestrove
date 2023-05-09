@@ -5,6 +5,7 @@ import ProfileSection from "./profile/page";
 import ShipmentPaymentSection from "./shipmentpayment/page";
 import WishlistSection from "./wishlist/page";
 import CartSection from "./cart/page";
+import VerifyToken from "@/services/verifyToken";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
@@ -34,7 +35,16 @@ const Profile = () => {
     },
   ]);
 
+  const tokenVerification = async () => {
+    const tokenDecoded = await VerifyToken();
+    console.log("token decoded : ", tokenDecoded);
+    if (!tokenDecoded) {
+      router.replace("/login");
+    }
+  };
+
   useEffect(() => {
+    tokenVerification();
     setCurrentSection(searchPathname.substring(1));
   }, []);
 

@@ -4,6 +4,7 @@ import Footer from "../components/footer/page";
 import HomePage from "../components/home/page";
 
 export default async function Page() {
+  console.log("INTIAILS REDUXXXXXX");
   return (
     <div className={"mainContainer"}>
       <Header />

@@ -40,9 +40,7 @@ export const userSlice = createSlice({
       state.wishlist.push(action.payload);
     },
     removeFromWishlist: (state, action) => {
-      state.wishlist = state.wishlist.filter(
-        (item) => item.id !== action.payload
-      );
+      state.wishlist = state.wishlist.filter((item) => item !== action.payload);
     },
     addToCart: (state, action) => {
       const itemExists = state.cart.some((item) => item === action.payload);
@@ -50,7 +48,7 @@ export const userSlice = createSlice({
       else state.cart.push(action.payload);
     },
     removeFromCart: (state, action) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload);
+      state.cart = state.cart.filter((item) => item !== action.payload);
     },
     resetStore: (state, action) => {
       return initialState;

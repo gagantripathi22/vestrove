@@ -84,7 +84,17 @@ const getAllMaleItem = async (req, res) => {
 
 const getAllFemaleItem = async (req, res) => {
   try {
-    const femaleItem = await Item.find({}).where("gender").equals("women");
+    let query = {};
+    if (req.query.type) {
+      query.category = req.query.type;
+    }
+    if (req.query.color) {
+      query.color = req.query.color;
+    }
+    if (req.query.size) {
+      query.size = req.query.size;
+    }
+    const femaleItem = await Item.find(query).where("gender").equals("women");
     res.status(200).json(femaleItem);
   } catch (error) {
     res.status(400).json(error);

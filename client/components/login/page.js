@@ -13,7 +13,6 @@ const Login = ({ handleLogin }) => {
     const tokenDecoded = await VerifyToken();
     console.log("token decoded : ", tokenDecoded);
     if (tokenDecoded) {
-      console.log("token decoded if");
       router.replace("/");
     }
   };
