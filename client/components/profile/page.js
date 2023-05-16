@@ -8,6 +8,7 @@ import CartSection from "./cart/page";
 import VerifyToken from "@/services/verifyToken";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import InitializeData from "@/app/Redux/features/initialize/initialize";
 
 const Profile = () => {
   const router = useRouter();
@@ -53,42 +54,45 @@ const Profile = () => {
   };
 
   return (
-    <div className={styles.profileContainer}>
-      {/* <div className={styles.sectionHeading}>profile</div> */}
-      <div className={styles.profileSpacing}>
-        <div className={styles.filterSection}>
-          {filterItems.map((item) => {
-            return (
-              <div
-                className={styles.filterItem}
-                onClick={() => handleSectionChangeWithUrl(item.alias)}
-              >
+    <>
+      <InitializeData />
+      <div className={styles.profileContainer}>
+        {/* <div className={styles.sectionHeading}>profile</div> */}
+        <div className={styles.profileSpacing}>
+          <div className={styles.filterSection}>
+            {filterItems.map((item) => {
+              return (
                 <div
-                  className={styles.filterItemText}
-                  style={{
-                    fontWeight: currentSection === item.alias ? 500 : 400,
-                  }}
+                  className={styles.filterItem}
+                  onClick={() => handleSectionChangeWithUrl(item.alias)}
                 >
-                  {item.name}
+                  <div
+                    className={styles.filterItemText}
+                    style={{
+                      fontWeight: currentSection === item.alias ? 500 : 400,
+                    }}
+                  >
+                    {item.name}
+                  </div>
+                  <div className={styles.filterItemHoverEffect}></div>
                 </div>
-                <div className={styles.filterItemHoverEffect}></div>
-              </div>
-            );
-          })}
-        </div>
-        <div className={styles.optionSection}>
-          {currentSection === "profile" ? (
-            <ProfileSection />
-          ) : currentSection === "shipping" ? (
-            <ShipmentPaymentSection />
-          ) : currentSection === "wishlist" ? (
-            <WishlistSection wishList={wishList} />
-          ) : currentSection === "cart" ? (
-            <CartSection cartList={cartList} />
-          ) : null}
+              );
+            })}
+          </div>
+          <div className={styles.optionSection}>
+            {currentSection === "profile" ? (
+              <ProfileSection />
+            ) : currentSection === "shipping" ? (
+              <ShipmentPaymentSection />
+            ) : currentSection === "wishlist" ? (
+              <WishlistSection wishList={wishList} />
+            ) : currentSection === "cart" ? (
+              <CartSection cartList={cartList} />
+            ) : null}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

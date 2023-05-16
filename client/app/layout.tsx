@@ -2,19 +2,8 @@ import { Italiana, Jost } from "next/font/google";
 import "../styles/globals.css";
 import { Providers } from "./Redux/provider";
 
-// Redux
-import VerifyJwt from "@/services/verifyToken";
-import jwt_decode from "jwt-decode";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  addToWishlist,
-  addToCart,
-  addName,
-  addEmail,
-  addToList,
-  addToken,
-} from "@/app/Redux/features/user/userSlice";
-// Redux
+import Header from "@/components/header/page";
+import Footer from "@/components/footer/page";
 
 // Fonts
 const jost = Jost({ subsets: ["latin"], variable: "--jost-font" });
@@ -31,13 +20,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Redux Initialization
-
-  // Redux Initialization
   return (
     <html lang="en" className={`${italiana.variable} ${jost.variable}`}>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

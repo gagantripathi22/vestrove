@@ -8,7 +8,8 @@ const saltRounds = 10;
 const signUp = async (req, res) => {
   const data = new User({
     email: req.body.email,
-    name: req.body.name,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     password: req.body.password,
   });
 
@@ -31,25 +32,29 @@ const signUp = async (req, res) => {
 const login = async (req, res) => {
   try {
     const fetchedUser = await User.find({ email: req.body.email });
-    const match = await bcrypt.compare(
-      req.body.password,
-      fetchedUser[0].password
-    );
-    if (match) {
-      res.status(200);
-      jwt.sign(
-        { fetchedUser },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: "86400s" },
-        (err, token) => {
-          res.json({
-            token,
-            user: fetchedUser,
-          });
-        }
+    if (fetchedUser.length > 0) {
+      const match = await bcrypt.compare(
+        req.body.password,
+        fetchedUser[0].password
       );
+      if (match) {
+        res.status(200);
+        jwt.sign(
+          { fetchedUser },
+          process.env.JWT_SECRET_KEY,
+          { expiresIn: "86400s" },
+          (err, token) => {
+            res.json({
+              token,
+              user: fetchedUser,
+            });
+          }
+        );
+      } else {
+        res.status(400).json("Incorrect Credentials");
+      }
     } else {
-      throw "Incorrect Credentials";
+      res.status(400).json("Invalid Credentials");
     }
   } catch (err) {
     res.status(400).json({ message: err });
@@ -113,12 +118,14 @@ const removeFromWishlist = async (req, res) => {
 };
 
 const getUserInfo = async (req, res) => {
+  console.log("getuserinfo inside");
   try {
     const userIdToFetch = req.body.userId;
     const fetchUser = await User.find({ _id: userIdToFetch });
     if (fetchUser) {
       res.status(200).json({
-        name: fetchUser[0].name,
+        firstname: fetchUser[0].firstname,
+        lastname: fetchUser[0].lastname,
         email: fetchUser[0].email,
         wishlist: fetchUser[0].wishlist,
         cart: fetchUser[0].cart,
@@ -167,6 +174,28 @@ const getCart = async (req, res) => {
   }
 };
 
+const updateUserInfo = async (req, res) => {
+  try {
+    const IdToFetch = req.params.id;
+    if (IdToFetch === req.authData.fetchedUser[0]._id) {
+      const getUser = await User.find({ _id: IdToFetch });
+      if (getUser) {
+        const filter = { _id: IdToFetch };
+        const toUpdate = req.body;
+        console.log(filter, toUpdate);
+        try {
+          const userUpdate = await User.findOneAndUpdate(filter, toUpdate);
+          res.status(200).json(userUpdate);
+        } catch (error) {
+          res.status(400).json(error);
+        }
+      }
+    }
+  } catch (error) {
+    res.status(400).json(error.messsage);
+  }
+};
+
 var userController = {
   signUp: signUp,
   login: login,
@@ -177,6 +206,7 @@ var userController = {
   getUserInfo: getUserInfo,
   getWishlist: getWishlist,
   getCart: getCart,
+  updateUserInfo: updateUserInfo,
 };
 
 module.exports = userController;

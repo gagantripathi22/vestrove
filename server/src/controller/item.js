@@ -67,13 +67,16 @@ const getAllMaleItem = async (req, res) => {
   try {
     let query = {};
     if (req.query.type) {
-      query.category = req.query.type;
+      console.log("type: ", typeof req.query.type);
+      if (req.query.type != "null") query.category = req.query.type;
     }
     if (req.query.color) {
-      query.color = req.query.color;
+      console.log("color: ", typeof req.query.color);
+      if (req.query.color != "null") query.color = req.query.color;
     }
     if (req.query.size) {
-      query.size = req.query.size;
+      console.log("size: ", req.query.size);
+      if (req.query.size != "null") query.size = req.query.size;
     }
     const maleItem = await Item.find(query).where("gender").equals("men");
     res.status(200).json(maleItem);
@@ -86,13 +89,13 @@ const getAllFemaleItem = async (req, res) => {
   try {
     let query = {};
     if (req.query.type) {
-      query.category = req.query.type;
+      if (req.query.type != "null") query.category = req.query.type;
     }
     if (req.query.color) {
-      query.color = req.query.color;
+      if (req.query.color != "null") query.color = req.query.color;
     }
     if (req.query.size) {
-      query.size = req.query.size;
+      if (req.query.size != "null") query.size = req.query.size;
     }
     const femaleItem = await Item.find(query).where("gender").equals("women");
     res.status(200).json(femaleItem);
@@ -152,6 +155,16 @@ const getWomenItemByCategory = async (req, res) => {
   }
 };
 
+const getItemById = async (req, res) => {
+  const productId = { _id: req.params.id };
+  try {
+    const product = await Item.find(productId);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 const additemController = {
   addItem: addItem,
   removeItem: removeItem,
@@ -162,6 +175,7 @@ const additemController = {
   uploadImage: uploadImage,
   getMaleItemByCategory: getMaleItemByCategory,
   getWomenItemByCategory: getWomenItemByCategory,
+  getItemById: getItemById,
 };
 
 module.exports = additemController;

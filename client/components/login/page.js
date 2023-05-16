@@ -6,8 +6,20 @@ import ShowcaseImagesList from "./showcaseImages.json";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import VerifyToken from "../../services/verifyToken";
+import jwt_decode from "jwt-decode";
+import InitializeData from "@/app/Redux/features/initialize/initialize";
+import { useDispatch } from "react-redux";
+import {
+  addToWishlist,
+  addToCart,
+  addEmail,
+  addToken,
+  addFirstname,
+  addLastname,
+} from "@/app/Redux/features/user/userSlice";
 
 const Login = ({ handleLogin }) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const tokenVerification = async () => {
     const tokenDecoded = await VerifyToken();
@@ -80,13 +92,75 @@ const Login = ({ handleLogin }) => {
     else `${styles.showcaseImageChangeEffect}`;
   };
 
+  // async function setLocalStorageAccessToken(token) {
+  //   localStorage.setItem("access-token", token);
+  //   return new Promise(function (resolve, reject) {
+  //     console.log(
+  //       "Access Token added : ",
+  //       localStorage.getItem("access-token")
+  //     );
+  //     resolve();
+  //   });
+  // }
+
   const handleLoginBtnClick = async () => {
     const res = await handleLogin(loginEmail, loginPassword);
+    await localStorage.setItem("access-token", res.token);
     if (res.token) {
+      // setLocalStorageAccessToken(res.token).then(async () => {
+      //   console.log("Local Storage then");
+      //   await addDataToRedux();
+      // });
       await localStorage.setItem("access-token", res.token);
+      await addDataToRedux();
       router.push("/");
     } else {
       setUserInputInfo(res);
+    }
+  };
+
+  const addDataToRedux = async () => {
+    dispatch(addEmail("gagantripathi@gagan.com"));
+    console.log("Add data to redux on login click");
+    const getToken = await localStorage.getItem("access-token");
+    const getTokenData = await jwt_decode(getToken);
+    const getTokenUserId = getTokenData.fetchedUser[0]._id;
+    console.log("addDataToRedux Token : ", getTokenData);
+    const getLoginUserData = await fetch(
+      `http://localhost:8080/api/user/getUserData`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-access-token": `Bearer ${getToken}`,
+        },
+        body: JSON.stringify({
+          userId: getTokenUserId,
+        }),
+      }
+    );
+    if (getLoginUserData.status == 200) {
+      const res = await getLoginUserData.json();
+      const email = res.email;
+      const firstname = res.firstname;
+      const lastname = res.lastname;
+      const wishlist = await Object.values(res.wishlist);
+      const cart = await Object.values(res.cart);
+      console.log("success");
+      cart.map((item) => {
+        dispatch(addToCart(item));
+      });
+      wishlist.map((item) => {
+        dispatch(addToWishlist(item));
+      });
+      dispatch(addEmail(email));
+      dispatch(addFirstname(firstname));
+      dispatch(addLastname(lastname));
+      dispatch(addToken(getToken));
+    } else {
+      console.log("fail");
+      return "invalid credentials";
     }
   };
 
@@ -188,6 +262,9 @@ const Login = ({ handleLogin }) => {
           )}
         </div>
       </div>
+      <button onClick={() => console.log(localStorage.getItem("access-token"))}>
+        Test Get Access Token
+      </button>
     </div>
   );
 };

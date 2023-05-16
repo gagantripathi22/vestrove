@@ -21,5 +21,6 @@ router.get("/getAll", basicAuth, Item.getAll);
 router.patch("/updateItem/:id", basicAuth, Item.updateItem);
 router.get("/men/:category", basicAuth, Item.getMaleItemByCategory);
 router.get("/women/:category", basicAuth, Item.getWomenItemByCategory);
+router.get("/product/:id", basicAuth, Item.getItemById);
 
 module.exports = router;

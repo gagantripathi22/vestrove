@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface UserState {
   email: String;
-  name: String;
+  firstname: String;
+  lastname: String;
   wishlist: any;
   cart: any;
   token: String;
@@ -12,7 +13,8 @@ export interface UserState {
 
 const initialState: UserState = {
   email: "",
-  name: "",
+  firstname: "",
+  lastname: "",
   wishlist: [],
   cart: [],
   token: "",
@@ -28,16 +30,16 @@ export const userSlice = createSlice({
     addEmail: (state, action) => {
       state.email = action.payload;
     },
-    addName: (state, action) => {
-      state.name = action.payload;
+    addFirstname: (state, action) => {
+      state.firstname = action.payload;
+    },
+    addLastname: (state, action) => {
+      state.lastname = action.payload;
     },
     addToWishlist: (state, action) => {
       const itemExists = state.wishlist.some((item) => item === action.payload);
       if (itemExists) return state;
       else state.wishlist.push(action.payload);
-    },
-    addToList: (state, action) => {
-      state.wishlist.push(action.payload);
     },
     removeFromWishlist: (state, action) => {
       state.wishlist = state.wishlist.filter((item) => item !== action.payload);
@@ -58,12 +60,12 @@ export const userSlice = createSlice({
 
 export const {
   addToWishlist,
-  addToList,
   removeFromWishlist,
   addToCart,
   removeFromCart,
   addEmail,
-  addName,
+  addFirstname,
+  addLastname,
   resetStore,
   addToken,
 } = userSlice.actions;

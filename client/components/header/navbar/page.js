@@ -10,8 +10,10 @@ import MaleNewArrivalImg2 from "../../../public/categoryNewArrival/male2.jpg";
 import WatchNewArrivalImg1 from "../../../public/categoryNewArrival/watch1.jpg";
 import WatchNewArrivalImg2 from "../../../public/categoryNewArrival/watch2.jpg";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const router = useRouter();
   const [currentNavItem, setCurrentNavItem] = useState(null);
   const [currentNavExpandState, setCurrentNavExpandState] = useState(
     "navbarExpandContainer"
@@ -30,10 +32,25 @@ const Navbar = () => {
       <div id={itemId} className={styles.navSubItemContainer}>
         {navItems[itemId].subcategories?.map((subcat) => {
           return (
-            <div className={styles.navSubItem}>
-              <div className={styles.navSubItemText}>{subcat.name}</div>
-              <div className={styles.navSubItemHoverEffect}></div>
-            </div>
+            <Link
+              href={`/${
+                itemId === 0 ? "women" : itemId === 1 ? "men" : "watches"
+              }?type=${subcat.name.toLowerCase()}`}
+              // href={{
+              //   pathname: `/${
+              //     itemId === 0 ? "women" : itemId === 1 ? "men" : "watches"
+              //   }?type=${subcat.name.toLowerCase()}`,
+              //   query: { subCategory: subcat.name },
+              // }}
+            >
+              <div
+                className={styles.navSubItem}
+                onClick={() => router.refresh()}
+              >
+                <div className={styles.navSubItemText}>{subcat.name}</div>
+                <div className={styles.navSubItemHoverEffect}></div>
+              </div>
+            </Link>
           );
         })}
       </div>

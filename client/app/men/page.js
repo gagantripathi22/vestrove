@@ -4,12 +4,10 @@ import Header from "../../components/header/page";
 import Footer from "../../components/footer/page";
 
 const Men = () => {
-  console.log("womenroute");
+  console.log("menroute");
   return (
     <>
-      <Header />
       <CategoryPage />
-      <Footer />
     </>
   );
 };

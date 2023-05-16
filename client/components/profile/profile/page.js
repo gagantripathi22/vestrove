@@ -1,28 +1,50 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../../../styles/profile/profile.module.scss";
+import { useSelector } from "react-redux";
+import Button from "@/components/items/button/page";
 
 const Profile = () => {
-  const renderPlainInput = (name) => {
+  const userInfoSelector = (state) => state.user;
+  const userInfo = useSelector(userInfoSelector);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  useEffect(() => {
+    setFirstname(userInfo.firstname);
+    setLastname(userInfo.lastname);
+    setEmail(userInfo.email);
+  }, [userInfo]);
+
+  const renderPlainInput = (inputTitle, value, callbackValue) => {
     return (
       <div className={styles.plainInputContainer}>
-        <h5 className={styles.plainInputName}>{name}</h5>
+        <h5 className={styles.plainInputName}>{inputTitle}</h5>
         <input
           type="text"
           // id="fname"
           // name="fname"
+          value={value}
+          onChange={(e) => callbackValue(e.target.value)}
           className={styles.plainInputField}
         ></input>
       </div>
     );
   };
-  const renderPasswordInput = (name) => {
+  const renderPasswordInput = (inputTitle, value, callbackValue) => {
     return (
       <div className={styles.plainInputContainer}>
-        <h5 className={styles.plainInputName}>{name}</h5>
+        <h5 className={styles.plainInputName}>{inputTitle}</h5>
         <input
           type="password"
           // id="fname"
           // name="fname"
+          value={value}
+          onChange={(e) => callbackValue(e.target.value)}
           className={styles.plainInputField}
         ></input>
       </div>
@@ -33,21 +55,35 @@ const Profile = () => {
       <section className={styles.basicDetailSection}>
         <h3 className={styles.sectionTitle}>Profile</h3>
         <form className={styles.basicDetailForm}>
-          {renderPlainInput("First Name")}
-          {renderPlainInput("Last Name")}
+          {renderPlainInput("First Name", firstname, setFirstname)}
+          {renderPlainInput("Last Name", lastname, setLastname)}
           <span></span>
-          {renderPlainInput("Email")}
+          {renderPlainInput("Email", email, setEmail)}
         </form>
+        <div className={styles.buttonContainer}>
+          <Button text="Update Profile" />
+        </div>
       </section>
       <section className={styles.passwordSection}>
         <h3 className={styles.sectionTitle}>Password</h3>
         <form className={styles.basicDetailForm}>
-          {renderPasswordInput("current password")}
+          {renderPasswordInput(
+            "current password",
+            currentPassword,
+            setCurrentPassword
+          )}
           <span></span>
           <span></span>
-          {renderPasswordInput("new password")}
-          {renderPasswordInput("confirm new password")}
+          {renderPasswordInput("new password", newPassword, setNewPassword)}
+          {renderPasswordInput(
+            "confirm new password",
+            confirmPassword,
+            setConfirmPassword
+          )}
         </form>
+        <div className={styles.buttonContainer}>
+          <Button text="Update Password" />
+        </div>
       </section>
     </>
   );

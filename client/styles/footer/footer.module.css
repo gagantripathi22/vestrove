@@ -16,9 +16,10 @@
 }
 
 .footerHeading {
-  font-family: var(--italiana-font);
-  /* font-weight: 400; */
+  font-family: var(--jost-font);
+  font-weight: 400;
   font-size: 3em;
+  text-transform: uppercase;
   color: #787878;
   cursor: pointer;
 }

@@ -22,13 +22,117 @@
     },
     {
       "id": 2,
-      "name": "xxl"
+      "name": "xxxl"
     }
   ],
   [
     {
       "id": 1,
       "name": "cream"
+    },
+    {
+      "id": 2,
+      "name": "brown"
+    },
+    {
+      "id": 3,
+      "name": "black"
+    },
+    {
+      "id": 4,
+      "name": "blue"
+    },
+    {
+      "id": 5,
+      "name": "grey"
+    },
+    {
+      "id": 6,
+      "name": "white"
+    },
+    {
+      "id": 7,
+      "name": "denim blue"
+    },
+    {
+      "id": 8,
+      "name": "green"
+    },
+    {
+      "id": 9,
+      "name": "pink"
+    },
+    {
+      "id": 10,
+      "name": "orange"
+    },
+    {
+      "id": 11,
+      "name": "purple"
+    },
+    {
+      "id": 12,
+      "name": "beige"
+    },
+    {
+      "id": 13,
+      "name": "red"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "name": "jeans"
+    },
+    {
+      "id": 2,
+      "name": "dresses"
+    },
+    {
+      "id": 3,
+      "name": "jumpsuits"
+    },
+    {
+      "id": 4,
+      "name": "shorts"
+    },
+    {
+      "id": 5,
+      "name": "sweatshirts"
+    },
+    {
+      "id": 5,
+      "name": "tops"
+    }
+  ],
+  [
+    {
+      "id": 1,
+      "name": "blazers"
+    },
+    {
+      "id": 2,
+      "name": "jackets"
+    },
+    {
+      "id": 3,
+      "name": "jeans"
+    },
+    {
+      "id": 4,
+      "name": "shirts"
+    },
+    {
+      "id": 5,
+      "name": "shorts"
+    },
+    {
+      "id": 5,
+      "name": "sweatshirts"
+    },
+    {
+      "id": 6,
+      "name": "tshirts"
     }
   ]
 ]

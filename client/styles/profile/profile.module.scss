@@ -215,4 +215,10 @@
   opacity: 0;
   animation: removeBtnAnimation 1s ease forwards;
   // animation-delay: ;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.buttonContainer {
+  margin-top: 60px;
 }

@@ -18,7 +18,7 @@ const Header = () => {
               console.log(Decode(localStorage.getItem("access-token")));
             }}
           >
-            7/stop
+            sevnstop
           </h1>
         </Link>
         <Navbar />

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../../../styles/profile/profile.module.scss";
 import jwt_decode from "jwt-decode";
+import Link from "next/link";
 import RemoveBtn from "../../items/removeBtn/page";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWishlist } from "@/app/Redux/features/user/userSlice";
+import InitializeData from "../../../app/Redux/features/initialize/initialize";
 
 const Wishlist = () => {
   const [item, setItems] = useState([]);
@@ -79,33 +81,44 @@ const Wishlist = () => {
     updateWishlistState();
   }, []);
   return (
-    <div className={styles.basicDetailSection}>
-      <h3 className={styles.sectionTitle}>Wishlist</h3>
-      <div className={styles.sectionItemsGrid}>
-        {item.map((data, index) => {
-          return (
-            <div className={styles.sectionGridItem}>
-              <Image
-                className={styles.sectionGridItemImage}
-                src={data.image}
-                height={180}
-                width={180}
-              ></Image>
-              <div className={styles.sectoinGridItemDetail}>
-                <div className={styles.sectionGridItemName}>{data.name}</div>
-                <div className={styles.sectionGridItemPrice}>{data.price}</div>
+    <>
+      <InitializeData />
+      <div className={styles.basicDetailSection}>
+        <h3 className={styles.sectionTitle}>Wishlist</h3>
+        <div className={styles.sectionItemsGrid}>
+          {item.map((data, index) => {
+            return (
+              <div style={{ position: "relative" }}>
+                <div
+                  className={styles.removeBtn}
+                  onClick={() => handleRemoveFromWishlist(data._id, index)}
+                >
+                  <RemoveBtn />
+                </div>
+                <Link href={`/product/${data._id}`}>
+                  <div className={styles.sectionGridItem}>
+                    <Image
+                      className={styles.sectionGridItemImage}
+                      src={data.image}
+                      height={180}
+                      width={180}
+                    ></Image>
+                    <div className={styles.sectoinGridItemDetail}>
+                      <div className={styles.sectionGridItemName}>
+                        {data.name}
+                      </div>
+                      <div className={styles.sectionGridItemPrice}>
+                        Rs. {data.price}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
               </div>
-              <div
-                className={styles.removeBtn}
-                onClick={() => handleRemoveFromWishlist(data._id, index)}
-              >
-                <RemoveBtn />
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,11 +1,13 @@
+"use client";
+
 import React from "react";
-import CategoryPage from "../../components/normalCategoryPage/page";
+import ProductPage from "../../../components/product/page";
 
 const Women = () => {
   console.log("womenroute");
   return (
     <>
-      <CategoryPage />
+      <ProductPage />
     </>
   );
 };

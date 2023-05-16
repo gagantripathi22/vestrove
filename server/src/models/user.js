@@ -13,7 +13,12 @@ const userSchema = new mongoose.Schema({
       message: "Please enter a valid email",
     },
   },
-  name: {
+  firstname: {
+    required: true,
+    type: String,
+    required: true,
+  },
+  lastname: {
     required: true,
     type: String,
   },

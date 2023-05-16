@@ -36,7 +36,7 @@ const UserControls = () => {
 
   useEffect(() => {
     if (localStorage.getItem("access-token")) setIsUserLoggedIn(true);
-  }, []);
+  }, [localStorage.getItem("access-token")]);
 
   const [controlItems, setControlItems] = useState([
     {

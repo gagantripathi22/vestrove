@@ -26,4 +26,6 @@ router.post("/getWishlist", verifyToken, userController.getWishlist);
 
 router.post("/getCart", verifyToken, userController.getCart);
 
+router.patch("/updateUser/:id", verifyToken, userController.updateUserInfo);
+
 module.exports = router;

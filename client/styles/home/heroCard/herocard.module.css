@@ -46,13 +46,13 @@
   object-fit: cover;
 }
 
-.cardContainerBig:hover .cardTitleUnderline {
+/* .cardContainerBig:hover .cardTitleUnderline {
   width: 100%;
 }
 
 .cardContainerWide:hover .cardTitleUnderline {
   width: 100%;
-}
+} */
 
 .cardTitleContainer {
   display: flex;
@@ -64,7 +64,7 @@
 }
 
 .cardTitle {
-  font-family: var(--italiana-font);
+  font-family: var(--jost-font);
   font-size: 7em;
   text-transform: uppercase;
   color: #242527;

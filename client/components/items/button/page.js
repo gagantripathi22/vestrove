@@ -7,7 +7,6 @@ const Button = ({ buttonHeight, buttonWidth, text }) => {
       className={styles.buttonContainer}
       style={{
         height: buttonHeight ? buttonHeight : 50,
-        width: buttonWidth ? buttonWidth : 140,
       }}
     >
       <div className={styles.buttonText}>{text ? text : "Button Text"}</div>

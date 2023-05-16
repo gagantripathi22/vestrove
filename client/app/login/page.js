@@ -1,10 +1,9 @@
 import React from "react";
 import LoginPage from "../../components/login/page";
-import Header from "@/components/header/page";
-import Footer from "@/components/footer/page";
 
 async function handleLogin(email, password) {
   "use server";
+  console.log("handle login working");
   const tryLogin = await fetch(`http://localhost:8080/api/user/login`, {
     method: "POST",
     headers: {
@@ -30,9 +29,7 @@ const Login = async () => {
   // console.log(loginres.user[0].email);
   return (
     <>
-      <Header />
       <LoginPage handleLogin={handleLogin} />
-      <Footer />
     </>
   );
 };
