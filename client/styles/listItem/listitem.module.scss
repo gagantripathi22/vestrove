@@ -8,7 +8,7 @@
 }
 
 .listItem {
-  width: 234px;
+  width: 100%;
   margin-right: 30px;
   cursor: pointer;
   // animation: itemRenderAnimation 2s;
@@ -23,6 +23,7 @@
   width: 100%;
   aspect-ratio: 2 / 3;
   background-color: rgb(235, 235, 235);
+  object-fit: cover;
 }
 
 .listItemDetail {

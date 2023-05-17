@@ -85,3 +85,45 @@
   justify-content: center;
   cursor: pointer;
 }
+
+@media (max-width: 1140px) {
+  .product {
+    flex-direction: column;
+  }
+  .productImageContainer {
+    width: 100%;
+    height: 1200px;
+  }
+  .productImage {
+  }
+  .productDetailContainer {
+    width: 100%;
+    height: auto;
+    padding: 50px 0 0 0;
+  }
+  .productContainer {
+    height: auto;
+  }
+  .productSpacing {
+    margin: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .productImageContainer {
+    height: 500px;
+  }
+  .productContainer {
+    margin-top: 0px;
+  }
+  .productName {
+    font-size: 18px;
+  }
+  .productPrice {
+    font-size: 15px;
+  }
+  .productColor {
+    font-size: 15px;
+  }
+}
