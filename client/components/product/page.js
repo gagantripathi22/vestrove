@@ -159,12 +159,10 @@ const Product = () => {
     getProductDetailsFromRedux();
     console.log("User Data from redux : ", userData);
   }, []);
+
   return (
     <>
       <InitializeData />
-      <Head>
-        <title>{productData[0]?.name}</title>
-      </Head>
       <div className={styles.productContainer}>
         <div className={styles.productSpacing}>
           <div className={styles.product}>

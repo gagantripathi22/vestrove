@@ -17,7 +17,8 @@ const Cart = () => {
     const getToken = localStorage.getItem("access-token");
 
     const getTokenData = await jwt_decode(getToken);
-    const getTokenUserId = getTokenData.fetchedUser[0]._id;
+    console.log("getTokenData : ", getTokenData, getToken);
+    const getTokenUserId = getTokenData.fetchedUserTokenData._id;
     const getCartUserData = await fetch(
       `http://localhost:8080/api/user/getCart`,
       {
@@ -86,7 +87,10 @@ const Cart = () => {
       <div className={styles.sectionItemsGrid}>
         {item.map((data, index) => {
           return (
-            <div style={{ position: "relative" }}>
+            <div
+              style={{ position: "relative" }}
+              className={styles.gridItemMainContainer}
+            >
               <div
                 className={styles.removeBtn}
                 onClick={() => handleRemoveFromWishlist(data._id, index)}

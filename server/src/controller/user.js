@@ -32,21 +32,27 @@ const signUp = async (req, res) => {
 const login = async (req, res) => {
   try {
     const fetchedUser = await User.find({ email: req.body.email });
+
     if (fetchedUser.length > 0) {
       const match = await bcrypt.compare(
         req.body.password,
         fetchedUser[0].password
       );
+      const fetchedUserTokenData = {
+        email: fetchedUser[0].email,
+        _id: fetchedUser[0]._id,
+        // token:
+      };
       if (match) {
         res.status(200);
         jwt.sign(
-          { fetchedUser },
+          { fetchedUserTokenData },
           process.env.JWT_SECRET_KEY,
           { expiresIn: "86400s" },
           (err, token) => {
             res.json({
               token,
-              user: fetchedUser,
+              user: fetchedUserTokenData,
             });
           }
         );
@@ -139,17 +145,17 @@ const getUserInfo = async (req, res) => {
 const getWishlist = async (req, res) => {
   try {
     const IdToFetch = req.body.userId;
-    if (IdToFetch === req.authData.fetchedUser[0]._id) {
-      const fetchWishlist = await User.find({ _id: IdToFetch });
-      const getItemUsingId = await Item.find({
-        _id: { $in: fetchWishlist[0].wishlist },
+    // if (IdToFetch === req.authData.fetchedUser[0]._id) {
+    const fetchWishlist = await User.find({ _id: IdToFetch });
+    const getItemUsingId = await Item.find({
+      _id: { $in: fetchWishlist[0].wishlist },
+    });
+    if (getItemUsingId) {
+      res.status(200).json({
+        wishlist: getItemUsingId,
       });
-      if (getItemUsingId) {
-        res.status(200).json({
-          wishlist: getItemUsingId,
-        });
-      }
     }
+    // }
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -158,17 +164,17 @@ const getWishlist = async (req, res) => {
 const getCart = async (req, res) => {
   try {
     const IdToFetch = req.body.userId;
-    if (IdToFetch === req.authData.fetchedUser[0]._id) {
-      const fetchCart = await User.find({ _id: IdToFetch });
-      const getItemUsingId = await Item.find({
-        _id: { $in: fetchCart[0].cart },
+    // if (IdToFetch === req.authData.fetchedUser[0]._id) {
+    const fetchCart = await User.find({ _id: IdToFetch });
+    const getItemUsingId = await Item.find({
+      _id: { $in: fetchCart[0].cart },
+    });
+    if (getItemUsingId) {
+      res.status(200).json({
+        cart: getItemUsingId,
       });
-      if (getItemUsingId) {
-        res.status(200).json({
-          cart: getItemUsingId,
-        });
-      }
     }
+    // }
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -196,6 +202,55 @@ const updateUserInfo = async (req, res) => {
   }
 };
 
+const updateProfileData = async (req, res) => {
+  try {
+    const IdToFetch = req.params.id;
+    const getUser = await User.find({ _id: IdToFetch });
+    if (getUser) {
+      const filter = { _id: IdToFetch };
+      const toUpdate = req.body;
+      console.log(filter, toUpdate);
+      try {
+        const userUpdate = await User.findOneAndUpdate(filter, toUpdate);
+        res.status(200).json(userUpdate);
+      } catch (error) {
+        res.status(400).json(error);
+      }
+    }
+  } catch (error) {
+    res.status(400).json(error.messsage);
+  }
+};
+
+const updatePassword = async (req, res) => {
+  try {
+    const IdToFetch = req.params.id;
+    const getUser = await User.find({ _id: IdToFetch });
+    console.log(req.body.currentPassword, getUser[0].password);
+    if (await bcrypt.compare(req.body.currentPassword, getUser[0].password)) {
+      const filter = { _id: IdToFetch };
+      const newHashedPassword = await bcrypt.hash(
+        req.body.newPassword,
+        saltRounds
+      );
+      const toUpdate = {
+        password: newHashedPassword,
+      };
+      console.log(filter, toUpdate);
+      try {
+        const userUpdate = await User.findOneAndUpdate(filter, toUpdate);
+        res.status(200).json(userUpdate);
+      } catch (error) {
+        res.status(400).json(error);
+      }
+    } else {
+      res.status(400).json("Incorrect Current Password");
+    }
+  } catch (error) {
+    res.status(400).json(error.messsage);
+  }
+};
+
 var userController = {
   signUp: signUp,
   login: login,
@@ -207,6 +262,8 @@ var userController = {
   getWishlist: getWishlist,
   getCart: getCart,
   updateUserInfo: updateUserInfo,
+  updateProfileData: updateProfileData,
+  updatePassword: updatePassword,
 };
 
 module.exports = userController;

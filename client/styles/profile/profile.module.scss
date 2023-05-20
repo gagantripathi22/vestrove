@@ -34,6 +34,8 @@
   min-height: 280px;
   height: fit-content;
   border-right: 1px solid rgb(222, 222, 222);
+  display: flex;
+  flex-direction: column;
 }
 
 .optionSection {
@@ -221,4 +223,56 @@
 
 .buttonContainer {
   margin-top: 60px;
+}
+
+@media (max-width: 1000px) {
+  .profileSpacing {
+    flex-direction: column;
+  }
+  .filterSection {
+    width: fit-content;
+    overflow-x: scroll;
+    flex-direction: row;
+    height: auto;
+    min-height: auto;
+    padding: 0 100px;
+    margin-bottom: 50px;
+    border-right: none;
+  }
+  .filterItem {
+    height: fit-content;
+    margin-bottom: 0;
+    min-width: fit-content;
+    margin-right: 30px;
+  }
+  .profileContainer {
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filterSection {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  .optionSection {
+    padding: 20px;
+  }
+  .sectionItemsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-column: 0;
+    column-gap: 10px;
+  }
+  .sectionGridItem {
+    width: auto;
+  }
+  .sectionGridItemImage {
+    width: 100%;
+  }
+  .gridItemMainContainer {
+    width: 100%;
+  }
+  .basicDetailForm {
+    grid-template-columns: 1fr;
+  }
 }

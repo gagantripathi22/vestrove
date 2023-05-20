@@ -25,7 +25,7 @@ const InitializeData = () => {
   const addDataToRedux = async () => {
     const getToken = localStorage.getItem("access-token");
     const getTokenData = await jwt_decode(getToken);
-    const getTokenUserId = getTokenData.fetchedUser[0]._id;
+    const getTokenUserId = getTokenData.fetchedUserTokenData._id;
     const getLoginUserData = await fetch(
       `http://localhost:8080/api/user/getUserData`,
       {

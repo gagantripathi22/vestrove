@@ -105,27 +105,29 @@ const Login = ({ handleLogin }) => {
 
   const handleLoginBtnClick = async () => {
     const res = await handleLogin(loginEmail, loginPassword);
-    await localStorage.setItem("access-token", res.token);
+    // await localStorage.setItem("access-token", res.token);
     if (res.token) {
       // setLocalStorageAccessToken(res.token).then(async () => {
       //   console.log("Local Storage then");
       //   await addDataToRedux();
       // });
       await localStorage.setItem("access-token", res.token);
-      await addDataToRedux();
-      router.push("/");
+      await addDataToRedux(res.token);
     } else {
       setUserInputInfo(res);
     }
   };
 
-  const addDataToRedux = async () => {
+  const addDataToRedux = async (token) => {
     dispatch(addEmail("gagantripathi@gagan.com"));
     console.log("Add data to redux on login click");
     const getToken = await localStorage.getItem("access-token");
-    const getTokenData = await jwt_decode(getToken);
-    const getTokenUserId = getTokenData.fetchedUser[0]._id;
-    console.log("addDataToRedux Token : ", getTokenData);
+    const getTokenData = await jwt_decode(token);
+    const getTokenUserId = getTokenData.fetchedUserTokenData._id;
+    console.log(
+      "addDataToRedux Token : ",
+      getTokenData.fetchedUserTokenData._id
+    );
     const getLoginUserData = await fetch(
       `http://localhost:8080/api/user/getUserData`,
       {
@@ -158,6 +160,7 @@ const Login = ({ handleLogin }) => {
       dispatch(addFirstname(firstname));
       dispatch(addLastname(lastname));
       dispatch(addToken(getToken));
+      router.push("/");
     } else {
       console.log("fail");
       return "invalid credentials";
@@ -263,7 +266,19 @@ const Login = ({ handleLogin }) => {
         </div>
       </div>
       <button onClick={() => console.log(localStorage.getItem("access-token"))}>
-        Test Get Access Token
+        ------TEST TOKEN----------
+      </button>
+
+      <button
+        onClick={async () =>
+          console.log(
+            await jwt_decode(
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZXRjaGVkVXNlciI6W3siX2lkIjoiNjQ2M2JlOGUxNmY5OWEzMmFhMzIxZjdkIiwiZW1haWwiOiJnYWdhbkBnbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJHYWdhbiIsImxhc3RuYW1lIjoiVHJpcGF0aGkiLCJwYXNzd29yZCI6IiQyYiQxMCRrOVh0c054bkVwQU9EMnQ2U0VKSUR1UEtURGpzd1J1WlBKUVZUdGlOOU8vQVRuemM0dEZOeSIsImNhcnQiOltdLCJ3aXNobGlzdCI6W10sIl9fdiI6MH1dLCJpYXQiOjE2ODQyNTg0NTUsImV4cCI6MTY4NDM0NDg1NX0.HORAZ0dgaIhbUo6P21LtwYL5ss1CQDYMhAyl0Sk6xN8"
+            )
+          )
+        }
+      >
+        --------TEST Token DEOde
       </button>
     </div>
   );

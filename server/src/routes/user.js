@@ -28,4 +28,12 @@ router.post("/getCart", verifyToken, userController.getCart);
 
 router.patch("/updateUser/:id", verifyToken, userController.updateUserInfo);
 
+router.patch(
+  "/updateProfile/:id",
+  verifyToken,
+  userController.updateProfileData
+);
+
+router.patch("/updatePassword/:id", verifyToken, userController.updatePassword);
+
 module.exports = router;
