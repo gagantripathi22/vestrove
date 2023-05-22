@@ -22,6 +22,7 @@
   width: auto;
   height: auto;
   padding: 2em;
+  // overflow: hidden;
 }
 
 .filterSection {
@@ -62,8 +63,13 @@
   text-transform: uppercase;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 30px;
+  margin-top: 7px;
   margin-bottom: 40px;
+}
+
+.sectionHeadingAndFilter {
+  display: flex;
+  flex-direction: column;
 }
 
 @keyframes itemRenderAnimation {
@@ -164,6 +170,9 @@
   .filterText {
     font-size: 16px;
   }
+  .listItem {
+    height: 100%;
+  }
 }
 
 @media (max-width: 1110px) {
@@ -178,6 +187,7 @@
   }
   .filterSectionSpacing {
     padding: 0;
+    overflow: hidden;
   }
   .sectionFilterMobile {
     margin-bottom: 25px;
@@ -190,6 +200,23 @@
   }
   .itemListSection {
     width: auto;
+  }
+  .sectionHeadingAndFilter {
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  .sectionHeading {
+    height: fit-content;
+    margin: 0;
+    flex: 1;
+  }
+  .sectionFilterMobile {
+    height: fit-content;
+    margin: 0;
+    padding: 0;
   }
 }
 

@@ -88,3 +88,14 @@
   font-family: (--jost-font);
   color: red;
 }
+
+.checkBoxesContainer select {
+  border: none;
+  border-bottom: 1px solid #8a8a8a;
+  padding: 15px 0;
+  outline: none;
+}
+
+.dropdownMenu {
+  outline: none;
+}

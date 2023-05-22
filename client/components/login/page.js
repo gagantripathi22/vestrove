@@ -16,6 +16,7 @@ import {
   addToken,
   addFirstname,
   addLastname,
+  addId,
 } from "@/app/Redux/features/user/userSlice";
 
 const Login = ({ handleLogin }) => {
@@ -160,6 +161,7 @@ const Login = ({ handleLogin }) => {
       dispatch(addFirstname(firstname));
       dispatch(addLastname(lastname));
       dispatch(addToken(getToken));
+      dispatch(addId(getTokenData.fetchedUserTokenData._id));
       router.push("/");
     } else {
       console.log("fail");

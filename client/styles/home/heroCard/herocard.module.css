@@ -108,4 +108,9 @@
   .bigCard {
     height: 100%;
   }
+
+  .cardTitleContainer {
+    left: 25px;
+    bottom: 16px;
+  }
 }

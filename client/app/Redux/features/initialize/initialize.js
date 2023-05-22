@@ -10,6 +10,7 @@ import {
   addToken,
   addFirstname,
   addLastname,
+  addId,
 } from "@/app/Redux/features/user/userSlice";
 
 const InitializeData = () => {
@@ -58,6 +59,7 @@ const InitializeData = () => {
       dispatch(addFirstname(firstname));
       dispatch(addLastname(lastname));
       dispatch(addToken(getToken));
+      dispatch(addId(getTokenUserId));
     } else {
       console.log("fail");
       return "invalid credentials";

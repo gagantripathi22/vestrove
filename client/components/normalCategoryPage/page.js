@@ -101,15 +101,17 @@ const NormalCategoryPage = () => {
     <>
       <InitializeData />
       <div className={styles.normalCatContainer}>
-        {category !== "" && (
-          <div
-            className={styles.sectionHeading}
-          >{`${category}'s clothing`}</div>
-        )}
-        <div className={styles.sectionFilterMobile}>
-          <div className={styles.filterBtn}>
-            <Image alt="" className={styles.filterIcon} src={FilterIcon} />
-            <div className={styles.filterText}>Filter</div>
+        <div className={styles.sectionHeadingAndFilter}>
+          {category !== "" && (
+            <div
+              className={styles.sectionHeading}
+            >{`${category}'s clothing`}</div>
+          )}
+          <div className={styles.sectionFilterMobile}>
+            <div className={styles.filterBtn}>
+              <Image alt="" className={styles.filterIcon} src={FilterIcon} />
+              <div className={styles.filterText}>Filter</div>
+            </div>
           </div>
         </div>
         <div className={styles.normalCatSpacing}>

@@ -1,10 +1,10 @@
 .footerContainer {
-  height: 50vh;
+  /* height: 50vh; */
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 60px;
-  background-color: #d9d9d9;
+  background-color: #f3f3f3;
   padding: 80px 20px;
   bottom: 0;
 }
@@ -46,6 +46,17 @@
   color: #787878;
   font-size: 15px;
   text-transform: uppercase;
+}
+
+.footerSiteInfo {
+  font-family: var(--jost-font);
+  color: #787878;
+  margin-top: 20px;
+}
+
+.footerSiteInfoLink {
+  font-weight: 500;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

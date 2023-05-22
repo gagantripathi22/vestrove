@@ -143,66 +143,68 @@ const Navbar = () => {
 
   return (
     <>
-      <div
-        className={styles.navbarContainer}
-        onMouseEnter={() => setCurrentNavExpandState("navbarExpandVisible")}
-        onMouseLeave={() => {
-          setCurrentNavExpandState("navbarExpandContainer");
-        }}
-      >
-        {navItems.map((item) => {
-          return (
-            <>
-              <div
-                id={item.id}
-                className={styles.navbarItemContainer}
-                onMouseEnter={() => {
-                  setCurrentNavExpandState("navbarExpandVisible");
-                  setCurrentNavItem(item.name);
-                }}
-              >
-                <Link
-                  href={`/${item.name}`}
-                  onClick={() => console.log("click click!")}
+      <div className={styles.navbarContainerCenter}>
+        <div
+          className={styles.navbarContainer}
+          onMouseEnter={() => setCurrentNavExpandState("navbarExpandVisible")}
+          onMouseLeave={() => {
+            setCurrentNavExpandState("navbarExpandContainer");
+          }}
+        >
+          {navItems.map((item) => {
+            return (
+              <>
+                <div
+                  id={item.id}
+                  className={styles.navbarItemContainer}
+                  onMouseEnter={() => {
+                    setCurrentNavExpandState("navbarExpandVisible");
+                    setCurrentNavItem(item.name);
+                  }}
                 >
-                  <div className={styles.navbarItem}>
-                    <h5 className={styles.navbarItemTitle}>{item.name}</h5>
-                  </div>
-                </Link>
-              </div>
-            </>
-          );
-        })}
-      </div>
-      <div
-        className={getCurrentNavbarExpandClass()}
-        // className={styles.navbarExpandVisible}
-        onMouseEnter={() => {
-          if (currentNavItem !== null)
-            setCurrentNavExpandState("navbarExpandVisible");
-        }}
-        onMouseLeave={() => {
-          setCurrentNavExpandState("navbarExpandContainer");
-          setCurrentNavItem(null);
-        }}
-      >
-        <div className={styles.navbarExpandSpacing}>
-          {currentNavItem === "women" ? (
-            <>
-              {renderNavSubCategories(0)}
-              {renderCategoryNewArrival(0)}
-            </>
-          ) : currentNavItem === "men" ? (
-            <>
-              {renderNavSubCategories(1)}
-              {renderCategoryNewArrival(1)}
-            </>
-          ) : currentNavItem === "watches" ? (
-            <>
-              {renderItemListOfSubCategory(2)}
-              {renderCategoryNewArrival(2)}
-            </>
-          ) : null}
+                  <Link
+                    href={`/${item.name}`}
+                    onClick={() => console.log("click click!")}
+                  >
+                    <div className={styles.navbarItem}>
+                      <h5 className={styles.navbarItemTitle}>{item.name}</h5>
+                    </div>
+                  </Link>
+                </div>
+              </>
+            );
+          })}
+        </div>
+        <div
+          className={getCurrentNavbarExpandClass()}
+          // className={styles.navbarExpandVisible}
+          onMouseEnter={() => {
+            if (currentNavItem !== null)
+              setCurrentNavExpandState("navbarExpandVisible");
+          }}
+          onMouseLeave={() => {
+            setCurrentNavExpandState("navbarExpandContainer");
+            setCurrentNavItem(null);
+          }}
+        >
+          <div className={styles.navbarExpandSpacing}>
+            {currentNavItem === "women" ? (
+              <>
+                {renderNavSubCategories(0)}
+                {renderCategoryNewArrival(0)}
+              </>
+            ) : currentNavItem === "men" ? (
+              <>
+                {renderNavSubCategories(1)}
+                {renderCategoryNewArrival(1)}
+              </>
+            ) : currentNavItem === "watches" ? (
+              <>
+                {renderItemListOfSubCategory(2)}
+                {renderCategoryNewArrival(2)}
+              </>
+            ) : null}
+          </div>
         </div>
       </div>
     </>

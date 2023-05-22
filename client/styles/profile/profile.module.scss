@@ -132,15 +132,15 @@
 
 @for $i from 1 through 50 {
   .sectionGridItem:nth-child(#{$i}) {
-    animation-delay: 100ms * $i;
+    // animation-delay: 100ms * $i;
   }
 }
 
-@for $i from 1 through 50 {
-  .removeBtn:nth-child(#{$i}) {
-    animation-delay: 200ms * $i;
-  }
-}
+// @for $i from 1 through 50 {
+//   .removeBtn:nth-child(#{$i}) {
+//     animation-delay: 200ms * $i;
+//   }
+// }
 
 @keyframes itemRenderAnimation {
   0% {

@@ -3,7 +3,7 @@ import styles from "../../../styles/profile/profile.module.scss";
 import { useSelector } from "react-redux";
 import Button from "@/components/items/button/page";
 
-const Profile = () => {
+const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
   const userInfoSelector = (state) => state.user;
   const userInfo = useSelector(userInfoSelector);
   const [firstname, setFirstname] = useState("");
@@ -19,6 +19,29 @@ const Profile = () => {
     setLastname(userInfo.lastname);
     setEmail(userInfo.email);
   }, [userInfo]);
+
+  const updateProfile = async () => {
+    await handleProfileUpdate(
+      userInfo._id,
+      localStorage.getItem("access-token"),
+      firstname,
+      lastname,
+      email
+    );
+  };
+
+  const updatePassword = async () => {
+    if (newPassword === confirmPassword) {
+      await handlePasswordUpdate(
+        userInfo._id,
+        localStorage.getItem("access-token"),
+        currentPassword,
+        newPassword
+      );
+    } else {
+      alert("passwords do not match");
+    }
+  };
 
   const renderPlainInput = (inputTitle, value, callbackValue) => {
     return (
@@ -60,7 +83,7 @@ const Profile = () => {
           <span></span>
           {renderPlainInput("Email", email, setEmail)}
         </form>
-        <div className={styles.buttonContainer}>
+        <div className={styles.buttonContainer} onClick={() => updateProfile()}>
           <Button text="Update Profile" />
         </div>
       </section>
@@ -81,7 +104,10 @@ const Profile = () => {
             setConfirmPassword
           )}
         </form>
-        <div className={styles.buttonContainer}>
+        <div
+          className={styles.buttonContainer}
+          onClick={() => updatePassword()}
+        >
           <Button text="Update Password" />
         </div>
       </section>

@@ -3,6 +3,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface UserState {
+  _id: String;
   email: String;
   firstname: String;
   lastname: String;
@@ -12,6 +13,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
+  _id: "",
   email: "",
   firstname: "",
   lastname: "",
@@ -24,6 +26,9 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    addId: (state, action) => {
+      state._id = action.payload;
+    },
     addToken: (state, action) => {
       state.token = action.payload;
     },
@@ -68,5 +73,6 @@ export const {
   addLastname,
   resetStore,
   addToken,
+  addId,
 } = userSlice.actions;
 export default userSlice.reducer;

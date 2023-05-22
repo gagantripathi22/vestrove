@@ -13,7 +13,7 @@ const Home = () => {
     <>
       <InitializeData />
       <div className={styles.homeContainer}>
-        <button onClick={() => console.log(JSON.stringify(myData))}>
+        {/* <button onClick={() => console.log(JSON.stringify(myData))}>
           test redux
         </button>
         <button
@@ -25,7 +25,7 @@ const Home = () => {
           }
         >
           Test Local Token
-        </button>
+        </button> */}
         <HeroCard />
         <NewArrival />
       </div>

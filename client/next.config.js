@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   images: {
     domains: ["firebasestorage.googleapis.com"],
   },
   experimental: {
-    appDir: true,
+    // appDir: true,
     serverActions: true,
   },
 };
