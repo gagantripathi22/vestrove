@@ -33,7 +33,7 @@ const NewArrivals = () => {
         <div className={styles.sectionTitle}>New Arrivals</div>
         <div className={styles.newArrivalList}>
           {newArrivalData.map((item) => {
-            return <ListItem item={item} />;
+            return <ListItem item={item} key={item.id} />;
           })}
         </div>
       </div>
