@@ -93,25 +93,9 @@ const Login = ({ handleLogin }) => {
     else `${styles.showcaseImageChangeEffect}`;
   };
 
-  // async function setLocalStorageAccessToken(token) {
-  //   localStorage.setItem("access-token", token);
-  //   return new Promise(function (resolve, reject) {
-  //     console.log(
-  //       "Access Token added : ",
-  //       localStorage.getItem("access-token")
-  //     );
-  //     resolve();
-  //   });
-  // }
-
   const handleLoginBtnClick = async () => {
     const res = await handleLogin(loginEmail, loginPassword);
-    // await localStorage.setItem("access-token", res.token);
     if (res.token) {
-      // setLocalStorageAccessToken(res.token).then(async () => {
-      //   console.log("Local Storage then");
-      //   await addDataToRedux();
-      // });
       await localStorage.setItem("access-token", res.token);
       await addDataToRedux(res.token);
     } else {
@@ -151,10 +135,10 @@ const Login = ({ handleLogin }) => {
       const wishlist = await Object.values(res.wishlist);
       const cart = await Object.values(res.cart);
       console.log("success");
-      cart.map((item) => {
+      cart.forEach((item) => {
         dispatch(addToCart(item));
       });
-      wishlist.map((item) => {
+      wishlist.forEach((item) => {
         dispatch(addToWishlist(item));
       });
       dispatch(addEmail(email));
@@ -267,21 +251,6 @@ const Login = ({ handleLogin }) => {
           )}
         </div>
       </div>
-      <button onClick={() => console.log(localStorage.getItem("access-token"))}>
-        ------TEST TOKEN----------
-      </button>
-
-      <button
-        onClick={async () =>
-          console.log(
-            await jwt_decode(
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmZXRjaGVkVXNlciI6W3siX2lkIjoiNjQ2M2JlOGUxNmY5OWEzMmFhMzIxZjdkIiwiZW1haWwiOiJnYWdhbkBnbWFpbC5jb20iLCJmaXJzdG5hbWUiOiJHYWdhbiIsImxhc3RuYW1lIjoiVHJpcGF0aGkiLCJwYXNzd29yZCI6IiQyYiQxMCRrOVh0c054bkVwQU9EMnQ2U0VKSUR1UEtURGpzd1J1WlBKUVZUdGlOOU8vQVRuemM0dEZOeSIsImNhcnQiOltdLCJ3aXNobGlzdCI6W10sIl9fdiI6MH1dLCJpYXQiOjE2ODQyNTg0NTUsImV4cCI6MTY4NDM0NDg1NX0.HORAZ0dgaIhbUo6P21LtwYL5ss1CQDYMhAyl0Sk6xN8"
-            )
-          )
-        }
-      >
-        --------TEST Token DEOde
-      </button>
     </div>
   );
 };

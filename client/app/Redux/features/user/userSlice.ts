@@ -42,20 +42,26 @@ export const userSlice = createSlice({
       state.lastname = action.payload;
     },
     addToWishlist: (state, action) => {
-      const itemExists = state.wishlist.some((item) => item === action.payload);
+      const itemExists = state.wishlist.some(
+        (item: String) => item === action.payload
+      );
       if (itemExists) return state;
       else state.wishlist.push(action.payload);
     },
     removeFromWishlist: (state, action) => {
-      state.wishlist = state.wishlist.filter((item) => item !== action.payload);
+      state.wishlist = state.wishlist.filter(
+        (item: String) => item !== action.payload
+      );
     },
     addToCart: (state, action) => {
-      const itemExists = state.cart.some((item) => item === action.payload);
+      const itemExists = state.cart.some(
+        (item: String) => item === action.payload
+      );
       if (itemExists) return state;
       else state.cart.push(action.payload);
     },
     removeFromCart: (state, action) => {
-      state.cart = state.cart.filter((item) => item !== action.payload);
+      state.cart = state.cart.filter((item: String) => item !== action.payload);
     },
     resetStore: (state, action) => {
       return initialState;

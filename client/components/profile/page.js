@@ -65,6 +65,7 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
                 <div
                   className={styles.filterItem}
                   onClick={() => handleSectionChangeWithUrl(item.alias)}
+                  key={item.id}
                 >
                   <div
                     className={styles.filterItemText}

@@ -9,7 +9,7 @@ const VerifyJwt = async () => {
       var decoded = await jwt_decode(token);
       var current_time = new Date().getTime() / 1000;
       if (current_time > decoded.exp) {
-        await localStorage.removeItem("access-token");
+        localStorage.removeItem("access-token");
         return false;
       } else {
         return true;

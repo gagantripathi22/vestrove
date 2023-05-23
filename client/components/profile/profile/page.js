@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../../../styles/profile/profile.module.scss";
 import { useSelector } from "react-redux";

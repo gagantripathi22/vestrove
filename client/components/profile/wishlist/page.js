@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../../../styles/profile/profile.module.scss";
@@ -88,7 +89,7 @@ const Wishlist = () => {
         <div className={styles.sectionItemsGrid}>
           {item.map((data, index) => {
             return (
-              <div style={{ position: "relative" }}>
+              <div style={{ position: "relative" }} key={item.id}>
                 <div
                   className={styles.removeBtn}
                   onClick={() => handleRemoveFromWishlist(data._id, index)}

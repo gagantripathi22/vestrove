@@ -7,10 +7,12 @@ import CartIcon from "../../../public/cart.svg";
 import WishlistIcon from "../../../public/wishlist.svg";
 import styles from "../../../styles/header/header.module.css";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetStore } from "@/app/Redux/features/user/userSlice";
 
 const UserControls = () => {
+  const userSelector = (state) => state.user;
+  const userData = useSelector(userSelector);
   const dispatch = useDispatch();
   const router = useRouter();
   const [currentControlItem, setCurrentControlItem] = useState(null);
@@ -20,7 +22,8 @@ const UserControls = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   const handleLogout = async () => {
-    const checkLogout = await localStorage.removeItem("access-token");
+    const checkLogout =
+      typeof window !== "undefined" && localStorage.removeItem("access-token");
     dispatch(resetStore());
     setIsUserLoggedIn(false);
     console.log("? : ", checkLogout);
@@ -35,8 +38,8 @@ const UserControls = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("access-token")) setIsUserLoggedIn(true);
-  }, [localStorage.getItem("access-token")]);
+    if (userData.token) setIsUserLoggedIn(true);
+  }, [userData.token]);
 
   const [controlItems, setControlItems] = useState([
     {
@@ -182,6 +185,7 @@ const UserControls = () => {
                             ? handleProfileRoute()
                             : null
                         }
+                        key={item.id}
                       >
                         <div className={styles.userControlExpandItemName}>
                           {item.name}
@@ -201,6 +205,7 @@ const UserControls = () => {
                             ? handleLoginRoute()
                             : null
                         }
+                        key={item.id}
                       >
                         <div className={styles.userControlExpandItemName}>
                           {item.name}

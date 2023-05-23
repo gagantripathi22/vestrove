@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "../../../styles/profile/profile.module.scss";
@@ -90,6 +91,7 @@ const Cart = () => {
             <div
               style={{ position: "relative" }}
               className={styles.gridItemMainContainer}
+              key={item.id}
             >
               <div
                 className={styles.removeBtn}

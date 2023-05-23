@@ -49,10 +49,10 @@ const InitializeData = () => {
       const wishlist = await Object.values(res.wishlist);
       const cart = await Object.values(res.cart);
       console.log("success");
-      cart.map((item) => {
+      cart.forEach((item) => {
         dispatch(addToCart(item));
       });
-      wishlist.map((item) => {
+      wishlist.forEach((item) => {
         dispatch(addToWishlist(item));
       });
       dispatch(addEmail(email));

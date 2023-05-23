@@ -3,6 +3,8 @@
 import { Provider } from "react-redux";
 import { store } from "./store";
 
-export function Providers({ children }) {
+type MyComponentProps = React.PropsWithChildren<{}>;
+
+export function Providers({ children }: MyComponentProps) {
   return <Provider store={store}>{children}</Provider>;
 }

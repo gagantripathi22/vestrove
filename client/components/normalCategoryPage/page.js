@@ -150,7 +150,7 @@ const NormalCategoryPage = () => {
             <div className={styles.itemListSection}>
               {itemList.map((item) => {
                 return (
-                  <Link href={`/product/${item._id}`}>
+                  <Link href={`/product/${item._id}`} key={item.id}>
                     <div className={styles.listItem} key={item.id}>
                       <Image
                         alt=""

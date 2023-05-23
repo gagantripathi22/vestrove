@@ -16,15 +16,7 @@ const Header = () => {
     <div className={styles.headerContainer}>
       <div className={styles.headerSpacing}>
         <Link href={"/"}>
-          <h1
-            className={styles.heading}
-            onClick={() => {
-              console.log(localStorage.getItem("access-token"));
-              console.log(Decode(localStorage.getItem("access-token")));
-            }}
-          >
-            sevnstop
-          </h1>
+          <h1 className={styles.heading}>sevnstop</h1>
         </Link>
         <div
           className={styles.mobileNavBtn}
@@ -48,7 +40,7 @@ const Header = () => {
       >
         {NavItems.map((item) => {
           return (
-            <section className={styles.categorySection}>
+            <section className={styles.categorySection} key={item.id}>
               <Link href={`/${item.name}`}>
                 <h5 className={styles.categorySectionTitle}>{item.name}</h5>
               </Link>
@@ -57,6 +49,7 @@ const Header = () => {
                   return (
                     <Link
                       href={`/${item.name}?type=${subcat.name.toLowerCase()}`}
+                      key={item.id}
                     >
                       <div
                         className={styles.mobileNavSubItem}
