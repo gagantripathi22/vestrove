@@ -5,7 +5,7 @@ import styles from "../../../styles/listItem/listitem.module.scss";
 
 const ListItem = ({ item, itemWidth }) => {
   return (
-    <Link href={`/product/${item._id}`}>
+    <Link href={`/product/${item._id}`} key={item.id}>
       <div className={styles.listItem} style={{ width: itemWidth }}>
         <Image
           className={styles.listItemImage}

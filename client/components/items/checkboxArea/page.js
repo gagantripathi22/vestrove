@@ -25,7 +25,7 @@ const CheckBoxArea = ({ sectionTitle, checkboxItems }) => {
       <div className={styles.checkBoxesContainer}>
         {Array.from(checkItems).map((item) => {
           return (
-            <div className={styles.checkBoxItem}>
+            <div className={styles.checkBoxItem} key={item.id}>
               <input
                 name={item}
                 className="checkbox"

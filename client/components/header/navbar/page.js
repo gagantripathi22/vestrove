@@ -36,6 +36,7 @@ const Navbar = () => {
               href={`/${
                 itemId === 0 ? "women" : itemId === 1 ? "men" : "watches"
               }?type=${subcat.name.toLowerCase()}`}
+              key={subcat.id}
               // href={{
               //   pathname: `/${
               //     itemId === 0 ? "women" : itemId === 1 ? "men" : "watches"
@@ -155,7 +156,7 @@ const Navbar = () => {
             return (
               <>
                 <div
-                  id={item.id}
+                  key={item.id}
                   className={styles.navbarItemContainer}
                   onMouseEnter={() => {
                     setCurrentNavExpandState("navbarExpandVisible");
