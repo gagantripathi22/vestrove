@@ -5,7 +5,7 @@ import ListItem from "../../items/listItem/page";
 
 const NewArrivals = () => {
   const getLastRecentAddedItems = async () => {
-    await fetch(`http://localhost:8080/api/item/recentSix`, {
+    await fetch(`https://seven-stop-backend.onrender.com/api/item/recentSix`, {
       method: "GET",
       headers: {
         Accept: "application/json",

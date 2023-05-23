@@ -28,7 +28,7 @@ const Product = () => {
 
   const getProduct = async () => {
     const tryFetchProduct = await fetch(
-      `http://localhost:8080/api/item/product/${productId}`,
+      `https://seven-stop-backend.onrender.com/api/item/product/${productId}`,
       {
         method: "GET",
         headers: {
@@ -48,7 +48,7 @@ const Product = () => {
   };
   const handleAddToWishlist = async () => {
     const tryAddToWishlist = await fetch(
-      `http://localhost:8080/api/user/addToWishlist`,
+      `https://seven-stop-backend.onrender.com/api/user/addToWishlist`,
       {
         method: "POST",
         headers: {
@@ -73,7 +73,7 @@ const Product = () => {
   };
   const handleRemoveFromWishlist = async () => {
     const tryRemoveFromWishlist = await fetch(
-      `http://localhost:8080/api/user/removeFromWishlist`,
+      `https://seven-stop-backend.onrender.com/api/user/removeFromWishlist`,
       {
         method: "DELETE",
         headers: {
@@ -98,7 +98,7 @@ const Product = () => {
   };
   const handleAddToCart = async () => {
     const tryAddToCart = await fetch(
-      `http://localhost:8080/api/user/addToCart`,
+      `https://seven-stop-backend.onrender.com/api/user/addToCart`,
       {
         method: "POST",
         headers: {
@@ -123,7 +123,7 @@ const Product = () => {
   };
   const handleRemoveFromCart = async () => {
     const tryRemoveFromCart = await fetch(
-      `http://localhost:8080/api/user/removeFromCart`,
+      `https://seven-stop-backend.onrender.com/api/user/removeFromCart`,
       {
         method: "DELETE",
         headers: {

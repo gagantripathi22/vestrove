@@ -19,7 +19,7 @@ const Wishlist = () => {
     const getTokenData = await jwt_decode(getToken);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
     const getWishlistUserData = await fetch(
-      `http://localhost:8080/api/user/getWishlist`,
+      `https://seven-stop-backend.onrender.com/api/user/getWishlist`,
       {
         method: "POST",
         headers: {
@@ -49,7 +49,7 @@ const Wishlist = () => {
     const userToken = await myData.token;
     console.log(userEmail, itemId, userToken);
     const tryLogin = await fetch(
-      `http://localhost:8080/api/user/removeFromWishlist`,
+      `https://seven-stop-backend.onrender.com/api/user/removeFromWishlist`,
       {
         method: "DELETE",
         headers: {

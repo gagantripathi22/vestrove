@@ -5,8 +5,8 @@ async function handleProfileUpdate(uid, token, firstname, lastname, email) {
   "use server";
   console.log("handle Profile update working");
   const tryProfileUpdate = await fetch(
-    `http://localhost:8080/api/user/updateProfile/${uid}`,
-    // `http://localhost:8080/api/user/updateProfile/6463be8e16f99a32aa321f7d`,
+    `https://seven-stop-backend.onrender.com/api/user/updateProfile/${uid}`,
+    // `https://seven-stop-backend.onrender.com/api/user/updateProfile/6463be8e16f99a32aa321f7d`,
     {
       method: "PATCH",
       headers: {
@@ -31,8 +31,8 @@ async function handlePasswordUpdate(uid, token, currentPassword, newPassword) {
   "use server";
   console.log("handle password update working");
   const tryProfileUpdate = await fetch(
-    `http://localhost:8080/api/user/updatePassword/${uid}`,
-    // `http://localhost:8080/api/user/updateProfile/6463be8e16f99a32aa321f7d`,
+    `https://seven-stop-backend.onrender.com/api/user/updatePassword/${uid}`,
+    // `https://seven-stop-backend.onrender.com/api/user/updateProfile/6463be8e16f99a32aa321f7d`,
     {
       method: "PATCH",
       headers: {

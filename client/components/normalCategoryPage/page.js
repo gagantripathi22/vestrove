@@ -43,7 +43,10 @@ const NormalCategoryPage = () => {
     const size = currentSize !== "" ? "size=" + currentSize + "&" : "";
 
     const getCategoryData = await fetch(
-      `http://localhost:8080/api/item/${category}/all?` + subcat + color + size,
+      `https://seven-stop-backend.onrender.com/api/item/${category}/all?` +
+        subcat +
+        color +
+        size,
       {
         method: "GET",
         headers: {
