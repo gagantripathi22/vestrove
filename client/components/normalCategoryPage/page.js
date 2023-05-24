@@ -146,7 +146,7 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
           </div>
           <div className={styles.itemDetailSection}>
             <div className={styles.itemListSection}>
-              {itemList.map((item) => {
+              {itemList?.map((item) => {
                 return (
                   <Link href={`/product/${item._id}`} key={item.id}>
                     <div className={styles.listItem} key={item.id}>

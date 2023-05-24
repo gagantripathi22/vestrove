@@ -91,7 +91,7 @@ const Cart = ({ handleFetchCart }) => {
     <div className={styles.basicDetailSection}>
       <h3 className={styles.sectionTitle}>Cart</h3>
       <div className={styles.sectionItemsGrid}>
-        {item.map((data, index) => {
+        {item?.map((data, index) => {
           return (
             <div
               style={{ position: "relative" }}
