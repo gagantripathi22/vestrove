@@ -23,7 +23,7 @@ const Footer = () => {
           <a target="_blank" href={"https://github.com/gagantripathi22"}>
             <span className={styles.footerSiteInfoLink}>@gagantripathi22</span>
           </a>
-          . Visit{" "}
+          . Check out{" "}
           <a
             target="_blank"
             href={"https://gagantripathi22.github.io/portfolio/"}

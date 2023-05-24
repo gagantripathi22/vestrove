@@ -22,6 +22,7 @@
   width: auto;
   height: auto;
   padding: 2em;
+  transition: 0.2s;
   // overflow: hidden;
 }
 
@@ -149,6 +150,8 @@
   }
   .filterSection {
     border: none;
+    border-bottom: 3px solid rgb(236, 236, 236);
+    margin-bottom: 20px;
   }
   .itemListSection {
     padding: 10px;
@@ -160,7 +163,13 @@
   }
 
   .filterSectionSpacing {
+    height: 0px;
     padding: 0;
+  }
+  .filterSectionSpacingVisible {
+    padding: 0;
+    height: 100%;
+    transition: 0.2s;
   }
   .sectionFilterMobile {
     padding: 10px 10px;
@@ -188,6 +197,9 @@
   .filterSectionSpacing {
     padding: 0;
     overflow: hidden;
+    // height: 100%;
+    z-index: 50;
+    background-color: white;
   }
   .sectionFilterMobile {
     margin-bottom: 25px;
@@ -199,6 +211,7 @@
     width: auto;
   }
   .itemListSection {
+    padding: 0;
     width: auto;
   }
   .sectionHeadingAndFilter {

@@ -5,7 +5,7 @@ async function handleLogin(email, password) {
   "use server";
   console.log("handle login working");
   const tryLogin = await fetch(
-    `https://seven-stop-backend.onrender.com/api/user/login`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,
     {
       method: "POST",
       headers: {

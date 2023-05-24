@@ -99,3 +99,15 @@
 .dropdownMenu {
   outline: none;
 }
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    margin-bottom: 4px;
+  }
+  .checkBoxAreaContainer {
+    margin-bottom: 40px;
+  }
+  .filterSection {
+    border-bottom: 3px solid rgb(236, 236, 236);
+  }
+}

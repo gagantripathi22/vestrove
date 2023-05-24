@@ -5,12 +5,16 @@ import ListItem from "../../items/listItem/page";
 
 const NewArrivals = () => {
   const getLastRecentAddedItems = async () => {
-    await fetch(`https://seven-stop-backend.onrender.com/api/item/recentSix`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/item/recentSix`, {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Basic " + btoa("admingagan456:admingagan654"),
+        Authorization:
+          "Basic " +
+          btoa(
+            `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
+          ),
       },
     }).then(async (res) => {
       setNewArrivalData(await res.json());

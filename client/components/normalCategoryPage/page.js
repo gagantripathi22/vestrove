@@ -23,27 +23,28 @@ const NormalCategoryPage = () => {
   );
   const [currentColor, setCurrentColor] = useState("");
   const [currentSize, setCurrentSize] = useState("");
+  const [mobileFilterExpanded, setMobileFilterExpanded] = useState(false);
 
   const fetchCategoryData = async () => {
-    console.log(
-      "Fetch Category Data Called : Category = ",
-      category,
-      " Filter = ",
-      currentSubCategory,
-      currentColor,
-      currentSize
-    );
     setItemList([]);
-    console.log("subcat", typeof currentSubCategory, currentSubCategory);
-    console.log("color", typeof currentColor, currentColor);
-    console.log("size", typeof currentSize, currentSize);
+    // console.log(
+    //   "Fetch Category Data Called : Category = ",
+    //   category,
+    //   " Filter = ",
+    //   currentSubCategory,
+    //   currentColor,
+    //   currentSize
+    // );
+    // console.log("subcat", typeof currentSubCategory, currentSubCategory);
+    // console.log("color", typeof currentColor, currentColor);
+    // console.log("size", typeof currentSize, currentSize);
     const subcat =
       currentSubCategory !== "" ? "type=" + currentSubCategory + "&" : "";
     const color = currentColor !== "" ? "color=" + currentColor + "&" : "";
     const size = currentSize !== "" ? "size=" + currentSize + "&" : "";
 
     const getCategoryData = await fetch(
-      `https://seven-stop-backend.onrender.com/api/item/${category}/all?` +
+      `${process.env.NEXT_PUBLIC_API_URL}/api/item/${category}/all?` +
         subcat +
         color +
         size,
@@ -52,7 +53,11 @@ const NormalCategoryPage = () => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: "Basic " + btoa("admingagan456:admingagan654"),
+          Authorization:
+            "Basic " +
+            btoa(
+              `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
+            ),
         },
       }
     );
@@ -111,15 +116,24 @@ const NormalCategoryPage = () => {
             >{`${category}'s clothing`}</div>
           )}
           <div className={styles.sectionFilterMobile}>
-            <div className={styles.filterBtn}>
+            <div
+              className={styles.filterBtn}
+              onClick={() => setMobileFilterExpanded((prev) => !prev)}
+            >
               <Image alt="" className={styles.filterIcon} src={FilterIcon} />
               <div className={styles.filterText}>Filter</div>
             </div>
           </div>
         </div>
         <div className={styles.normalCatSpacing}>
-          <div className={styles.filterSectionSpacing}>
-            <div className={styles.filterSection}>
+          <div
+            className={
+              mobileFilterExpanded
+                ? styles.filterSectionSpacingVisible
+                : styles.filterSectionSpacing
+            }
+          >
+            <div className={`${styles.filterSection}`}>
               {/* <CheckBoxArea sectionTitle="Type" checkboxItems={subCategory} /> */}
               <DropdownArea
                 sectionTitle="Product Type"

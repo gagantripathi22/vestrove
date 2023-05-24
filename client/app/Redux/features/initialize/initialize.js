@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import VerifyJwt from "@/services/verifyToken";
 import jwt_decode from "jwt-decode";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addToWishlist,
   addToCart,
@@ -14,13 +14,17 @@ import {
 } from "@/app/Redux/features/user/userSlice";
 
 const InitializeData = () => {
+  const userSelector = (state) => state.user;
+  const userData = useSelector(userSelector);
   const dispatch = useDispatch();
   const tokenVerification = async () => {
     const tokenDecoded = await VerifyJwt();
     if (tokenDecoded === false) {
       localStorage.removeItem("access-token");
     } else {
+      // if (userData.token !== "") {
       await addDataToRedux();
+      // }
     }
   };
   const addDataToRedux = async () => {
@@ -28,7 +32,7 @@ const InitializeData = () => {
     const getTokenData = await jwt_decode(getToken);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
     const getLoginUserData = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/getUserData`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/getUserData`,
       {
         method: "POST",
         headers: {

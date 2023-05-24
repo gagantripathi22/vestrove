@@ -114,7 +114,7 @@ const Login = ({ handleLogin }) => {
       getTokenData.fetchedUserTokenData._id
     );
     const getLoginUserData = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/getUserData`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/getUserData`,
       {
         method: "POST",
         headers: {

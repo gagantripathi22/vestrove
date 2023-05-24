@@ -28,13 +28,17 @@ const Product = () => {
 
   const getProduct = async () => {
     const tryFetchProduct = await fetch(
-      `https://seven-stop-backend.onrender.com/api/item/product/${productId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/item/product/${productId}`,
       {
         method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: "Basic " + btoa("admingagan456:admingagan654"),
+          Authorization:
+            "Basic " +
+            btoa(
+              `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
+            ),
         },
       }
     );
@@ -48,7 +52,7 @@ const Product = () => {
   };
   const handleAddToWishlist = async () => {
     const tryAddToWishlist = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/addToWishlist`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToWishlist`,
       {
         method: "POST",
         headers: {
@@ -73,7 +77,7 @@ const Product = () => {
   };
   const handleRemoveFromWishlist = async () => {
     const tryRemoveFromWishlist = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/removeFromWishlist`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromWishlist`,
       {
         method: "DELETE",
         headers: {
@@ -98,7 +102,7 @@ const Product = () => {
   };
   const handleAddToCart = async () => {
     const tryAddToCart = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/addToCart`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToCart`,
       {
         method: "POST",
         headers: {
@@ -123,7 +127,7 @@ const Product = () => {
   };
   const handleRemoveFromCart = async () => {
     const tryRemoveFromCart = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/removeFromCart`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromCart`,
       {
         method: "DELETE",
         headers: {

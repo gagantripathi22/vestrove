@@ -21,7 +21,7 @@ const Cart = () => {
     console.log("getTokenData : ", getTokenData, getToken);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
     const getCartUserData = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/getCart`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/getCart`,
       {
         method: "POST",
         headers: {
@@ -51,7 +51,7 @@ const Cart = () => {
     const userToken = await myData.token;
     console.log(userEmail, itemId, userToken);
     const tryLogin = await fetch(
-      `https://seven-stop-backend.onrender.com/api/user/removeFromCart`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromCart`,
       {
         method: "DELETE",
         headers: {
