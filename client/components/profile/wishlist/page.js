@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromWishlist } from "@/app/Redux/features/user/userSlice";
 import InitializeData from "../../../app/Redux/features/initialize/initialize";
 
-const Wishlist = () => {
+const Wishlist = ({ handleFetchWishlist }) => {
   const [item, setItems] = useState([]);
   const mySelector = (state) => state.user;
   const myData = useSelector(mySelector);
@@ -19,32 +19,32 @@ const Wishlist = () => {
     const getToken = localStorage.getItem("access-token");
     const getTokenData = await jwt_decode(getToken);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
-    const getWishlistUserData = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/getWishlist`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${getToken}`,
-        },
-        body: JSON.stringify({
-          userId: getTokenUserId,
-        }),
-      }
+
+    // if (getWishlistUserData.status == 200) {
+    //   const res = await getWishlistUserData.json();
+    //   console.log(res.wishlist);
+    //   return res.wishlist;
+    // } else {
+    //   console.log("fail");
+    //   return "invalid credentials";
+    // }
+
+    const getWishlistUserData = await handleFetchWishlist(
+      getToken,
+      getTokenUserId
     );
-    if (getWishlistUserData.status == 200) {
-      const res = await getWishlistUserData.json();
-      console.log(res.wishlist);
-      return res.wishlist;
-    } else {
-      console.log("fail");
-      return "invalid credentials";
-    }
+
+    setItems(getWishlistUserData.wishlist);
+
+    // if (getWishlistUserData) {
+    //   return getWishlistUserData.wishlist;
+    // } else {
+    //   return [];
+    // }
   };
-  const updateWishlistState = async () => {
-    setItems(await getWishlist());
-  };
+  // const updateWishlistState = async () => {
+  //   setItems(await getWishlist());
+  // };
   const handleRemoveFromWishlist = async (itemId, itemIndex) => {
     const userEmail = await myData.email;
     const userToken = await myData.token;
@@ -79,7 +79,8 @@ const Wishlist = () => {
     console.log("state : ", item);
   }, [item]);
   useEffect(() => {
-    updateWishlistState();
+    // updateWishlistState();
+    getWishlist();
   }, []);
   return (
     <>

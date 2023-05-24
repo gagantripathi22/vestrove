@@ -10,7 +10,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import FiltersListJson from "./filters.json";
 import InitializeData from "@/app/Redux/features/initialize/initialize";
 
-const NormalCategoryPage = () => {
+const NormalCategoryPage = ({ handleProductsFetch }) => {
   const urlquery = useSearchParams();
   const searchPathname = usePathname();
   const [category, setCategory] = useState(searchPathname.substring(1));
@@ -43,30 +43,14 @@ const NormalCategoryPage = () => {
     const color = currentColor !== "" ? "color=" + currentColor + "&" : "";
     const size = currentSize !== "" ? "size=" + currentSize + "&" : "";
 
-    const getCategoryData = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/item/${category}/all?` +
-        subcat +
-        color +
-        size,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization:
-            "Basic " +
-            btoa(
-              `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
-            ),
-        },
-      }
+    const productsData = await handleProductsFetch(
+      category,
+      subcat,
+      color,
+      size
     );
-    if (getCategoryData.status == 200) {
-      setItemList(await getCategoryData.json());
-    } else {
-      console.log("fail");
-      return "invalid credentials";
-    }
+
+    setItemList(productsData);
   };
 
   useEffect(() => {

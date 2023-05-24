@@ -50,13 +50,20 @@ async function handlePasswordUpdate(uid, token, currentPassword, newPassword) {
   } else [console.log("failed profile updation")];
 }
 
-const Profile = ({ wishList, cartList }) => {
+const Profile = ({
+  wishList,
+  cartList,
+  handleFetchWishlist,
+  handleFetchCart,
+}) => {
   console.log("profile route");
   return (
     <>
       <ProfilePage
         handleProfileUpdate={handleProfileUpdate}
         handlePasswordUpdate={handlePasswordUpdate}
+        handleFetchWishlist={handleFetchWishlist}
+        handleFetchCart={handleFetchCart}
       />
     </>
   );

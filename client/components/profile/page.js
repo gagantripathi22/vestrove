@@ -10,7 +10,12 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import InitializeData from "@/app/Redux/features/initialize/initialize";
 
-const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
+const Profile = ({
+  handleProfileUpdate,
+  handlePasswordUpdate,
+  handleFetchWishlist,
+  handleFetchCart,
+}) => {
   const router = useRouter();
   const searchPathname = usePathname();
 
@@ -89,9 +94,15 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
             ) : currentSection === "shipping" ? (
               <ShipmentPaymentSection />
             ) : currentSection === "wishlist" ? (
-              <WishlistSection wishList={wishList} />
+              <WishlistSection
+                wishList={wishList}
+                handleFetchWishlist={handleFetchWishlist}
+              />
             ) : currentSection === "cart" ? (
-              <CartSection cartList={cartList} />
+              <CartSection
+                cartList={cartList}
+                handleFetchCart={handleFetchCart}
+              />
             ) : null}
           </div>
         </div>

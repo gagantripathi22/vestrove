@@ -8,7 +8,7 @@ import RemoveBtn from "../../items/removeBtn/page";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "@/app/Redux/features/user/userSlice";
 
-const Cart = () => {
+const Cart = ({ handleFetchCart }) => {
   const [item, setItems] = useState([]);
   const mySelector = (state) => state.user;
   const myData = useSelector(mySelector);
@@ -20,32 +20,36 @@ const Cart = () => {
     const getTokenData = await jwt_decode(getToken);
     console.log("getTokenData : ", getTokenData, getToken);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
-    const getCartUserData = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/getCart`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${getToken}`,
-        },
-        body: JSON.stringify({
-          userId: getTokenUserId,
-        }),
-      }
-    );
-    if (getCartUserData.status == 200) {
-      const res = await getCartUserData.json();
-      console.log(res.cart);
-      return res.cart;
-    } else {
-      console.log("fail");
-      return "invalid credentials";
-    }
+    // const getCartUserData = await fetch(
+    //   `${process.env.NEXT_PUBLIC_API_URL}/api/user/getCart`,
+    //   {
+    //     method: "POST",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //       "x-access-token": `Bearer ${getToken}`,
+    //     },
+    //     body: JSON.stringify({
+    //       userId: getTokenUserId,
+    //     }),
+    //   }
+    // );
+    // if (getCartUserData.status == 200) {
+    //   const res = await getCartUserData.json();
+    //   console.log(res.cart);
+    //   return res.cart;
+    // } else {
+    //   console.log("fail");
+    //   return "invalid credentials";
+    // }
+
+    const getCartUserData = await handleFetchCart(getToken, getTokenUserId);
+
+    setItems(getCartUserData.cart);
   };
-  const updateCartState = async () => {
-    setItems(await getCart());
-  };
+  // const updateCartState = async () => {
+  //   setItems(await getCart());
+  // };
   const handleRemoveFromWishlist = async (itemId, itemIndex) => {
     const userEmail = await myData.email;
     const userToken = await myData.token;
@@ -80,7 +84,8 @@ const Cart = () => {
     console.log("state : ", item);
   }, [item]);
   useEffect(() => {
-    updateCartState();
+    // updateCartState();
+    getCart();
   }, []);
   return (
     <div className={styles.basicDetailSection}>
