@@ -86,7 +86,7 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
   };
 
   useEffect(() => {
-    if (itemList.length > 0) fetchFilterLists();
+    if (itemList?.length > 0) fetchFilterLists();
   }, [itemList]);
 
   return (
