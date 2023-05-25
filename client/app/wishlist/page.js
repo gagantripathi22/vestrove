@@ -16,6 +16,7 @@ async function handleFetchWishlist(token, userId) {
       body: JSON.stringify({
         userId: userId,
       }),
+      cache: "no-store",
     }
   );
   if (getWishlistUserData.status === 200) {

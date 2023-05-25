@@ -16,6 +16,7 @@ async function handleFetchCart(token, userId) {
       body: JSON.stringify({
         userId: userId,
       }),
+      cache: "no-store",
     }
   );
   if (getCartUserData.status === 200) {
