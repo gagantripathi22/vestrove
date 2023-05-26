@@ -9,6 +9,7 @@ import FilterIcon from "../../public/filter.svg";
 import { usePathname, useSearchParams } from "next/navigation";
 import FiltersListJson from "./filters.json";
 import InitializeData from "@/app/Redux/features/initialize/initialize";
+import LoadingSvg from "../../public/loading-sphere.svg";
 
 const NormalCategoryPage = ({ handleProductsFetch }) => {
   const urlquery = useSearchParams();
@@ -24,6 +25,7 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
   const [currentColor, setCurrentColor] = useState("");
   const [currentSize, setCurrentSize] = useState("");
   const [mobileFilterExpanded, setMobileFilterExpanded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchCategoryData = async () => {
     setItemList([]);
@@ -51,6 +53,7 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
     );
 
     setItemList(productsData);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -145,31 +148,37 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
             </div>
           </div>
           <div className={styles.itemDetailSection}>
-            <div className={styles.itemListSection}>
-              {itemList?.map((item) => {
-                return (
-                  <Link href={`/product/${item._id}`} key={item.id}>
-                    <div className={styles.listItem} key={item.id}>
-                      <Image
-                        alt=""
-                        className={styles.listItemImage}
-                        src={item.image}
-                        width={200}
-                        height={275}
-                      ></Image>
-                      <div className={styles.listItemDetail}>
-                        <div className={styles.newArrivalItemTitle}>
-                          {item.name}
-                        </div>
-                        <div className={styles.newArrivalItemPrice}>
-                          Rs. {item.price}
+            {isLoading ? (
+              <div className={styles.loadingContainer}>
+                <Image src={LoadingSvg} height={100}></Image>
+              </div>
+            ) : (
+              <div className={styles.itemListSection}>
+                {itemList?.map((item) => {
+                  return (
+                    <Link href={`/product/${item._id}`} key={item.id}>
+                      <div className={styles.listItem} key={item.id}>
+                        <Image
+                          alt=""
+                          className={styles.listItemImage}
+                          src={item.image}
+                          width={200}
+                          height={275}
+                        ></Image>
+                        <div className={styles.listItemDetail}>
+                          <div className={styles.newArrivalItemTitle}>
+                            {item.name}
+                          </div>
+                          <div className={styles.newArrivalItemPrice}>
+                            Rs. {item.price}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>

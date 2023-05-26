@@ -225,6 +225,14 @@
   margin-top: 60px;
 }
 
+.loadingContainer {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 1000px) {
   .profileSpacing {
     flex-direction: column;

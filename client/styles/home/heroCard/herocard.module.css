@@ -2,30 +2,33 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 0 20px;
+  /* padding: 0 20px; */
   overflow: hidden;
 }
 
 .heroCardSpacing {
   width: 100%;
-  max-width: 90rem;
+  max-width: 100%;
 }
 
 .bigCardsContainer {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .cardContainerBig {
   position: relative;
-  width: calc(100% - 5px);
+  /* width: calc(100% - 5px); */
+  background-color: #efefef;
+  height: 600px;
 }
 
 .bigCard {
   height: 600px;
   width: 100%;
-  background-color: rgb(235, 235, 235);
+  /* background-color: rgb(235, 235, 235); */
+  background-color: #efefef;
   position: relative;
   cursor: pointer;
   object-fit: cover;
@@ -65,9 +68,10 @@
 
 .cardTitle {
   font-family: var(--jost-font);
-  font-size: 7em;
+  font-size: 2em;
   text-transform: uppercase;
-  color: #242527;
+  /* color: #242527; */
+  color: white;
   font-weight: 400;
   cursor: pointer;
   -webkit-user-select: none;
@@ -84,9 +88,10 @@
 
 @media (max-width: 768px) {
   .cardTitle {
-    font-size: 3em;
+    font-size: 1.5em;
     left: 20px;
     bottom: 20px;
+    font-weight: 500;
   }
 
   .bigCardsContainer {
@@ -98,6 +103,7 @@
     overflow: hidden;
     margin-bottom: 15px;
     width: 100%;
+    margin-bottom: 0;
   }
 
   .cardContainerWide {

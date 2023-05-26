@@ -72,6 +72,9 @@
   .newArrivalList {
     grid-template-columns: repeat(3, minmax(0, 234px));
   }
+  .newArrivalContainer {
+    margin-top: 59px;
+  }
 }
 
 @media (max-width: 768px) {

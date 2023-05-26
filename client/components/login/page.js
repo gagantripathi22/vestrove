@@ -22,6 +22,7 @@ import {
 const Login = ({ handleLogin }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const [loginLoading, setLoginLoading] = useState(false);
   const tokenVerification = async () => {
     const tokenDecoded = await VerifyToken();
     console.log("token decoded : ", tokenDecoded);
@@ -94,6 +95,8 @@ const Login = ({ handleLogin }) => {
   };
 
   const handleLoginBtnClick = async () => {
+    setLoginLoading(true);
+
     const res = await handleLogin(loginEmail, loginPassword);
     if (res.token) {
       await localStorage.setItem("access-token", res.token);
@@ -196,7 +199,7 @@ const Login = ({ handleLogin }) => {
                   ></input>
                 </div>
                 <div onClick={() => handleLoginBtnClick()}>
-                  <Button text="Login" />
+                  <Button text="Login" loading={loginLoading} />
                 </div>
                 <div
                   className={styles.createAccText}

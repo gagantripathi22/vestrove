@@ -4,6 +4,8 @@ import styles from "../../../../styles/home/heroCard/herocard.module.css";
 import MaleHero2 from "../../../../public/male2bg.jpg";
 import FemaleHero2 from "../../../../public/female2bg.jpg";
 import WatchesHero2 from "../../../../public/watches2bg.jpg";
+import WomenHeroImg from "../../../../public/women-hero-img-2.jpg";
+import MenHeroImg from "../../../../public/men-hero-img-2.jpg";
 import Link from "next/link";
 
 const BigCard = () => {
@@ -15,33 +17,33 @@ const BigCard = () => {
             <Image
               alt=""
               className={styles.bigCard}
-              src={FemaleHero2}
+              src={WomenHeroImg}
               quality={100}
             />
             <div className={styles.cardTitleContainer}>
-              <h1 className={styles.cardTitle}>women</h1>
+              <h1 className={styles.cardTitle}>shop women</h1>
               <div className={styles.cardTitleUnderline}></div>
             </div>
           </Link>
         </div>
-        <div style={{ width: 26 }}></div>
+        {/* <div style={{ height: 9 }}></div> */}
         <div className={styles.cardContainerBig}>
           <Link href={"/men"}>
             <Image
               alt=""
               className={styles.bigCard}
-              src={MaleHero2}
+              src={MenHeroImg}
               quality={100}
             />
             <div className={styles.cardTitleContainer}>
-              <h1 className={styles.cardTitle}>men</h1>
+              <h1 className={styles.cardTitle}>shop men</h1>
               <div className={styles.cardTitleUnderline}></div>
             </div>
           </Link>
         </div>
       </div>
       <div style={{ height: 9 }}></div>
-      <div className={styles.cardContainerWide}>
+      {/* <div className={styles.cardContainerWide}>
         <Link href={"/watches"}>
           <Image
             alt=""
@@ -54,7 +56,7 @@ const BigCard = () => {
             <div className={styles.cardTitleUnderline}></div>
           </div>
         </Link>
-      </div>
+      </div> */}
     </>
   );
 };

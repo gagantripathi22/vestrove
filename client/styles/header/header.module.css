@@ -1,30 +1,40 @@
 .headerContainer {
-  height: 141px;
+  height: 280px;
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 0 20px;
-  margin-bottom: 50px;
+  /* margin-bottom: 18px; */
+  background-color: white;
 }
 
 .headerSpacing {
   width: 100%;
-  max-width: 90rem;
+  max-width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
   flex-direction: row;
-  border-bottom: 3px solid rgb(236, 236, 236);
+  /* border-bottom: 3px solid rgb(236, 236, 236); */
   position: relative;
 }
 
 .heading {
   font-family: var(--jost-font);
-  font-size: 3em;
+  font-size: 9em;
   font-weight: 400;
   text-transform: uppercase;
   cursor: pointer;
+  color: black;
+  /* position: absolute; */
+  /* z-index: 999; */
+  /* top: 0; */
+}
+
+.headingBlack {
+  color: black;
+  z-index: 998;
 }
 
 .userControls {
@@ -32,6 +42,9 @@
   /* margin-top: auto; */
   /* margin-bottom: auto; */
   /* margin-bottom: 60px; */
+  height: fit-content;
+  margin-top: 50px;
+  /* margin-bottom: 40px; */
   right: 0px;
   display: flex;
   align-items: center;
@@ -47,7 +60,7 @@
   /* width: 100%; */
   display: flex;
   flex-direction: row;
-  position: absolute;
+  /* position: absolute; */
   margin-left: auto;
   margin-right: auto;
   align-items: center;
@@ -74,6 +87,7 @@
   font-family: var(--jost-font);
   font-size: 15px;
   text-transform: uppercase;
+  color: black;
 }
 
 .useControlIconSpacing {
@@ -88,7 +102,7 @@
 .navbarExpandSpacing {
   height: 100%;
   width: 100%;
-  max-width: 90rem;
+  max-width: 100%;
   margin: 0 auto;
   padding: 40px 100px 0px 100px;
   display: flex;
@@ -98,10 +112,11 @@
 .navbarExpandContainer {
   position: absolute;
   height: 0px;
-  width: 100%;
-  top: 33px;
+  width: 100vw;
+  top: 260px;
   background-color: white;
   z-index: 99;
+  left: -20px;
   border-bottom: 1px solid rgb(186, 186, 186);
   transition: 0.4s;
   opacity: 0;
@@ -204,7 +219,7 @@
   /* height: 300px; */
   width: 250px;
   right: -14px;
-  top: 40px;
+  top: 38px;
   border: 1px solid rgb(186, 186, 186);
   /* border-top: 1px solid rgb(235, 235, 235);
   border-bottom: 1px solid rgb(235, 235, 235); */
@@ -311,12 +326,12 @@
 }
 
 .navbarContainerCenter {
-  width: 100%;
+  width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 70px;
+  /* position: absolute; */
+  top: 55px;
   left: 0;
 }
 
@@ -334,7 +349,7 @@
   background-color: white;
   position: absolute;
   z-index: 999;
-  top: 110px;
+  top: 98px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -347,7 +362,7 @@
 .mobileNavBarVisible {
   opacity: 1;
   padding-top: 20px;
-  height: calc(100% - 110px);
+  height: calc(100% - 90px);
 }
 
 .categorySection {
@@ -378,13 +393,20 @@
   margin-bottom: 8px;
 }
 
+.headingAndNav {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (max-width: 768px) {
   .headerContainer {
-    height: 108px;
-    margin-bottom: 10px;
+    height: 90px;
+    /* margin-bottom: 10px; */
   }
   .headerSpacing {
     border: none;
+    width: 100%;
+    justify-content: start;
   }
   .navbarContainer {
     display: none;
@@ -397,5 +419,14 @@
   }
   .mobileNavBtn {
     display: flex;
+    margin-left: auto;
+  }
+  .headingAndNav {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+  .navbarContainerCenter {
+    display: none;
   }
 }

@@ -6,7 +6,7 @@ import NewArrival from "./newArrival/page";
 import { useSelector } from "react-redux";
 import InitializeData from "@/app/Redux/features/initialize/initialize";
 
-const Home = () => {
+const Home = ({ fetchNewArrivals }) => {
   const mySelector = (state) => state.user;
   const myData = useSelector(mySelector);
   return (
@@ -27,7 +27,7 @@ const Home = () => {
           Test Local Token
         </button> */}
         <HeroCard />
-        <NewArrival />
+        <NewArrival fetchNewArrivals={fetchNewArrivals} />
       </div>
     </>
   );

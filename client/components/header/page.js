@@ -34,20 +34,22 @@ const Header = () => {
   return (
     <div className={styles.headerContainer}>
       <div className={styles.headerSpacing}>
-        <Link href={"/"}>
-          <h1 className={styles.heading}>sevnstop</h1>
-        </Link>
-        <div
-          className={styles.mobileNavBtn}
-          style={{ transform: mobileNavVisible && "rotate(180deg)" }}
-          onClick={() => setMobileNavVisible((prev) => !prev)}
-        >
-          <Image src={ArrowIcon} height={30} width={30} />
-        </div>
-        {/* {mobileNavVisible && ( */}
+        <div className={styles.headingAndNav}>
+          <Link href={"/"}>
+            <h1 className={styles.heading}>sevnstop</h1>
+          </Link>
+          <div
+            className={styles.mobileNavBtn}
+            style={{ transform: mobileNavVisible && "rotate(180deg)" }}
+            onClick={() => setMobileNavVisible((prev) => !prev)}
+          >
+            <Image src={ArrowIcon} height={30} width={30} />
+          </div>
+          {/* {mobileNavVisible && ( */}
 
-        {/* )} */}
-        <Navbar />
+          {/* )} */}
+          <Navbar />
+        </div>
         <UserControls />
       </div>
       <div

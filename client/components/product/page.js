@@ -17,40 +17,45 @@ import {
 } from "@/app/Redux/features/user/userSlice";
 import InitializeData from "@/app/Redux/features/initialize/initialize";
 
-const Product = () => {
+const Product = ({ handleProductFetch }) => {
   const dispatch = useDispatch();
   const userSelector = (state) => state.user;
   const userData = useSelector(userSelector);
   const productId = usePathname().split("/")[2];
+  const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [productData, setProductData] = useState([]);
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
   const [isProductInCart, setIsProductInCart] = useState(false);
 
   const getProduct = async () => {
-    const tryFetchProduct = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/item/product/${productId}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization:
-            "Basic " +
-            btoa(
-              `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
-            ),
-        },
-      }
-    );
-    if (tryFetchProduct.status == 200) {
-      console.log("success");
-      setProductData(await tryFetchProduct.json());
-    } else {
-      console.log("fail");
-      return "invalid credentials";
-    }
+    // const tryFetchProduct = await fetch(
+    //   `${process.env.NEXT_PUBLIC_API_URL}/api/item/product/${productId}`,
+    //   {
+    //     method: "GET",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //       Authorization:
+    //         "Basic " +
+    //         btoa(
+    //           `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
+    //         ),
+    //     },
+    //   }
+    // );
+    // if (tryFetchProduct.status == 200) {
+    //   console.log("success");
+    //   setProductData(await tryFetchProduct.json());
+    // } else {
+    //   console.log("fail");
+    //   return "invalid credentials";
+    // }
+    const productData = await handleProductFetch(productId);
+    // console.log("sakjdhfashd fjas;jd lfkajs f : ", productData);
+    setProductData(productData);
   };
   const handleAddToWishlist = async () => {
+    setIsLoadingBtn(true);
     const tryAddToWishlist = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToWishlist`,
       {
@@ -67,15 +72,18 @@ const Product = () => {
       }
     );
     if (tryAddToWishlist.status == 200) {
+      setIsLoadingBtn(false);
       console.log("successfully added to wishlist");
       dispatch(addToWishlist(productId));
       setIsProductInWishlist((prev) => !prev);
     } else {
+      setIsLoadingBtn(false);
       console.log("fail to add to wishlist");
       return "invalid credentials";
     }
   };
   const handleRemoveFromWishlist = async () => {
+    setIsLoadingBtn(true);
     const tryRemoveFromWishlist = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromWishlist`,
       {
@@ -92,15 +100,18 @@ const Product = () => {
       }
     );
     if (tryRemoveFromWishlist.status == 200) {
+      setIsLoadingBtn(false);
       console.log("successfully removed from wishlist");
       dispatch(removeFromWishlist(productId));
       setIsProductInWishlist((prev) => !prev);
     } else {
+      setIsLoadingBtn(false);
       console.log("fail to remove from wishlist");
       return "invalid credentials";
     }
   };
   const handleAddToCart = async () => {
+    setIsLoadingBtn(true);
     const tryAddToCart = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToCart`,
       {
@@ -117,15 +128,18 @@ const Product = () => {
       }
     );
     if (tryAddToCart.status == 200) {
+      setIsLoadingBtn(false);
       console.log("successfully added to cart");
       dispatch(addToCart(productId));
       setIsProductInCart((prev) => !prev);
     } else {
+      setIsLoadingBtn(false);
       console.log("fail to add to cart");
       return "invalid credentials";
     }
   };
   const handleRemoveFromCart = async () => {
+    setIsLoadingBtn(true);
     const tryRemoveFromCart = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromCart`,
       {
@@ -142,10 +156,12 @@ const Product = () => {
       }
     );
     if (tryRemoveFromCart.status == 200) {
+      setIsLoadingBtn(false);
       console.log("successfully remove from cart");
       dispatch(removeFromCart(productId));
       setIsProductInCart((prev) => !prev);
     } else {
+      setIsLoadingBtn(false);
       console.log("fail to remove from cart");
       return "invalid credentials";
     }
@@ -205,7 +221,7 @@ const Product = () => {
                 />
               </div>
               <div
-                style={{ width: "100%", marginTop: -35 }}
+                style={{ width: "100%", marginTop: 0 }}
                 onClick={() =>
                   isProductInCart ? handleRemoveFromCart() : handleAddToCart()
                 }
@@ -213,6 +229,8 @@ const Product = () => {
                 <Button
                   text={isProductInCart ? "Remove from Cart" : "Add To Cart"}
                   buttonHeight={50}
+                  buttonWidth={230}
+                  loading={isLoadingBtn}
                 />
               </div>
             </div>

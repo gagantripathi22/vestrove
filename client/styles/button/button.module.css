@@ -34,3 +34,7 @@
   font-weight: 400;
   z-index: 79;
 }
+
+.loadingSvg {
+  z-index: 79;
+}

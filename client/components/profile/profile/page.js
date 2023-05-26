@@ -10,6 +10,8 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
+  const [isProfileUpdating, setIsProfileIsUpdating] = useState(false);
+  const [isPasswordUpdating, setIsPasswordIsUpdating] = useState(false);
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -22,6 +24,7 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
   }, [userInfo]);
 
   const updateProfile = async () => {
+    setIsProfileIsUpdating(true);
     await handleProfileUpdate(
       userInfo._id,
       localStorage.getItem("access-token"),
@@ -29,9 +32,11 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
       lastname,
       email
     );
+    setIsProfileIsUpdating(false);
   };
 
   const updatePassword = async () => {
+    setIsPasswordIsUpdating(true);
     if (newPassword === confirmPassword) {
       await handlePasswordUpdate(
         userInfo._id,
@@ -42,6 +47,7 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
     } else {
       alert("passwords do not match");
     }
+    setIsPasswordIsUpdating(false);
   };
 
   const renderPlainInput = (inputTitle, value, callbackValue) => {
@@ -85,7 +91,7 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
           {renderPlainInput("Email", email, setEmail)}
         </form>
         <div className={styles.buttonContainer} onClick={() => updateProfile()}>
-          <Button text="Update Profile" />
+          <Button text="Update Profile" loading={isProfileUpdating} />
         </div>
       </section>
       <section className={styles.passwordSection}>
@@ -109,7 +115,7 @@ const Profile = ({ handleProfileUpdate, handlePasswordUpdate }) => {
           className={styles.buttonContainer}
           onClick={() => updatePassword()}
         >
-          <Button text="Update Password" />
+          <Button text="Update Password" loading={isPasswordUpdating} />
         </div>
       </section>
     </>
