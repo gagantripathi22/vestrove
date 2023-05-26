@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import styles from "../../../../styles/home/heroCard/herocard.module.css";
-import MaleHero2 from "../../../../public/male2bg.jpg";
-import FemaleHero2 from "../../../../public/female2bg.jpg";
-import WatchesHero2 from "../../../../public/watches2bg.jpg";
-import WomenHeroImg from "../../../../public/women-hero-img-2.jpg";
-import MenHeroImg from "../../../../public/men-hero-img-2.jpg";
+// import MaleHero2 from "../../../../public/male2bg.jpg";
+// import FemaleHero2 from "../../../../public/female2bg.jpg";
+// import WatchesHero2 from "../../../../public/watches2bg.jpg";
+import WomenHeroImg from "../../../../public/women-hero-img-2.webp";
+import MenHeroImg from "../../../../public/men-hero-img-2.webp";
 import Link from "next/link";
 
 const BigCard = () => {
@@ -19,6 +19,7 @@ const BigCard = () => {
               className={styles.bigCard}
               src={WomenHeroImg}
               quality={100}
+              priority
             />
             <div className={styles.cardTitleContainer}>
               <h1 className={styles.cardTitle}>shop women</h1>
@@ -34,6 +35,7 @@ const BigCard = () => {
               className={styles.bigCard}
               src={MenHeroImg}
               quality={100}
+              priority
             />
             <div className={styles.cardTitleContainer}>
               <h1 className={styles.cardTitle}>shop men</h1>

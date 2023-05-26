@@ -1,15 +1,10 @@
 import styles from "../styles/home/index.module.css";
 import HomePage from "../components/home/page";
 
-// interface Props {
-//   fetchNewArrivals: () => void;
-// }
-
 export const metadata = {
   title: "Sevnstop",
 };
 
-// const Page: React.FC<Props> = () => {
 const Page = () => {
   async function fetchNewArrivals() {
     "use server";
