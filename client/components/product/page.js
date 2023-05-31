@@ -23,7 +23,15 @@ const Product = ({ handleProductFetch }) => {
   const userData = useSelector(userSelector);
   const productId = usePathname().split("/")[2];
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
-  const [productData, setProductData] = useState([]);
+  const [productData, setProductData] = useState([
+    {
+      name: "",
+      color: "",
+      size: "",
+      price: "",
+      image: "",
+    },
+  ]);
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
   const [isProductInCart, setIsProductInCart] = useState(false);
 
