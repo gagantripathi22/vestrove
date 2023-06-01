@@ -36,11 +36,11 @@ const login = async (req, res) => {
     if (fetchedUser?.length > 0) {
       const match = await bcrypt.compare(
         req.body.password,
-        fetchedUser[0].password
+        fetchedUser?.password
       );
       const fetchedUserTokenData = {
-        email: fetchedUser[0].email,
-        _id: fetchedUser[0]._id,
+        email: fetchedUser[0]?.email,
+        _id: fetchedUser[0]?._id,
         // token:
       };
       if (match) {
@@ -130,11 +130,11 @@ const getUserInfo = async (req, res) => {
     const fetchUser = await User.find({ _id: userIdToFetch });
     if (fetchUser) {
       res.status(200).json({
-        firstname: fetchUser[0].firstname,
-        lastname: fetchUser[0].lastname,
-        email: fetchUser[0].email,
-        wishlist: fetchUser[0].wishlist,
-        cart: fetchUser[0].cart,
+        firstname: fetchUser[0]?.firstname,
+        lastname: fetchUser[0]?.lastname,
+        email: fetchUser[0]?.email,
+        wishlist: fetchUser[0]?.wishlist,
+        cart: fetchUser[0]?.cart,
       });
     }
   } catch (error) {
@@ -148,7 +148,7 @@ const getWishlist = async (req, res) => {
     // if (IdToFetch === req.authData.fetchedUser[0]._id) {
     const fetchWishlist = await User.find({ _id: IdToFetch });
     const getItemUsingId = await Item.find({
-      _id: { $in: fetchWishlist[0].wishlist },
+      _id: { $in: fetchWishlist[0]?.wishlist },
     });
     if (getItemUsingId) {
       res.status(200).json({
@@ -167,7 +167,7 @@ const getCart = async (req, res) => {
     // if (IdToFetch === req.authData.fetchedUser[0]._id) {
     const fetchCart = await User.find({ _id: IdToFetch });
     const getItemUsingId = await Item.find({
-      _id: { $in: fetchCart[0].cart },
+      _id: { $in: fetchCart[0]?.cart },
     });
     if (getItemUsingId) {
       res.status(200).json({
@@ -183,7 +183,7 @@ const getCart = async (req, res) => {
 const updateUserInfo = async (req, res) => {
   try {
     const IdToFetch = req.params.id;
-    if (IdToFetch === req.authData.fetchedUser[0]._id) {
+    if (IdToFetch === req.authData.fetchedUser[0]?._id) {
       const getUser = await User.find({ _id: IdToFetch });
       if (getUser) {
         const filter = { _id: IdToFetch };
@@ -226,8 +226,8 @@ const updatePassword = async (req, res) => {
   try {
     const IdToFetch = req.params.id;
     const getUser = await User.find({ _id: IdToFetch });
-    console.log(req.body.currentPassword, getUser[0].password);
-    if (await bcrypt.compare(req.body.currentPassword, getUser[0].password)) {
+    console.log(req.body.currentPassword, getUser[0]?.password);
+    if (await bcrypt.compare(req.body.currentPassword, getUser[0]?.password)) {
       const filter = { _id: IdToFetch };
       const newHashedPassword = await bcrypt.hash(
         req.body.newPassword,

@@ -172,7 +172,7 @@ const UserControls = () => {
           {currentControlItem === "profile" ? (
             <div className={styles.userControlExpandItemList}>
               {isUserLoggedIn
-                ? controlItems[0].loggedInItems.map((item) => {
+                ? controlItems[0]?.loggedInItems.map((item) => {
                     return (
                       <div
                         className={styles.userControlExpandItem}
@@ -194,7 +194,7 @@ const UserControls = () => {
                       </div>
                     );
                   })
-                : controlItems[0].loggedOutItems.map((item) => {
+                : controlItems[0]?.loggedOutItems.map((item) => {
                     return (
                       <div
                         className={styles.userControlExpandItem}

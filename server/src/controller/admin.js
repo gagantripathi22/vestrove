@@ -5,11 +5,11 @@ const searchAdmin = async (req, res) => {
   console.log("searchADmin");
   try {
     const AdminData = await Admin.find({ username: req.body.username });
-    console.log(req.body.password, AdminData[0].password);
+    console.log(req.body.password, AdminData[0]?.password);
     if (AdminData) {
       const comparePass = await bcrypt.compare(
         req.body.password,
-        AdminData[0].password
+        AdminData[0]?.password
       );
       if (comparePass) {
         res.status(200).json(comparePass);
