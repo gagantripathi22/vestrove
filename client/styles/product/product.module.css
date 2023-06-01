@@ -29,6 +29,9 @@
   height: 1000px;
   object-fit: cover;
   position: relative;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
 }
 
 .productImage {
@@ -42,7 +45,7 @@
   display: flex;
   flex: 1;
   width: 50px;
-  height: 100px;
+  /* height: 100px; */
   flex-direction: column;
   padding: 0 70px;
 }
@@ -83,6 +86,17 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.loadingContainer {
+  margin-top: 90px;
+}
+
+.loadingSkeleton {
+  height: 25px;
+  /* width: 200px; */
+  border-radius: 5px;
+  background-color: rgb(242, 242, 242);
 }
 
 @media (max-width: 1140px) {

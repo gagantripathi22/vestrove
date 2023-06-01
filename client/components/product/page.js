@@ -16,6 +16,7 @@ import {
   removeFromWishlist,
 } from "@/app/Redux/features/user/userSlice";
 import InitializeData from "@/app/Redux/features/initialize/initialize";
+import LoadingSvg from "../../public/loading-sphere.svg";
 
 const Product = ({ handleProductFetch }) => {
   const dispatch = useDispatch();
@@ -195,38 +196,76 @@ const Product = ({ handleProductFetch }) => {
         <div className={styles.productSpacing}>
           <div className={styles.product}>
             <div className={styles.productImageContainer}>
-              <Image
-                src={productData[0]?.image}
-                className={styles.productImage}
-                width={650}
-                height={900}
-                priority
-              ></Image>
-              <div
-                className={styles.wishlistBtn}
-                onClick={() =>
-                  isProductInWishlist
-                    ? handleRemoveFromWishlist()
-                    : handleAddToWishlist()
-                }
-              >
-                <Image
-                  src={isProductInWishlist ? WishlistIconRed : WishlistIcon}
-                  height={24}
-                ></Image>
-              </div>
+              {productData[0]?.image ? (
+                <>
+                  <Image
+                    src={productData[0]?.image}
+                    className={styles.productImage}
+                    width={650}
+                    height={900}
+                    priority
+                  ></Image>
+                  <div
+                    className={styles.wishlistBtn}
+                    onClick={() =>
+                      isProductInWishlist
+                        ? handleRemoveFromWishlist()
+                        : handleAddToWishlist()
+                    }
+                  >
+                    <Image
+                      src={isProductInWishlist ? WishlistIconRed : WishlistIcon}
+                      height={24}
+                    ></Image>
+                  </div>
+                </>
+              ) : (
+                <div className={styles.loadingContainer}>
+                  <Image src={LoadingSvg} height={100}></Image>
+                </div>
+              )}
             </div>
             <div className={styles.productDetailContainer}>
-              <h1 className={styles.productName}>{productData[0]?.name}</h1>
-              <div className={styles.productPrice}>
-                Rs. {productData[0]?.price}
-              </div>
-              <div className={styles.productColor}>{productData[0]?.color}</div>
+              {productData[0]?.name !== "" ? (
+                <h1 className={styles.productName}>{productData[0]?.name}</h1>
+              ) : (
+                <div
+                  className={styles.loadingSkeleton}
+                  style={{ width: 250 }}
+                ></div>
+              )}
+              {productData[0]?.price !== "" ? (
+                <div className={styles.productPrice}>
+                  Rs. {productData[0]?.price}
+                </div>
+              ) : (
+                <div
+                  className={styles.loadingSkeleton}
+                  style={{ width: 150, marginTop: 24 }}
+                ></div>
+              )}
+              {productData[0]?.color !== "" ? (
+                <div className={styles.productColor}>
+                  {productData[0]?.color}
+                </div>
+              ) : (
+                <div
+                  className={styles.loadingSkeleton}
+                  style={{ width: 60, marginTop: 24 }}
+                ></div>
+              )}
               <div className={styles.dropdown}>
-                <Dropdown
-                  defaultOptionTitle={"size"}
-                  dropboxItems={[{ name: productData[0]?.size }]}
-                />
+                {productData[0]?.size !== "" ? (
+                  <Dropdown
+                    defaultOptionTitle={"size"}
+                    dropboxItems={[{ name: productData[0]?.size }]}
+                  />
+                ) : (
+                  <div
+                    className={styles.loadingSkeleton}
+                    style={{ width: 300, marginTop: 24, marginBottom: 70 }}
+                  ></div>
+                )}
               </div>
               <div
                 style={{ width: "100%", marginTop: 0 }}
