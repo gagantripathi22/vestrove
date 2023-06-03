@@ -196,7 +196,7 @@ const Product = ({ handleProductFetch }) => {
         <div className={styles.productSpacing}>
           <div className={styles.product}>
             <div className={styles.productImageContainer}>
-              {productData[0]?.image ? (
+              {productData[0]?.image !== "" ? (
                 <>
                   <Image
                     src={productData[0]?.image}
