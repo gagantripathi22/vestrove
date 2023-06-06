@@ -19,7 +19,7 @@ import {
   addId,
 } from "@/app/Redux/features/user/userSlice";
 
-const Login = ({ handleLogin }) => {
+const Login = ({ handleLogin, handleSignUp }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [loginLoading, setLoginLoading] = useState(false);
@@ -98,6 +98,18 @@ const Login = ({ handleLogin }) => {
     setLoginLoading(true);
 
     const res = await handleLogin(loginEmail, loginPassword);
+    if (res.token) {
+      await localStorage.setItem("access-token", res.token);
+      await addDataToRedux(res.token);
+    } else {
+      setUserInputInfo(res);
+    }
+  };
+
+  const handleSignUpBtnClick = async () => {
+    setLoginLoading(true);
+
+    const res = await handleSignUp(loginEmail, loginPassword);
     if (res.token) {
       await localStorage.setItem("access-token", res.token);
       await addDataToRedux(res.token);
@@ -242,7 +254,9 @@ const Login = ({ handleLogin }) => {
                     className={styles.plainInputField}
                   ></input>
                 </div>
-                <Button text="Sign up" />
+                <div onClick={() => handleSignUpBtnClick()}>
+                  <Button text="Sign up" />
+                </div>
                 <div
                   className={styles.createAccText}
                   onClick={() => setShowLogin((prev) => !prev)}

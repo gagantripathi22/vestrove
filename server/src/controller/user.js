@@ -32,18 +32,18 @@ const signUp = async (req, res) => {
 const login = async (req, res) => {
   try {
     const fetchedUser = await User.find({ email: req.body.email });
-
-    if (fetchedUser?.length > 0) {
+    console.log(fetchedUser);
+    if (fetchedUser.length > 0) {
       const match = await bcrypt.compare(
         req.body.password,
-        fetchedUser?.password
+        fetchedUser[0].password
       );
       const fetchedUserTokenData = {
-        email: fetchedUser[0]?.email,
-        _id: fetchedUser[0]?._id,
-        // token:
+        email: fetchedUser[0].email,
+        _id: fetchedUser[0]._id,
       };
-      if (match) {
+      console.log(fetchedUserTokenData);
+      if (await match) {
         res.status(200);
         jwt.sign(
           { fetchedUserTokenData },
