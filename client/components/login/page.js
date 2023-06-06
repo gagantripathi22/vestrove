@@ -23,6 +23,7 @@ const Login = ({ handleLogin, handleSignUp }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [loginLoading, setLoginLoading] = useState(false);
+  const [signupLoading, setSignupLoading] = useState(false);
   const tokenVerification = async () => {
     const tokenDecoded = await VerifyToken();
     console.log("token decoded : ", tokenDecoded);
@@ -45,7 +46,8 @@ const Login = ({ handleLogin, handleSignUp }) => {
 
   // user data signup
   const [signupEmail, setSignupEmail] = useState("");
-  const [signupName, setSignupName] = useState("");
+  const [signupFirstname, setSignupFirstname] = useState("");
+  const [signupLastname, setSignupLastname] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
 
   // let timer;
@@ -96,8 +98,8 @@ const Login = ({ handleLogin, handleSignUp }) => {
 
   const handleLoginBtnClick = async () => {
     setLoginLoading(true);
-
     const res = await handleLogin(loginEmail, loginPassword);
+    console.log(res);
     if (res.token) {
       await localStorage.setItem("access-token", res.token);
       await addDataToRedux(res.token);
@@ -107,9 +109,14 @@ const Login = ({ handleLogin, handleSignUp }) => {
   };
 
   const handleSignUpBtnClick = async () => {
-    setLoginLoading(true);
-
-    const res = await handleSignUp(loginEmail, loginPassword);
+    setSignupLoading(true);
+    const res = await handleSignUp(
+      signupFirstname,
+      signupLastname,
+      signupEmail,
+      signupPassword
+    );
+    console.log(res);
     if (res.token) {
       await localStorage.setItem("access-token", res.token);
       await addDataToRedux(res.token);
@@ -119,7 +126,6 @@ const Login = ({ handleLogin, handleSignUp }) => {
   };
 
   const addDataToRedux = async (token) => {
-    dispatch(addEmail("gagantripathi@gagan.com"));
     console.log("Add data to redux on login click");
     const getToken = await localStorage.getItem("access-token");
     const getTokenData = await jwt_decode(token);
@@ -228,11 +234,20 @@ const Login = ({ handleLogin, handleSignUp }) => {
 
               <form className={styles.loginForm}>
                 <div className={styles.plainInputContainer}>
-                  <h5 className={styles.plainInputName}>full name</h5>
+                  <h5 className={styles.plainInputName}>first name</h5>
                   <input
                     type="text"
-                    value={signupName}
-                    onChange={(e) => setSignupName(e.target.value)}
+                    value={signupFirstname}
+                    onChange={(e) => setSignupFirstname(e.target.value)}
+                    className={styles.plainInputField}
+                  ></input>
+                </div>
+                <div className={styles.plainInputContainer}>
+                  <h5 className={styles.plainInputName}>last name</h5>
+                  <input
+                    type="text"
+                    value={signupLastname}
+                    onChange={(e) => setSignupLastname(e.target.value)}
                     className={styles.plainInputField}
                   ></input>
                 </div>
@@ -255,7 +270,7 @@ const Login = ({ handleLogin, handleSignUp }) => {
                   ></input>
                 </div>
                 <div onClick={() => handleSignUpBtnClick()}>
-                  <Button text="Sign up" />
+                  <Button text="Sign up" loading={signupLoading} />
                 </div>
                 <div
                   className={styles.createAccText}

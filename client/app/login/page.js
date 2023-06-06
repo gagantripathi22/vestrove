@@ -31,7 +31,7 @@ async function handleLogin(email, password) {
 async function handleSignUp(firstname, lastname, email, password) {
   "use server";
   console.log("handle signup working");
-  const tryLogin = await fetch(
+  const trySignup = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`,
     {
       method: "POST",
@@ -48,9 +48,9 @@ async function handleSignUp(firstname, lastname, email, password) {
       }),
     }
   );
-  if (tryLogin.status == 200) {
+  if (trySignup.status == 200) {
     console.log("success");
-    return tryLogin.json();
+    return trySignup.json();
   } else {
     console.log("fail");
     return "error signing up";
