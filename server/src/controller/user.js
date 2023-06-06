@@ -13,8 +13,10 @@ const signUp = async (req, res) => {
     password: req.body.password,
   });
 
-  console.log(data);
-
+  const fetchedUserTokenData = {
+    email: data.email,
+    _id: data._id,
+  };
   try {
     bcrypt.hash(data.password, saltRounds).then(async function (hash) {
       data.password = hash;
@@ -22,7 +24,14 @@ const signUp = async (req, res) => {
       const dataToSave = await data.save();
       res.status(200);
       console.log(dataToSave);
-      res.json(dataToSave);
+      jwt.sign(
+        { fetchedUserTokenData },
+        process.env.JWT_SECRET_KEY,
+        { expiresIn: "86400s" },
+        (err, token) => {
+          res.json({ token, user: dataToSave });
+        }
+      );
     });
   } catch (err) {
     res.status(400).json({ message: err.message });
