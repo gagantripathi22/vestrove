@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import styles from "../../styles/home/home.module.css";
 import HeroCard from "./heroCard/page";
 import NewArrival from "./newArrival/page";
@@ -27,6 +27,7 @@ const Home = ({ fetchNewArrivals }) => {
           Test Local Token
         </button> */}
         <HeroCard />
+        <button onClick={() => console.log(scrollY)}></button>
         <NewArrival fetchNewArrivals={fetchNewArrivals} />
       </div>
     </>

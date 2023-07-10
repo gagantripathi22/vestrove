@@ -14,18 +14,20 @@
 .bigCardsContainer {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding: 0 15px;
 }
 
 .cardContainerBig {
   position: relative;
   /* width: calc(100% - 5px); */
   background-color: #efefef;
-  height: 600px;
+  height: 900px;
+  flex: 1;
 }
 
 .bigCard {
-  height: 600px;
+  height: 100%;
   width: 100%;
   /* background-color: rgb(235, 235, 235); */
   background-color: #efefef;
@@ -84,6 +86,23 @@
   width: 0%;
   background-color: #242527;
   transition: 0.2s;
+}
+
+.bigHeroBtn {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  bottom: 20px;
+  padding: 11px 21px;
+  border: 0;
+  background: 0;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.bigHeroBtnText {
+  font-family: var(--jost-font);
+  font-size: 15px;
 }
 
 @media (max-width: 768px) {

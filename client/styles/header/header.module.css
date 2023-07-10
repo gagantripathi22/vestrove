@@ -1,11 +1,15 @@
 .headerContainer {
-  height: 280px;
+  height: 110px;
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 0 20px;
   /* margin-bottom: 18px; */
   background-color: white;
+  top: 0;
+  position: fixed;
+  z-index: 699;
+  transition: 0.2s;
 }
 
 .headerSpacing {
@@ -14,15 +18,15 @@
   height: 100%;
   display: flex;
   /* align-items: center; */
-  justify-content: space-between;
-  flex-direction: row;
+  justify-content: center;
+  /* flex-direction: row; */
   /* border-bottom: 3px solid rgb(236, 236, 236); */
   position: relative;
 }
 
 .heading {
   font-family: var(--jost-font);
-  font-size: 9em;
+  font-size: 11em;
   font-weight: 400;
   text-transform: uppercase;
   cursor: pointer;
@@ -30,6 +34,8 @@
   /* position: absolute; */
   /* z-index: 999; */
   /* top: 0; */
+  margin-top: 40px;
+  transition: 0.7s;
 }
 
 .headingBlack {
@@ -43,13 +49,14 @@
   /* margin-bottom: auto; */
   /* margin-bottom: 60px; */
   height: fit-content;
-  margin-top: 50px;
+  margin-top: 45px;
   /* margin-bottom: 40px; */
   right: 0px;
   display: flex;
   align-items: center;
   margin-right: 13px;
-  position: relative;
+  position: absolute;
+  top: 0;
 }
 
 .userControlIcon:last-child {
@@ -65,6 +72,10 @@
   margin-right: auto;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  height: calc(100% - 20px);
 }
 
 .navbarItemContainer {
@@ -113,7 +124,7 @@
   position: absolute;
   height: 0px;
   width: 100vw;
-  top: 260px;
+  top: 110px;
   background-color: white;
   z-index: 99;
   left: -20px;
@@ -341,6 +352,7 @@
   /* background-color: brown; */
   display: none;
   transition: 0.5s;
+  margin-top: 15px;
 }
 
 .mobileNavBar {
@@ -349,13 +361,14 @@
   background-color: white;
   position: absolute;
   z-index: 999;
-  top: 98px;
+  top: 90px;
   left: 0;
   right: 0;
   bottom: 0;
   padding: 0 20px;
   transition: 0.3s ease-in-out;
   /* opacity: 0; */
+  position: fixed;
   overflow: hidden;
 }
 
@@ -363,6 +376,8 @@
   opacity: 1;
   padding-top: 20px;
   height: calc(100% - 90px);
+  position: fixed;
+  top: 90px;
 }
 
 .categorySection {

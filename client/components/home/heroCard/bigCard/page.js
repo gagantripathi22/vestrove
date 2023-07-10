@@ -1,11 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import styles from "../../../../styles/home/heroCard/herocard.module.css";
-// import MaleHero2 from "../../../../public/male2bg.jpg";
-// import FemaleHero2 from "../../../../public/female2bg.jpg";
-// import WatchesHero2 from "../../../../public/watches2bg.jpg";
-import WomenHeroImg from "../../../../public/women-hero-img-2.webp";
-import MenHeroImg from "../../../../public/men-hero-img-2.webp";
+import womenHero from "../../../../public/women.webp";
+import menHero from "../../../../public/men2.webp";
 import Link from "next/link";
 
 const BigCard = () => {
@@ -13,34 +10,40 @@ const BigCard = () => {
     <>
       <div className={styles.bigCardsContainer}>
         <div className={styles.cardContainerBig}>
-          <Link href={"/women"}>
+          <Link href={"/women"} style={{ height: "100%" }}>
             <Image
               alt=""
               className={styles.bigCard}
-              src={WomenHeroImg}
+              src={womenHero}
               quality={100}
               priority
             />
-            <div className={styles.cardTitleContainer}>
+            {/* <div className={styles.cardTitleContainer}>
               <h1 className={styles.cardTitle}>shop women</h1>
               <div className={styles.cardTitleUnderline}></div>
-            </div>
+            </div> */}
+            <button className={styles.bigHeroBtn}>
+              <span className={styles.bigHeroBtnText}>Explore Women</span>
+            </button>
           </Link>
         </div>
-        {/* <div style={{ height: 9 }}></div> */}
+        <div style={{ width: 15, height: 10 }}></div>
         <div className={styles.cardContainerBig}>
           <Link href={"/men"}>
             <Image
               alt=""
               className={styles.bigCard}
-              src={MenHeroImg}
+              src={menHero}
               quality={100}
               priority
             />
-            <div className={styles.cardTitleContainer}>
+            {/* <div className={styles.cardTitleContainer}>
               <h1 className={styles.cardTitle}>shop men</h1>
               <div className={styles.cardTitleUnderline}></div>
-            </div>
+            </div> */}
+            <button className={styles.bigHeroBtn}>
+              <span className={styles.bigHeroBtnText}>Explore Men</span>
+            </button>
           </Link>
         </div>
       </div>

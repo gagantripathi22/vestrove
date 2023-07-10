@@ -25,7 +25,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Header />
-          {children}
+          <div className={"contentHeaderMargin"}>{children}</div>
           <Footer />
         </Providers>
       </body>

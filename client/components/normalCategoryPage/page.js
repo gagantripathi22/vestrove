@@ -12,6 +12,17 @@ import InitializeData from "@/app/Redux/features/initialize/initialize";
 import LoadingSvg from "../../public/loading-sphere.svg";
 
 const NormalCategoryPage = ({ handleProductsFetch }) => {
+  useEffect(() => {
+    console.log("Scroll Effect");
+    const onScroll = (event) => console.log("SCROLLLLLLL", event);
+
+    window.addEventListener("scroll", onScroll);
+
+    // return () => {
+    //   console.log("Scroll Removed");
+    //   window.removeEventListener("scroll", onScroll);
+    // };
+  }, []);
   const urlquery = useSearchParams();
   const searchPathname = usePathname();
   const [category, setCategory] = useState(searchPathname.substring(1));
@@ -57,7 +68,7 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
   };
 
   useEffect(() => {
-    console.log(currentSubCategory, currentColor, currentSize);
+    // console.log(currentSubCategory, currentColor, currentSize);
 
     fetchCategoryData();
   }, [currentSubCategory, currentColor, currentSize]);

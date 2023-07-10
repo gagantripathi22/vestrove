@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../../styles/header/header.module.css";
 import NavItemList from "./navItems.json";
 import Image from "next/image";
@@ -7,8 +7,6 @@ import FemaleNewArrivalImg1 from "../../../public/categoryNewArrival/female1.jpg
 import FemaleNewArrivalImg2 from "../../../public/categoryNewArrival/female2.jpg";
 import MaleNewArrivalImg1 from "../../../public/categoryNewArrival/male1.jpg";
 import MaleNewArrivalImg2 from "../../../public/categoryNewArrival/male2.jpg";
-import WatchNewArrivalImg1 from "../../../public/categoryNewArrival/watch1.jpg";
-import WatchNewArrivalImg2 from "../../../public/categoryNewArrival/watch2.jpg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 

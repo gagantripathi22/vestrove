@@ -16,41 +16,94 @@ const Header = () => {
   const dispatch = useDispatch();
   const [mobileNavVisible, setMobileNavVisible] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [scrollYPos, setScrollYPos] = useState(0);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [headingFont, setHeadingFont] = useState("11em");
 
   const handleLogout = async () => {
-    const checkLogout = localStorage.removeItem("access-token");
+    // const checkLogout = localStorage.removeItem("access-token");
+    localStorage.removeItem("access-token");
     setIsUserLoggedIn(false);
     dispatch(resetStore());
   };
 
   useEffect(() => {
-    console.log("is user loggedi in : ", isUserLoggedIn);
+    console.log("is user logged in : ", isUserLoggedIn);
   }, [isUserLoggedIn]);
 
   useEffect(() => {
     if (userData.token) setIsUserLoggedIn(true);
   }, [userData.token]);
 
-  return (
-    <div className={styles.headerContainer}>
-      <div className={styles.headerSpacing}>
-        <div className={styles.headingAndNav}>
-          <Link href={"/"}>
-            <h1 className={styles.heading}>sevnstop</h1>
-          </Link>
-          <div
-            className={styles.mobileNavBtn}
-            style={{ transform: mobileNavVisible && "rotate(180deg)" }}
-            onClick={() => setMobileNavVisible((prev) => !prev)}
-          >
-            <Image src={ArrowIcon} height={30} width={30} />
-          </div>
-          {/* {mobileNavVisible && ( */}
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollYPos(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-          {/* )} */}
-          <Navbar />
+  useEffect(() => {
+    if (screenWidth < 1000) {
+      setHeadingFont("calc(100vw - 81vw)");
+    } else {
+      setHeadingFont("11em");
+    }
+  }, [screenWidth]);
+  // calc(100vw - 81vw)
+  return (
+    <>
+      <div
+        className={styles.headerContainer}
+        // style={{ height: scrollYPos > 40 ? 110 : 315 }}
+      >
+        <div className={styles.headerSpacing}>
+          <div className={styles.headingAndNav}>
+            <Link href={"/"}>
+              <h1
+                className={styles.heading}
+                style={{
+                  fontSize: scrollYPos > 40 ? 50 : headingFont,
+                  marginTop: scrollYPos > 40 ? 20 : 40,
+                }}
+              >
+                sevnstop
+              </h1>
+            </Link>
+            <div
+              className={styles.mobileNavBtn}
+              style={{
+                transform: mobileNavVisible && "rotate(180deg)",
+                opacity: scrollYPos < 50 ? 0 : 1,
+              }}
+              onClick={() => setMobileNavVisible((prev) => !prev)}
+            >
+              <Image src={ArrowIcon} height={30} width={30} />
+            </div>
+            {/* {mobileNavVisible && ( */}
+
+            {/* )} */}
+          </div>
+          <div
+            style={{
+              transition: ".7s",
+              display: scrollYPos > 50 ? "block" : "none",
+            }}
+          >
+            <Navbar />
+          </div>
+
+          <UserControls />
         </div>
-        <UserControls />
       </div>
       <div
         className={
@@ -149,7 +202,7 @@ const Header = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

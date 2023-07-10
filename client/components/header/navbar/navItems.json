@@ -66,19 +66,5 @@
         "name": "T-Shirts"
       }
     ]
-  },
-  {
-    "id": 4,
-    "name": "watches",
-    "subcategories": [
-      {
-        "id": 1,
-        "name": "Men"
-      },
-      {
-        "id": 2,
-        "name": "Women"
-      }
-    ]
   }
 ]
