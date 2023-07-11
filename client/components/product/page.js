@@ -37,31 +37,30 @@ const Product = ({ handleProductFetch }) => {
   const [isProductInCart, setIsProductInCart] = useState(false);
 
   const getProduct = async () => {
-    // const tryFetchProduct = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/api/item/product/${productId}`,
-    //   {
-    //     method: "GET",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //       Authorization:
-    //         "Basic " +
-    //         btoa(
-    //           `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
-    //         ),
-    //     },
-    //   }
-    // );
-    // if (tryFetchProduct.status == 200) {
-    //   console.log("success");
-    //   setProductData(await tryFetchProduct.json());
-    // } else {
-    //   console.log("fail");
-    //   return "invalid credentials";
-    // }
-    const productData = await handleProductFetch(productId);
-    // console.log("sakjdhfashd fjas;jd lfkajs f : ", productData);
-    setProductData(productData);
+    const tryFetchProduct = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/item/product/${productId}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization:
+            "Basic " +
+            btoa(
+              `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
+            ),
+        },
+      }
+    );
+    if (tryFetchProduct.status == 200) {
+      console.log("success");
+      setProductData(await tryFetchProduct.json());
+    } else {
+      console.log("fail");
+      return "invalid credentials";
+    }
+    // const productData = await handleProductFetch(productId);
+    // setProductData(productData);
   };
   const handleAddToWishlist = async () => {
     setIsLoadingBtn(true);
