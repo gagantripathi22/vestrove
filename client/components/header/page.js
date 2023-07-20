@@ -18,7 +18,7 @@ const Header = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [scrollYPos, setScrollYPos] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [headingFont, setHeadingFont] = useState("11em");
+  const [headingFont, setHeadingFont] = useState("10vw");
 
   const handleLogout = async () => {
     // const checkLogout = localStorage.removeItem("access-token");
@@ -71,12 +71,14 @@ const Header = () => {
             <Link href={"/"}>
               <h1
                 className={styles.heading}
-                style={{
-                  fontSize: scrollYPos > 40 ? 50 : headingFont,
-                  marginTop: scrollYPos > 40 ? 20 : 40,
-                }}
+                style={
+                  {
+                    // fontSize: scrollYPos > 40 ? 50 : headingFont,
+                    // marginTop: scrollYPos > 40 ? 20 : 40,
+                  }
+                }
               >
-                sevnstop
+                vestrove
               </h1>
             </Link>
             <div
@@ -96,7 +98,7 @@ const Header = () => {
           <div
             style={{
               transition: ".7s",
-              display: scrollYPos > 50 ? "block" : "none",
+              // display: scrollYPos > 50 ? "block" : "none",
             }}
           >
             <Navbar />

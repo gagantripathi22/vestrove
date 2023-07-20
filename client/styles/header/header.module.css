@@ -5,7 +5,8 @@
   justify-content: center;
   padding: 0 20px;
   /* margin-bottom: 18px; */
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.852);
+  backdrop-filter: blur(15px);
   top: 0;
   position: fixed;
   z-index: 699;
@@ -17,7 +18,7 @@
   max-width: 100%;
   height: 100%;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: center;
   /* flex-direction: row; */
   /* border-bottom: 3px solid rgb(236, 236, 236); */
@@ -25,8 +26,8 @@
 }
 
 .heading {
-  font-family: var(--jost-font);
-  font-size: 11em;
+  font-family: var(--italiana-font);
+  font-size: 3vw;
   font-weight: 400;
   text-transform: uppercase;
   cursor: pointer;
@@ -34,8 +35,7 @@
   /* position: absolute; */
   /* z-index: 999; */
   /* top: 0; */
-  margin-top: 40px;
-  transition: 0.7s;
+  /* transition: 0.7s; */
 }
 
 .headingBlack {
