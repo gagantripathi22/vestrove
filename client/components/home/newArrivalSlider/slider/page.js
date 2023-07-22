@@ -28,7 +28,7 @@ const NewArrivalSlider = () => {
   async function fetchNewArrivals() {
     console.log("newarrivals Function");
     const tryFetchProduct = await fetch(
-      `http://localhost:8080/api/item/recentFive`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/item/recentFive`,
       {
         method: "GET",
         headers: {
