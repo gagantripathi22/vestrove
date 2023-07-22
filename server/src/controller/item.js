@@ -174,6 +174,15 @@ const getRecentSixProducts = async (req, res) => {
   }
 };
 
+const getRecentFiveProducts = async (req, res) => {
+  try {
+    const items = await Item.find().sort({ addedAt: -1 }).limit(5);
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 const additemController = {
   addItem: addItem,
   removeItem: removeItem,
@@ -186,6 +195,7 @@ const additemController = {
   getWomenItemByCategory: getWomenItemByCategory,
   getItemById: getItemById,
   getRecentSixProducts: getRecentSixProducts,
+  getRecentFiveProducts: getRecentFiveProducts,
 };
 
 module.exports = additemController;

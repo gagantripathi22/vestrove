@@ -23,5 +23,6 @@ router.get("/men/:category", basicAuth, Item.getMaleItemByCategory);
 router.get("/women/:category", basicAuth, Item.getWomenItemByCategory);
 router.get("/product/:id", basicAuth, Item.getItemById);
 router.get("/recentSix", basicAuth, Item.getRecentSixProducts);
+router.get("/recentFive", basicAuth, Item.getRecentFiveProducts);
 
 module.exports = router;

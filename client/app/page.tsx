@@ -2,7 +2,7 @@ import styles from "../styles/home/index.module.css";
 import HomePage from "../components/home/page";
 
 export const metadata = {
-  title: "Sevnstop",
+  title: "VESTROVE",
 };
 
 const Page = () => {

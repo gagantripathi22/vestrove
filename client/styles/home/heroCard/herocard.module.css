@@ -30,6 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
 }
 
 .cardContainerBig {
@@ -46,7 +47,6 @@
   /* background-color: rgb(235, 235, 235); */
   background-color: #efefef;
   position: relative;
-  cursor: pointer;
   object-fit: cover;
 }
 
@@ -61,7 +61,6 @@
   height: 100%;
   background-color: rgb(235, 235, 235);
   position: relative;
-  cursor: pointer;
   object-fit: cover;
 }
 
@@ -82,6 +81,12 @@
   bottom: 40px;
 }
 
+.bigCardImages {
+  display: flex;
+  width: 80%;
+  flex-direction: row;
+}
+
 .cardTitle {
   font-family: var(--jost-font);
   font-size: 2em;
@@ -89,7 +94,6 @@
   /* color: #242527; */
   color: white;
   font-weight: 400;
-  cursor: pointer;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -156,6 +160,12 @@
   margin-right: 0px;
 }
 
+@media (max-width: 1200px) {
+  .heroCardContainer {
+    padding: 0 100px;
+  }
+}
+
 @media (max-width: 768px) {
   .cardTitle {
     font-size: 1.5em;
@@ -188,5 +198,16 @@
   .cardTitleContainer {
     left: 25px;
     bottom: 16px;
+  }
+  .heroCardContainer {
+    height: auto;
+    padding: 0 0;
+  }
+  .bigCardImages {
+    width: 100%;
+  }
+  .bigHeroActionArea {
+    width: 100%;
+    padding: 30px;
   }
 }
