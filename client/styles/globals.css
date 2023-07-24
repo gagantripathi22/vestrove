@@ -74,10 +74,16 @@ html body {
   padding: 0;
   margin: 0;
   overflow-x: inherit;
+  background-color: #121212;
 }
 
 .contentHeaderMargin {
-  margin-top: 140px;
+  padding-top: 170px;
+  background-color: #fff;
+  margin-bottom: calc(40vh);
+  padding-bottom: 150px;
+  z-index: 19;
+  position: relative;
 }
 
 @media (max-width: 1000px) {

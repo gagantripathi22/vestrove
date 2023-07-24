@@ -10,7 +10,7 @@ const NewArrivalSlider = () => {
       <>
         <div
           onClick={() => {
-            shiftItem(item, index);
+            index !== 0 && index !== 4 && shiftItem(item, index);
           }}
           className={styles.sliderItem}
         >
@@ -23,7 +23,6 @@ const NewArrivalSlider = () => {
       </>
     );
   };
-  let newArrivalList = [];
   const [list, setList] = useState([]);
   async function fetchNewArrivals() {
     console.log("newarrivals Function");
@@ -64,18 +63,15 @@ const NewArrivalSlider = () => {
       }
     }
   };
+  useEffect(() => {
+    console.log(list);
+  }, [list]);
   return (
     <>
       <div className={styles.slider}>
         {list.map((item, index) => {
           return (
-            <div
-              className={styles.sliderItemArea}
-              onClick={() => {
-                console.log(list[index].id, " + ", list[2].id);
-              }}
-              key={item._id}
-            >
+            <div className={styles.sliderItemArea} key={item._id}>
               {list[index]._id === list[2]._id ? (
                 <Link href={`/product/${item._id}`} key={item._id}>
                   <SliderItemComponent item={item} index={index} />

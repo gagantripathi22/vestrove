@@ -24,10 +24,7 @@ const Footer = () => {
             <span className={styles.footerSiteInfoLink}>@gagantripathi22</span>
           </a>
           . Check out{" "}
-          <a
-            target="_blank"
-            href={"https://gagantripathi22.github.io/portfolio/"}
-          >
+          <a target="_blank" href={"https://gagan.vercel.app"}>
             <span className={styles.footerSiteInfoLink}>portfolio</span>
           </a>
           .
