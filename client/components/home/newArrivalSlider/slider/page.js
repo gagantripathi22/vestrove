@@ -74,6 +74,7 @@ const NewArrivalSlider = () => {
               onClick={() => {
                 console.log(list[index].id, " + ", list[2].id);
               }}
+              key={item._id}
             >
               {list[index]._id === list[2]._id ? (
                 <Link href={`/product/${item._id}`} key={item._id}>
