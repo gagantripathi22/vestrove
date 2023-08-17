@@ -1,22 +1,21 @@
-import React from "react";
-import WishlistPage from "../profile/page";
+import React from 'react';
+import WishlistPage from '../profile/page';
 
 async function handleFetchWishlist(token, userId) {
-  "use server";
-  console.log("Fetch Wishlist Products called");
+  'use server';
   const getWishlistUserData = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/getWishlist`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': `Bearer ${token}`,
       },
       body: JSON.stringify({
         userId: userId,
       }),
-      cache: "no-store",
+      cache: 'no-store',
     }
   );
   if (getWishlistUserData.status === 200) {

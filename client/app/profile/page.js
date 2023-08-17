@@ -1,19 +1,18 @@
-import React from "react";
-import ProfilePage from "../../components/profile/page";
+import React from 'react';
+import ProfilePage from '../../components/profile/page';
 
 async function handleProfileUpdate(uid, token, firstname, lastname, email) {
-  "use server";
-  console.log("handle Profile update working");
+  'use server';
   const tryProfileUpdate = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/updateProfile/${uid}`,
     {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': `Bearer ${token}`,
       },
-      cache: "no-store",
+      cache: 'no-store',
       body: JSON.stringify({
         firstname: firstname,
         lastname: lastname,
@@ -21,33 +20,26 @@ async function handleProfileUpdate(uid, token, firstname, lastname, email) {
       }),
     }
   );
-  if (tryProfileUpdate) {
-    console.log("successfully updated profile");
-  } else [console.log("failed profile updation")];
 }
 
 async function handlePasswordUpdate(uid, token, currentPassword, newPassword) {
-  "use server";
-  console.log("handle password update working");
+  'use server';
   const tryProfileUpdate = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/updatePassword/${uid}`,
     {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'x-access-token': `Bearer ${token}`,
       },
-      cache: "no-store",
+      cache: 'no-store',
       body: JSON.stringify({
         currentPassword: currentPassword,
         newPassword: newPassword,
       }),
     }
   );
-  if (tryProfileUpdate) {
-    console.log("successfully updated profile");
-  } else [console.log("failed profile updation")];
 }
 
 const Profile = ({
@@ -56,7 +48,6 @@ const Profile = ({
   handleFetchWishlist,
   handleFetchCart,
 }) => {
-  console.log("profile route");
   return (
     <>
       <ProfilePage

@@ -1,36 +1,36 @@
-"use client";
-import React, { use, useEffect, useState } from "react";
-import styles from "../../styles/product/product.module.css";
-import Image from "next/image";
-import Dropdown from "../items/dropdown/page";
-import Button from "../items/button/page";
-import { usePathname, useSearchParams } from "next/navigation";
-import Head from "next/head";
-import WishlistIcon from "../../public/wishlist.svg";
-import WishlistIconRed from "../../public/wishlist-red.svg";
-import { useSelector, useDispatch } from "react-redux";
+'use client';
+import React, { use, useEffect, useState } from 'react';
+import styles from '../../styles/product/product.module.css';
+import Image from 'next/image';
+import Dropdown from '../items/dropdown/page';
+import Button from '../items/button/page';
+import { usePathname, useSearchParams } from 'next/navigation';
+import Head from 'next/head';
+import WishlistIcon from '../../public/wishlist.svg';
+import WishlistIconRed from '../../public/wishlist-red.svg';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   addToCart,
   addToWishlist,
   removeFromCart,
   removeFromWishlist,
-} from "@/app/Redux/features/user/userSlice";
-import InitializeData from "@/app/Redux/features/initialize/initialize";
-import LoadingSvg from "../../public/loading-sphere.svg";
+} from '@/app/Redux/features/user/userSlice';
+import InitializeData from '@/app/Redux/features/initialize/initialize';
+import LoadingSvg from '../../public/loading-sphere.svg';
 
 const Product = ({ handleProductFetch }) => {
   const dispatch = useDispatch();
   const userSelector = (state) => state.user;
   const userData = useSelector(userSelector);
-  const productId = usePathname().split("/")[2];
+  const productId = usePathname().split('/')[2];
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
   const [productData, setProductData] = useState([
     {
-      name: "",
-      color: "",
-      size: "",
-      price: "",
-      image: "",
+      name: '',
+      color: '',
+      size: '',
+      price: '',
+      image: '',
     },
   ]);
   const [isProductInWishlist, setIsProductInWishlist] = useState(false);
@@ -40,12 +40,12 @@ const Product = ({ handleProductFetch }) => {
     const tryFetchProduct = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/item/product/${productId}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
           Authorization:
-            "Basic " +
+            'Basic ' +
             btoa(
               `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
             ),
@@ -53,11 +53,9 @@ const Product = ({ handleProductFetch }) => {
       }
     );
     if (tryFetchProduct.status == 200) {
-      console.log("success");
       setProductData(await tryFetchProduct.json());
     } else {
-      console.log("fail");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
     // const productData = await handleProductFetch(productId);
     // setProductData(productData);
@@ -67,11 +65,11 @@ const Product = ({ handleProductFetch }) => {
     const tryAddToWishlist = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToWishlist`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${userData.token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': `Bearer ${userData.token}`,
         },
         body: JSON.stringify({
           email: userData.email,
@@ -81,13 +79,11 @@ const Product = ({ handleProductFetch }) => {
     );
     if (tryAddToWishlist.status == 200) {
       setIsLoadingBtn(false);
-      console.log("successfully added to wishlist");
       dispatch(addToWishlist(productId));
       setIsProductInWishlist((prev) => !prev);
     } else {
       setIsLoadingBtn(false);
-      console.log("fail to add to wishlist");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
   };
   const handleRemoveFromWishlist = async () => {
@@ -95,11 +91,11 @@ const Product = ({ handleProductFetch }) => {
     const tryRemoveFromWishlist = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromWishlist`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${userData.token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': `Bearer ${userData.token}`,
         },
         body: JSON.stringify({
           email: userData.email,
@@ -109,13 +105,11 @@ const Product = ({ handleProductFetch }) => {
     );
     if (tryRemoveFromWishlist.status == 200) {
       setIsLoadingBtn(false);
-      console.log("successfully removed from wishlist");
       dispatch(removeFromWishlist(productId));
       setIsProductInWishlist((prev) => !prev);
     } else {
       setIsLoadingBtn(false);
-      console.log("fail to remove from wishlist");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
   };
   const handleAddToCart = async () => {
@@ -123,11 +117,11 @@ const Product = ({ handleProductFetch }) => {
     const tryAddToCart = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToCart`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${userData.token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': `Bearer ${userData.token}`,
         },
         body: JSON.stringify({
           email: userData.email,
@@ -137,13 +131,11 @@ const Product = ({ handleProductFetch }) => {
     );
     if (tryAddToCart.status == 200) {
       setIsLoadingBtn(false);
-      console.log("successfully added to cart");
       dispatch(addToCart(productId));
       setIsProductInCart((prev) => !prev);
     } else {
       setIsLoadingBtn(false);
-      console.log("fail to add to cart");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
   };
   const handleRemoveFromCart = async () => {
@@ -151,11 +143,11 @@ const Product = ({ handleProductFetch }) => {
     const tryRemoveFromCart = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromCart`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${userData.token}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': `Bearer ${userData.token}`,
         },
         body: JSON.stringify({
           email: userData.email,
@@ -165,13 +157,11 @@ const Product = ({ handleProductFetch }) => {
     );
     if (tryRemoveFromCart.status == 200) {
       setIsLoadingBtn(false);
-      console.log("successfully remove from cart");
       dispatch(removeFromCart(productId));
       setIsProductInCart((prev) => !prev);
     } else {
       setIsLoadingBtn(false);
-      console.log("fail to remove from cart");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
   };
   const getProductDetailsFromRedux = async () => {
@@ -185,7 +175,6 @@ const Product = ({ handleProductFetch }) => {
   useEffect(() => {
     getProduct();
     getProductDetailsFromRedux();
-    console.log("User Data from redux : ", userData);
   }, []);
 
   return (
@@ -195,7 +184,7 @@ const Product = ({ handleProductFetch }) => {
         <div className={styles.productSpacing}>
           <div className={styles.product}>
             <div className={styles.productImageContainer}>
-              {productData[0]?.image !== "" ? (
+              {productData[0]?.image !== '' ? (
                 <>
                   <Image
                     src={productData[0]?.image}
@@ -225,7 +214,7 @@ const Product = ({ handleProductFetch }) => {
               )}
             </div>
             <div className={styles.productDetailContainer}>
-              {productData[0]?.name !== "" ? (
+              {productData[0]?.name !== '' ? (
                 <h1 className={styles.productName}>{productData[0]?.name}</h1>
               ) : (
                 <div
@@ -233,7 +222,7 @@ const Product = ({ handleProductFetch }) => {
                   style={{ width: 250 }}
                 ></div>
               )}
-              {productData[0]?.price !== "" ? (
+              {productData[0]?.price !== '' ? (
                 <div className={styles.productPrice}>
                   Rs. {productData[0]?.price}
                 </div>
@@ -243,7 +232,7 @@ const Product = ({ handleProductFetch }) => {
                   style={{ width: 150, marginTop: 24 }}
                 ></div>
               )}
-              {productData[0]?.color !== "" ? (
+              {productData[0]?.color !== '' ? (
                 <div className={styles.productColor}>
                   {productData[0]?.color}
                 </div>
@@ -254,9 +243,9 @@ const Product = ({ handleProductFetch }) => {
                 ></div>
               )}
               <div className={styles.dropdown}>
-                {productData[0]?.size !== "" ? (
+                {productData[0]?.size !== '' ? (
                   <Dropdown
-                    defaultOptionTitle={"size"}
+                    defaultOptionTitle={'size'}
                     dropboxItems={[{ name: productData[0]?.size }]}
                   />
                 ) : (
@@ -267,13 +256,13 @@ const Product = ({ handleProductFetch }) => {
                 )}
               </div>
               <div
-                style={{ width: "100%", marginTop: 0 }}
+                style={{ width: '100%', marginTop: 0 }}
                 onClick={() =>
                   isProductInCart ? handleRemoveFromCart() : handleAddToCart()
                 }
               >
                 <Button
-                  text={isProductInCart ? "Remove from Cart" : "Add To Cart"}
+                  text={isProductInCart ? 'Remove from Cart' : 'Add To Cart'}
                   buttonHeight={50}
                   buttonWidth={230}
                   loading={isLoadingBtn}

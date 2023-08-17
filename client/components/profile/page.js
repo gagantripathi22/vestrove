@@ -1,14 +1,14 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import styles from "../../styles/profile/profile.module.scss";
-import ProfileSection from "./profile/page";
-import ShipmentPaymentSection from "./shipmentpayment/page";
-import WishlistSection from "./wishlist/page";
-import CartSection from "./cart/page";
-import VerifyToken from "@/services/verifyToken";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import InitializeData from "@/app/Redux/features/initialize/initialize";
+'use client';
+import React, { useEffect, useState } from 'react';
+import styles from '../../styles/profile/profile.module.scss';
+import ProfileSection from './profile/page';
+import ShipmentPaymentSection from './shipmentpayment/page';
+import WishlistSection from './wishlist/page';
+import CartSection from './cart/page';
+import VerifyToken from '@/services/verifyToken';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import InitializeData from '@/app/Redux/features/initialize/initialize';
 
 const Profile = ({
   handleProfileUpdate,
@@ -21,31 +21,30 @@ const Profile = ({
 
   const [wishList, setWishList] = useState([]);
   const [cartList, setCartList] = useState([]);
-  const [currentSection, setCurrentSection] = useState("");
+  const [currentSection, setCurrentSection] = useState('');
   const [filterItems, setFilterItems] = useState([
     {
-      name: "profile",
-      alias: "profile",
+      name: 'profile',
+      alias: 'profile',
     },
     {
-      name: "wishlist",
-      alias: "wishlist",
+      name: 'wishlist',
+      alias: 'wishlist',
     },
     {
-      name: "cart",
-      alias: "cart",
+      name: 'cart',
+      alias: 'cart',
     },
     {
-      name: "shipping & payment",
-      alias: "shipping",
+      name: 'shipping & payment',
+      alias: 'shipping',
     },
   ]);
 
   const tokenVerification = async () => {
     const tokenDecoded = await VerifyToken();
-    console.log("token decoded : ", tokenDecoded);
     if (!tokenDecoded) {
-      router.replace("/login");
+      router.replace('/login');
     }
   };
 
@@ -86,19 +85,19 @@ const Profile = ({
             })}
           </div>
           <div className={styles.optionSection}>
-            {currentSection === "profile" ? (
+            {currentSection === 'profile' ? (
               <ProfileSection
                 handleProfileUpdate={handleProfileUpdate}
                 handlePasswordUpdate={handlePasswordUpdate}
               />
-            ) : currentSection === "shipping" ? (
+            ) : currentSection === 'shipping' ? (
               <ShipmentPaymentSection />
-            ) : currentSection === "wishlist" ? (
+            ) : currentSection === 'wishlist' ? (
               <WishlistSection
                 wishList={wishList}
                 handleFetchWishlist={handleFetchWishlist}
               />
-            ) : currentSection === "cart" ? (
+            ) : currentSection === 'cart' ? (
               <CartSection
                 cartList={cartList}
                 handleFetchCart={handleFetchCart}

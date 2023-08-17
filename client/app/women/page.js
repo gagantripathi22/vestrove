@@ -1,25 +1,24 @@
-import React from "react";
-import CategoryPage from "../../components/normalCategoryPage/page";
+import React from 'react';
+import CategoryPage from '../../components/normalCategoryPage/page';
 
 export const metadata = {
   title: "Women's Clothing",
 };
 
 async function handleProductsFetch(category, subcat, color, size) {
-  "use server";
-  console.log("Handle Product Fetch Called");
+  'use server';
   const getProducts = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/item/${category}/all?` +
       subcat +
       color +
       size,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
         Authorization:
-          "Basic " +
+          'Basic ' +
           btoa(
             `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
           ),
@@ -32,7 +31,6 @@ async function handleProductsFetch(category, subcat, color, size) {
 }
 
 const Women = () => {
-  console.log("womenroute");
   return (
     <>
       <CategoryPage handleProductsFetch={handleProductsFetch} />

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styles from "../../../styles/dropdown/dropdown.module.css";
+import React, { useEffect, useState } from 'react';
+import styles from '../../../styles/dropdown/dropdown.module.css';
 
 const DropdownArea = ({
   sectionTitle,
@@ -10,22 +10,18 @@ const DropdownArea = ({
 }) => {
   const [checkItems, setCheckItems] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState('');
   useEffect(() => {
     dropboxItems && setSubCategory(dropboxItems);
   }, [dropboxItems]);
   const handleItemChange = (e) => {
     subCat(e.target.value);
     setSelectedItem(e.target.value);
-    console.log("Target Value : ", e.target.value);
   };
   useEffect(() => {
-    console.log("running once");
     setSelectedItem(initialValue);
   }, []);
-  useEffect(() => {
-    console.log("Selected item : " + selectedItem);
-  }, [selectedItem]);
+  useEffect(() => {}, [selectedItem]);
   return (
     <div className={styles.checkBoxAreaContainer}>
       <div className={styles.sectionTitle}>{sectionTitle}</div>

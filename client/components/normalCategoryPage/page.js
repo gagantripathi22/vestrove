@@ -1,28 +1,17 @@
-"use client";
-import React, { use, useEffect, useState } from "react";
-import Image from "next/image";
-import styles from "../../styles/normalCategoryPage/normalcategorypage.module.scss";
-import CheckBoxArea from "../items/checkboxArea/page";
-import Link from "next/link";
-import DropdownArea from "../items/dropdown/page";
-import FilterIcon from "../../public/filter.svg";
-import { usePathname, useSearchParams } from "next/navigation";
-import FiltersListJson from "./filters.json";
-import InitializeData from "@/app/Redux/features/initialize/initialize";
-import LoadingSvg from "../../public/loading-sphere.svg";
+'use client';
+import React, { use, useEffect, useState } from 'react';
+import Image from 'next/image';
+import styles from '../../styles/normalCategoryPage/normalcategorypage.module.scss';
+import CheckBoxArea from '../items/checkboxArea/page';
+import Link from 'next/link';
+import DropdownArea from '../items/dropdown/page';
+import FilterIcon from '../../public/filter.svg';
+import { usePathname, useSearchParams } from 'next/navigation';
+import FiltersListJson from './filters.json';
+import InitializeData from '@/app/Redux/features/initialize/initialize';
+import LoadingSvg from '../../public/loading-sphere.svg';
 
 const NormalCategoryPage = ({ handleProductsFetch }) => {
-  useEffect(() => {
-    console.log("Scroll Effect");
-    const onScroll = (event) => console.log("SCROLLLLLLL", event);
-
-    window.addEventListener("scroll", onScroll);
-
-    // return () => {
-    //   console.log("Scroll Removed");
-    //   window.removeEventListener("scroll", onScroll);
-    // };
-  }, []);
   const urlquery = useSearchParams();
   const searchPathname = usePathname();
   const [category, setCategory] = useState(searchPathname.substring(1));
@@ -31,30 +20,19 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
   const [colorsList, setColorsList] = useState(new Set());
   const [sizeList, setSizeList] = useState(new Set());
   const [currentSubCategory, setCurrentSubCategory] = useState(
-    urlquery.get("type") ? urlquery.get("type") : ""
+    urlquery.get('type') ? urlquery.get('type') : ''
   );
-  const [currentColor, setCurrentColor] = useState("");
-  const [currentSize, setCurrentSize] = useState("");
+  const [currentColor, setCurrentColor] = useState('');
+  const [currentSize, setCurrentSize] = useState('');
   const [mobileFilterExpanded, setMobileFilterExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchCategoryData = async () => {
     setItemList([]);
-    // console.log(
-    //   "Fetch Category Data Called : Category = ",
-    //   category,
-    //   " Filter = ",
-    //   currentSubCategory,
-    //   currentColor,
-    //   currentSize
-    // );
-    // console.log("subcat", typeof currentSubCategory, currentSubCategory);
-    // console.log("color", typeof currentColor, currentColor);
-    // console.log("size", typeof currentSize, currentSize);
     const subcat =
-      currentSubCategory !== "" ? "type=" + currentSubCategory + "&" : "";
-    const color = currentColor !== "" ? "color=" + currentColor + "&" : "";
-    const size = currentSize !== "" ? "size=" + currentSize + "&" : "";
+      currentSubCategory !== '' ? 'type=' + currentSubCategory + '&' : '';
+    const color = currentColor !== '' ? 'color=' + currentColor + '&' : '';
+    const size = currentSize !== '' ? 'size=' + currentSize + '&' : '';
 
     const productsData = await handleProductsFetch(
       category,
@@ -68,22 +46,20 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
   };
 
   useEffect(() => {
-    // console.log(currentSubCategory, currentColor, currentSize);
-
     fetchCategoryData();
   }, [currentSubCategory, currentColor, currentSize]);
 
   useEffect(() => {
-    setCurrentSubCategory(urlquery.get("type"));
-    setCurrentColor(urlquery.get("color"));
-    setCurrentSize(urlquery.get("size"));
+    setCurrentSubCategory(urlquery.get('type'));
+    setCurrentColor(urlquery.get('color'));
+    setCurrentSize(urlquery.get('size'));
   }, []);
 
   useEffect(() => {
-    setCurrentSubCategory(urlquery.get("type"));
-    setCurrentColor(urlquery.get("color"));
-    setCurrentSize(urlquery.get("size"));
-  }, [urlquery.get("type"), urlquery.get("color"), urlquery.get("size")]);
+    setCurrentSubCategory(urlquery.get('type'));
+    setCurrentColor(urlquery.get('color'));
+    setCurrentSize(urlquery.get('size'));
+  }, [urlquery.get('type'), urlquery.get('color'), urlquery.get('size')]);
 
   const fetchFilterLists = () => {
     const categorySet = new Set(subCategory);
@@ -108,7 +84,7 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
       <InitializeData />
       <div className={styles.normalCatContainer}>
         <div className={styles.sectionHeadingAndFilter}>
-          {category !== "" && (
+          {category !== '' && (
             <div
               className={styles.sectionHeading}
             >{`${category}'s clothing`}</div>
@@ -137,7 +113,7 @@ const NormalCategoryPage = ({ handleProductsFetch }) => {
                 sectionTitle="Product Type"
                 defaultOptionTitle="Product Type"
                 dropboxItems={
-                  category === "women" ? FiltersListJson[2] : FiltersListJson[3]
+                  category === 'women' ? FiltersListJson[2] : FiltersListJson[3]
                 }
                 subCat={setCurrentSubCategory}
                 initialValue={currentSubCategory}

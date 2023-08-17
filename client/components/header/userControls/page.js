@@ -1,14 +1,14 @@
-"use client";
-import React, { use, useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import UserIcon from "../../../public/user.svg";
-import CartIcon from "../../../public/cart.svg";
-import WishlistIcon from "../../../public/wishlist.svg";
-import styles from "../../../styles/header/header.module.css";
-import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { resetStore } from "@/app/Redux/features/user/userSlice";
+'use client';
+import React, { use, useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import UserIcon from '../../../public/user.svg';
+import CartIcon from '../../../public/cart.svg';
+import WishlistIcon from '../../../public/wishlist.svg';
+import styles from '../../../styles/header/header.module.css';
+import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetStore } from '@/app/Redux/features/user/userSlice';
 
 const UserControls = () => {
   const userSelector = (state) => state.user;
@@ -17,24 +17,23 @@ const UserControls = () => {
   const router = useRouter();
   const [currentControlItem, setCurrentControlItem] = useState(null);
   const [currentUserControlExpandState, setCurrentUserControlExpandState] =
-    useState("userControlExpand");
+    useState('userControlExpand');
   const [currentControlIndex, setCurrentControlIndex] = useState(0);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   const handleLogout = async () => {
     const checkLogout =
-      typeof window !== "undefined" && localStorage.removeItem("access-token");
+      typeof window !== 'undefined' && localStorage.removeItem('access-token');
     dispatch(resetStore());
     setIsUserLoggedIn(false);
-    console.log("? : ", checkLogout);
   };
 
   const handleLoginRoute = () => {
-    router.push("/login");
+    router.push('/login');
   };
 
   const handleProfileRoute = () => {
-    router.push("/profile");
+    router.push('/profile');
   };
 
   useEffect(() => {
@@ -43,47 +42,47 @@ const UserControls = () => {
 
   const [controlItems, setControlItems] = useState([
     {
-      heading: "Profile",
+      heading: 'Profile',
       loggedInItems: [
         {
-          name: "View Profile",
-          path: "/profile",
-          action: "profile",
+          name: 'View Profile',
+          path: '/profile',
+          action: 'profile',
         },
         {
-          name: "Logout",
-          path: "/logout",
-          action: "logout",
+          name: 'Logout',
+          path: '/logout',
+          action: 'logout',
         },
       ],
       loggedOutItems: [
         {
-          name: "Sign in",
-          path: "/login",
-          action: "login",
+          name: 'Sign in',
+          path: '/login',
+          action: 'login',
         },
       ],
     },
     {
-      heading: "Wishlist",
-      path: "/wishlist",
+      heading: 'Wishlist',
+      path: '/wishlist',
     },
     {
-      heading: "Cart",
-      path: "/cart",
+      heading: 'Cart',
+      path: '/cart',
     },
   ]);
 
   useEffect(() => {
-    if (currentControlItem === "profile") setCurrentControlIndex(0);
-    else if (currentControlItem === "wishlist") setCurrentControlIndex(1);
-    else if (currentControlItem === "cart") setCurrentControlIndex(2);
+    if (currentControlItem === 'profile') setCurrentControlIndex(0);
+    else if (currentControlItem === 'wishlist') setCurrentControlIndex(1);
+    else if (currentControlItem === 'cart') setCurrentControlIndex(2);
   }, [currentControlItem]);
 
   const getCurrentExpandClass = () => {
-    if (currentUserControlExpandState === "userControlExpand")
+    if (currentUserControlExpandState === 'userControlExpand')
       return `${styles.userControlExpand}`;
-    else if (currentUserControlExpandState === "userControlExpandVisible")
+    else if (currentUserControlExpandState === 'userControlExpandVisible')
       return `${styles.userControlExpand} ${styles.userControlExpandVisible}`;
   };
 
@@ -92,37 +91,37 @@ const UserControls = () => {
       className={styles.userControls}
       onMouseLeave={() => {
         setCurrentControlItem(null);
-        setCurrentUserControlExpandState("userControlExpand");
+        setCurrentUserControlExpandState('userControlExpand');
       }}
     >
-      <Link href={"/profile"}>
+      <Link href={'/profile'}>
         <div
           className={styles.useControlIconSpacing}
           onMouseEnter={() => {
-            setCurrentControlItem("profile");
-            setCurrentUserControlExpandState("userControlExpandVisible");
+            setCurrentControlItem('profile');
+            setCurrentUserControlExpandState('userControlExpandVisible');
           }}
         >
           <Image alt="" className={styles.userControlIcon} src={UserIcon} />
         </div>
       </Link>
-      <Link href={"/wishlist"}>
+      <Link href={'/wishlist'}>
         <div
           className={styles.useControlIconSpacing}
           onMouseEnter={() => {
-            setCurrentControlItem("wishlist");
-            setCurrentUserControlExpandState("userControlExpandVisible");
+            setCurrentControlItem('wishlist');
+            setCurrentUserControlExpandState('userControlExpandVisible');
           }}
         >
           <Image alt="" className={styles.userControlIcon} src={WishlistIcon} />
         </div>
       </Link>
-      <Link href={"/cart"}>
+      <Link href={'/cart'}>
         <div
           className={styles.useControlIconSpacing}
           onMouseEnter={() => {
-            setCurrentControlItem("cart");
-            setCurrentUserControlExpandState("userControlExpandVisible");
+            setCurrentControlItem('cart');
+            setCurrentUserControlExpandState('userControlExpandVisible');
           }}
         >
           <Image alt="" className={styles.userControlIcon} src={CartIcon} />
@@ -132,12 +131,12 @@ const UserControls = () => {
       <div
         className={getCurrentExpandClass()}
         style={{
-          position: "absolute",
+          position: 'absolute',
           height: !isUserLoggedIn
             ? 130
-            : currentControlItem === "profile"
+            : currentControlItem === 'profile'
             ? 170
-            : currentControlItem === "wishlist" || currentControlItem === "cart"
+            : currentControlItem === 'wishlist' || currentControlItem === 'cart'
             ? 75
             : 0,
         }}
@@ -145,13 +144,13 @@ const UserControls = () => {
         <div
           className={styles.userControlExpandArrow}
           style={{
-            position: "absolute",
+            position: 'absolute',
             right:
-              currentControlItem === "profile"
+              currentControlItem === 'profile'
                 ? 78
-                : currentControlItem === "wishlist"
+                : currentControlItem === 'wishlist'
                 ? 43
-                : currentControlItem === "cart"
+                : currentControlItem === 'cart'
                 ? 8
                 : 8,
           }}
@@ -160,7 +159,7 @@ const UserControls = () => {
           className={styles.userControlIconAndExpandSpaceFiller}
           onMouseEnter={() => {
             if (currentControlItem !== null) {
-              setCurrentUserControlExpandState("userControlExpandVisible");
+              setCurrentUserControlExpandState('userControlExpandVisible');
             }
           }}
         ></div>
@@ -169,7 +168,7 @@ const UserControls = () => {
           <div className={styles.userControlExpandHeading}>
             {controlItems[currentControlIndex].heading}
           </div>
-          {currentControlItem === "profile" ? (
+          {currentControlItem === 'profile' ? (
             <div className={styles.userControlExpandItemList}>
               {isUserLoggedIn
                 ? controlItems[0]?.loggedInItems.map((item) => {
@@ -177,11 +176,11 @@ const UserControls = () => {
                       <div
                         className={styles.userControlExpandItem}
                         onClick={() =>
-                          item.action === "logout"
+                          item.action === 'logout'
                             ? handleLogout()
-                            : item.action === "login"
+                            : item.action === 'login'
                             ? handleLoginRoute()
-                            : item.action === "profile"
+                            : item.action === 'profile'
                             ? handleProfileRoute()
                             : null
                         }
@@ -199,9 +198,9 @@ const UserControls = () => {
                       <div
                         className={styles.userControlExpandItem}
                         onClick={() =>
-                          item.action === "logout"
+                          item.action === 'logout'
                             ? handleLogout()
-                            : item.action === "login"
+                            : item.action === 'login'
                             ? handleLoginRoute()
                             : null
                         }
@@ -215,7 +214,7 @@ const UserControls = () => {
                     );
                   })}
             </div>
-          ) : currentControlItem === "wishlist" ? (
+          ) : currentControlItem === 'wishlist' ? (
             <div className={styles.userControlExpandItemList}></div>
           ) : (
             <div className={styles.userControlExpandItemList}></div>

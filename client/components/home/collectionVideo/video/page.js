@@ -1,9 +1,8 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import styles from "../../../../styles/home/collectionVideo/collectionVideo.module.css";
-import Link from "next/link";
-// import CollectionVideo from "../../../../public/video-black-collection.mp4";
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import styles from '../../../../styles/home/collectionVideo/collectionVideo.module.css';
+import Link from 'next/link';
 
 const Video = () => {
   return (
@@ -17,7 +16,7 @@ const Video = () => {
             </h3>
             <video
               className={styles.videoClip}
-              src={"/video.mp4"}
+              src={'/video.mp4'}
               muted
               autoPlay
               loop

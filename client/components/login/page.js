@@ -1,14 +1,14 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import styles from "../../styles/login/login.module.css";
-import Button from "../items/button/page";
-import ShowcaseImagesList from "./showcaseImages.json";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import VerifyToken from "../../services/verifyToken";
-import jwt_decode from "jwt-decode";
-import InitializeData from "@/app/Redux/features/initialize/initialize";
-import { useDispatch } from "react-redux";
+'use client';
+import React, { useEffect, useState } from 'react';
+import styles from '../../styles/login/login.module.css';
+import Button from '../items/button/page';
+import ShowcaseImagesList from './showcaseImages.json';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import VerifyToken from '../../services/verifyToken';
+import jwt_decode from 'jwt-decode';
+import InitializeData from '@/app/Redux/features/initialize/initialize';
+import { useDispatch } from 'react-redux';
 import {
   addToWishlist,
   addToCart,
@@ -17,7 +17,7 @@ import {
   addFirstname,
   addLastname,
   addId,
-} from "@/app/Redux/features/user/userSlice";
+} from '@/app/Redux/features/user/userSlice';
 
 const Login = ({ handleLogin, handleSignUp }) => {
   const dispatch = useDispatch();
@@ -26,9 +26,8 @@ const Login = ({ handleLogin, handleSignUp }) => {
   const [signupLoading, setSignupLoading] = useState(false);
   const tokenVerification = async () => {
     const tokenDecoded = await VerifyToken();
-    console.log("token decoded : ", tokenDecoded);
     if (tokenDecoded) {
-      router.replace("/");
+      router.replace('/');
     }
   };
   useEffect(() => {
@@ -38,57 +37,17 @@ const Login = ({ handleLogin, handleSignUp }) => {
   const [currentShowcaseImage, setCurrentShowcaseImage] = useState(0);
   const [showImageChangeEffect, setShowImageChangeEffect] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [userInputInfo, setUserInputInfo] = useState("");
+  const [userInputInfo, setUserInputInfo] = useState('');
 
   // user data login
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
 
   // user data signup
-  const [signupEmail, setSignupEmail] = useState("");
-  const [signupFirstname, setSignupFirstname] = useState("");
-  const [signupLastname, setSignupLastname] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-
-  // let timer;
-  // const updateCount = () => {
-  //   timer = setInterval(() => {
-  //     if (currentShowcaseImage !== showcaseImages.length) {
-  //       // console.log("if ", currentShowcaseImage, " // ", showcaseImages.length);
-  //       setCurrentShowcaseImage((prevCount) => prevCount + 1);
-  //       setShowImageChangeEffect(true);
-  //     } else {
-  //       // console.log(
-  //       //   "else ",
-  //       //   currentShowcaseImage,
-  //       //   " // ",
-  //       //   showcaseImages.length
-  //       // );
-  //       setShowImageChangeEffect(true);
-  //       setCurrentShowcaseImage(0);
-  //     }
-  //   }, 5000);
-  // };
-
-  // useEffect(() => {
-  //   updateCount();
-  //   return () => clearInterval(timer);
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(currentShowcaseImage);
-  //   let resetCounter;
-  //   if (currentShowcaseImage >= showcaseImages.length - 1)
-  //     resetCounter = setTimeout(() => setCurrentShowcaseImage(0), 4000);
-
-  //   return () => clearTimeout(resetCounter);
-  // }, [currentShowcaseImage]);
-
-  // useEffect(() => {
-  //   showImageChangeEffect
-  //     ? setShowImageChangeEffect(false)
-  //     : setShowImageChangeEffect(true);
-  // }, [showImageChangeEffect]);
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupFirstname, setSignupFirstname] = useState('');
+  const [signupLastname, setSignupLastname] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
 
   const getCurrentImageEffectClass = () => {
     if (showImageChangeEffect === false)
@@ -99,9 +58,8 @@ const Login = ({ handleLogin, handleSignUp }) => {
   const handleLoginBtnClick = async () => {
     setLoginLoading(true);
     const res = await handleLogin(loginEmail, loginPassword);
-    console.log(res);
     if (res.token) {
-      await localStorage.setItem("access-token", res.token);
+      await localStorage.setItem('access-token', res.token);
       await addDataToRedux(res.token);
     } else {
       setUserInputInfo(res);
@@ -116,9 +74,8 @@ const Login = ({ handleLogin, handleSignUp }) => {
       signupEmail,
       signupPassword
     );
-    console.log(res);
     if (res.token) {
-      await localStorage.setItem("access-token", res.token);
+      await localStorage.setItem('access-token', res.token);
       await addDataToRedux(res.token);
     } else {
       setUserInputInfo(res);
@@ -126,22 +83,17 @@ const Login = ({ handleLogin, handleSignUp }) => {
   };
 
   const addDataToRedux = async (token) => {
-    console.log("Add data to redux on login click");
-    const getToken = await localStorage.getItem("access-token");
+    const getToken = await localStorage.getItem('access-token');
     const getTokenData = await jwt_decode(token);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
-    console.log(
-      "addDataToRedux Token : ",
-      getTokenData.fetchedUserTokenData._id
-    );
     const getLoginUserData = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/getUserData`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${getToken}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': `Bearer ${getToken}`,
         },
         body: JSON.stringify({
           userId: getTokenUserId,
@@ -155,7 +107,6 @@ const Login = ({ handleLogin, handleSignUp }) => {
       const lastname = res.lastname;
       const wishlist = await Object.values(res.wishlist);
       const cart = await Object.values(res.cart);
-      console.log("success");
       cart.forEach((item) => {
         dispatch(addToCart(item));
       });
@@ -167,10 +118,9 @@ const Login = ({ handleLogin, handleSignUp }) => {
       dispatch(addLastname(lastname));
       dispatch(addToken(getToken));
       dispatch(addId(getTokenData.fetchedUserTokenData._id));
-      router.push("/");
+      router.push('/');
     } else {
-      console.log("fail");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
   };
 

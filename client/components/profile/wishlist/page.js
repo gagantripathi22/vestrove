@@ -1,14 +1,14 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import styles from "../../../styles/profile/profile.module.scss";
-import jwt_decode from "jwt-decode";
-import Link from "next/link";
-import RemoveBtn from "../../items/removeBtn/page";
-import { useSelector, useDispatch } from "react-redux";
-import { removeFromWishlist } from "@/app/Redux/features/user/userSlice";
-import InitializeData from "../../../app/Redux/features/initialize/initialize";
-import LoadingSvg from "../../../public/loading-sphere.svg";
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import styles from '../../../styles/profile/profile.module.scss';
+import jwt_decode from 'jwt-decode';
+import Link from 'next/link';
+import RemoveBtn from '../../items/removeBtn/page';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromWishlist } from '@/app/Redux/features/user/userSlice';
+import InitializeData from '../../../app/Redux/features/initialize/initialize';
+import LoadingSvg from '../../../public/loading-sphere.svg';
 
 const Wishlist = ({ handleFetchWishlist }) => {
   const [item, setItems] = useState([]);
@@ -18,7 +18,7 @@ const Wishlist = ({ handleFetchWishlist }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const getWishlist = async () => {
-    const getToken = localStorage.getItem("access-token");
+    const getToken = localStorage.getItem('access-token');
     const getTokenData = await jwt_decode(getToken);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
     const getWishlistUserData = await handleFetchWishlist(
@@ -36,15 +36,14 @@ const Wishlist = ({ handleFetchWishlist }) => {
 
     const userEmail = await myData.email;
     const userToken = await myData.token;
-    console.log(userEmail, itemId, userToken);
     const tryLogin = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromWishlist`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${userToken}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': `Bearer ${userToken}`,
         },
         body: JSON.stringify({
           email: userEmail,
@@ -53,18 +52,14 @@ const Wishlist = ({ handleFetchWishlist }) => {
       }
     );
     if (tryLogin.status == 200) {
-      console.log("success");
       dispatch(removeFromWishlist(itemId));
 
       return tryLogin.json();
     } else {
-      console.log("fail");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
   };
-  useEffect(() => {
-    console.log("state : ", item);
-  }, [item]);
+  useEffect(() => {}, [item]);
   useEffect(() => {
     getWishlist();
   }, []);
@@ -81,7 +76,7 @@ const Wishlist = ({ handleFetchWishlist }) => {
           <div className={styles.sectionItemsGrid}>
             {item?.map((data, index) => {
               return (
-                <div style={{ position: "relative" }} key={item.id}>
+                <div style={{ position: 'relative' }} key={item.id}>
                   <div
                     className={styles.removeBtn}
                     onClick={() => handleRemoveFromWishlist(data._id, index)}

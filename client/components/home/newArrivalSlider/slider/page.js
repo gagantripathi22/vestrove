@@ -1,8 +1,8 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import styles from "../../../../styles/home/newArrivalSlider/newarrivalslider.module.css";
-import Link from "next/link";
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import styles from '../../../../styles/home/newArrivalSlider/newarrivalslider.module.css';
+import Link from 'next/link';
 
 const NewArrivalSlider = () => {
   const SliderItemComponent = ({ item, index }) => {
@@ -25,16 +25,15 @@ const NewArrivalSlider = () => {
   };
   const [list, setList] = useState([]);
   async function fetchNewArrivals() {
-    console.log("newarrivals Function");
     const tryFetchProduct = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/item/recentFive`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
           Authorization:
-            "Basic " +
+            'Basic ' +
             btoa(
               `${process.env.NEXT_PUBLIC_BASIC_AUTH_USERNAME}:${process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD}`
             ),
@@ -44,7 +43,7 @@ const NewArrivalSlider = () => {
     if (tryFetchProduct.status === 200) {
       setList(await tryFetchProduct.json());
     } else {
-      console.log("errorrrrr");
+      console.error('unable to fetch product');
     }
   }
   useEffect(() => {
@@ -63,9 +62,6 @@ const NewArrivalSlider = () => {
       }
     }
   };
-  useEffect(() => {
-    console.log(list);
-  }, [list]);
   return (
     <>
       <div className={styles.slider}>

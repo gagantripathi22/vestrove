@@ -1,14 +1,14 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import styles from "../../styles/header/header.module.css";
-import Navbar from "./navbar/page";
-import UserControls from "./userControls/page";
-import Link from "next/link";
-import Image from "next/image";
-import ArrowIcon from "../../public/arrow.svg";
-import NavItems from "./navbar/navItems.json";
-import { useDispatch, useSelector } from "react-redux";
-import { resetStore } from "@/app/Redux/features/user/userSlice";
+'use client';
+import React, { useState, useEffect } from 'react';
+import styles from '../../styles/header/header.module.css';
+import Navbar from './navbar/page';
+import UserControls from './userControls/page';
+import Link from 'next/link';
+import Image from 'next/image';
+import ArrowIcon from '../../public/arrow.svg';
+import NavItems from './navbar/navItems.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { resetStore } from '@/app/Redux/features/user/userSlice';
 
 const Header = () => {
   const userSelector = (state) => state.user;
@@ -18,18 +18,16 @@ const Header = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [scrollYPos, setScrollYPos] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [headingFont, setHeadingFont] = useState("10vw");
+  const [headingFont, setHeadingFont] = useState('10vw');
 
   const handleLogout = async () => {
     // const checkLogout = localStorage.removeItem("access-token");
-    localStorage.removeItem("access-token");
+    localStorage.removeItem('access-token');
     setIsUserLoggedIn(false);
     dispatch(resetStore());
   };
 
-  useEffect(() => {
-    console.log("is user logged in : ", isUserLoggedIn);
-  }, [isUserLoggedIn]);
+  useEffect(() => {}, [isUserLoggedIn]);
 
   useEffect(() => {
     if (userData.token) setIsUserLoggedIn(true);
@@ -39,24 +37,24 @@ const Header = () => {
     const handleScroll = () => {
       setScrollYPos(window.scrollY);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
   useEffect(() => {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
     if (screenWidth < 1000) {
-      setHeadingFont("calc(100vw - 81vw)");
+      setHeadingFont('calc(100vw - 81vw)');
     } else {
-      setHeadingFont("11em");
+      setHeadingFont('11em');
     }
   }, [screenWidth]);
   // calc(100vw - 81vw)
@@ -68,7 +66,7 @@ const Header = () => {
       >
         <div className={styles.headerSpacing}>
           <div className={styles.headingAndNav}>
-            <Link href={"/"}>
+            <Link href={'/'}>
               <h1
                 className={styles.heading}
                 style={
@@ -84,7 +82,7 @@ const Header = () => {
             <div
               className={styles.mobileNavBtn}
               style={{
-                transform: mobileNavVisible && "rotate(180deg)",
+                transform: mobileNavVisible && 'rotate(180deg)',
                 opacity: scrollYPos < 50 ? 0 : 1,
               }}
               onClick={() => setMobileNavVisible((prev) => !prev)}
@@ -97,7 +95,7 @@ const Header = () => {
           </div>
           <div
             style={{
-              transition: ".7s",
+              transition: '.7s',
               // display: scrollYPos > 50 ? "block" : "none",
             }}
           >

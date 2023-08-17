@@ -1,18 +1,17 @@
-import React from "react";
-import LoginPage from "../../components/login/page";
+import React from 'react';
+import LoginPage from '../../components/login/page';
 
 async function handleLogin(email, password) {
-  "use server";
-  console.log("handle login working");
+  'use server';
   const tryLogin = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/login`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      cache: "no-store",
+      cache: 'no-store',
       body: JSON.stringify({
         email: email,
         password: password,
@@ -20,26 +19,23 @@ async function handleLogin(email, password) {
     }
   );
   if (tryLogin.status == 200) {
-    console.log("success");
     return tryLogin.json();
   } else {
-    console.log("fail");
-    return "invalid credentials";
+    return 'invalid credentials';
   }
 }
 
 async function handleSignUp(firstname, lastname, email, password) {
-  "use server";
-  console.log("handle signup working");
+  'use server';
   const trySignup = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/signup`,
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
       },
-      cache: "no-store",
+      cache: 'no-store',
       body: JSON.stringify({
         firstname: firstname,
         lastname: lastname,
@@ -49,17 +45,13 @@ async function handleSignUp(firstname, lastname, email, password) {
     }
   );
   if (trySignup.status == 200) {
-    console.log("success");
     return trySignup.json();
   } else {
-    console.log("fail");
-    return "error signing up";
+    return 'error signing up';
   }
 }
 
 const Login = async () => {
-  // const loginres = await handleLogin();
-  // console.log(loginres.user[0].email);
   return (
     <>
       <LoginPage handleLogin={handleLogin} handleSignUp={handleSignUp} />

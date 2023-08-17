@@ -1,27 +1,27 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import styles from "../../../styles/header/header.module.css";
-import NavItemList from "./navItems.json";
-import Image from "next/image";
-import FemaleNewArrivalImg1 from "../../../public/categoryNewArrival/female1.jpg";
-import FemaleNewArrivalImg2 from "../../../public/categoryNewArrival/female2.jpg";
-import MaleNewArrivalImg1 from "../../../public/categoryNewArrival/male1.jpg";
-import MaleNewArrivalImg2 from "../../../public/categoryNewArrival/male2.jpg";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { useState, useEffect } from 'react';
+import styles from '../../../styles/header/header.module.css';
+import NavItemList from './navItems.json';
+import Image from 'next/image';
+import FemaleNewArrivalImg1 from '../../../public/categoryNewArrival/female1.jpg';
+import FemaleNewArrivalImg2 from '../../../public/categoryNewArrival/female2.jpg';
+import MaleNewArrivalImg1 from '../../../public/categoryNewArrival/male1.jpg';
+import MaleNewArrivalImg2 from '../../../public/categoryNewArrival/male2.jpg';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const router = useRouter();
   const [currentNavItem, setCurrentNavItem] = useState(null);
   const [currentNavExpandState, setCurrentNavExpandState] = useState(
-    "navbarExpandContainer"
+    'navbarExpandContainer'
   );
   const [navItems, setNavItems] = useState(NavItemList);
 
   const getCurrentNavbarExpandClass = () => {
-    if (currentNavExpandState === "navbarExpandContainer")
+    if (currentNavExpandState === 'navbarExpandContainer')
       return `${styles.navbarExpandContainer}`;
-    else if (currentNavExpandState === "navbarExpandVisible")
+    else if (currentNavExpandState === 'navbarExpandVisible')
       return `${styles.navbarExpandContainer} ${styles.navbarExpandVisible}`;
   };
 
@@ -32,7 +32,7 @@ const Navbar = () => {
           return (
             <Link
               href={`/${
-                itemId === 0 ? "women" : itemId === 1 ? "men" : "watches"
+                itemId === 0 ? 'women' : itemId === 1 ? 'men' : 'watches'
               }?type=${subcat.name.toLowerCase()}`}
               key={subcat.id}
               // href={{
@@ -145,9 +145,9 @@ const Navbar = () => {
       <div className={styles.navbarContainerCenter}>
         <div
           className={styles.navbarContainer}
-          onMouseEnter={() => setCurrentNavExpandState("navbarExpandVisible")}
+          onMouseEnter={() => setCurrentNavExpandState('navbarExpandVisible')}
           onMouseLeave={() => {
-            setCurrentNavExpandState("navbarExpandContainer");
+            setCurrentNavExpandState('navbarExpandContainer');
           }}
         >
           {navItems.map((item) => {
@@ -157,14 +157,11 @@ const Navbar = () => {
                   key={item.id}
                   className={styles.navbarItemContainer}
                   onMouseEnter={() => {
-                    setCurrentNavExpandState("navbarExpandVisible");
+                    setCurrentNavExpandState('navbarExpandVisible');
                     setCurrentNavItem(item.name);
                   }}
                 >
-                  <Link
-                    href={`/${item.name}`}
-                    onClick={() => console.log("click click!")}
-                  >
+                  <Link href={`/${item.name}`}>
                     <div className={styles.navbarItem}>
                       <h5 className={styles.navbarItemTitle}>{item.name}</h5>
                     </div>
@@ -179,25 +176,25 @@ const Navbar = () => {
           // className={styles.navbarExpandVisible}
           onMouseEnter={() => {
             if (currentNavItem !== null)
-              setCurrentNavExpandState("navbarExpandVisible");
+              setCurrentNavExpandState('navbarExpandVisible');
           }}
           onMouseLeave={() => {
-            setCurrentNavExpandState("navbarExpandContainer");
+            setCurrentNavExpandState('navbarExpandContainer');
             setCurrentNavItem(null);
           }}
         >
           <div className={styles.navbarExpandSpacing}>
-            {currentNavItem === "women" ? (
+            {currentNavItem === 'women' ? (
               <>
                 {renderNavSubCategories(0)}
                 {renderCategoryNewArrival(0)}
               </>
-            ) : currentNavItem === "men" ? (
+            ) : currentNavItem === 'men' ? (
               <>
                 {renderNavSubCategories(1)}
                 {renderCategoryNewArrival(1)}
               </>
-            ) : currentNavItem === "watches" ? (
+            ) : currentNavItem === 'watches' ? (
               <>
                 {renderItemListOfSubCategory(2)}
                 {renderCategoryNewArrival(2)}

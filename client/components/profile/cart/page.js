@@ -1,13 +1,13 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import styles from "../../../styles/profile/profile.module.scss";
-import jwt_decode from "jwt-decode";
-import Link from "next/link";
-import RemoveBtn from "../../items/removeBtn/page";
-import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "@/app/Redux/features/user/userSlice";
-import LoadingSvg from "../../../public/loading-sphere.svg";
+'use client';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import styles from '../../../styles/profile/profile.module.scss';
+import jwt_decode from 'jwt-decode';
+import Link from 'next/link';
+import RemoveBtn from '../../items/removeBtn/page';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart } from '@/app/Redux/features/user/userSlice';
+import LoadingSvg from '../../../public/loading-sphere.svg';
 
 const Cart = ({ handleFetchCart }) => {
   const [item, setItems] = useState([]);
@@ -17,10 +17,9 @@ const Cart = ({ handleFetchCart }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   const getCart = async () => {
-    const getToken = localStorage.getItem("access-token");
+    const getToken = localStorage.getItem('access-token');
 
     const getTokenData = await jwt_decode(getToken);
-    console.log("getTokenData : ", getTokenData, getToken);
     const getTokenUserId = getTokenData.fetchedUserTokenData._id;
     const getCartUserData = await handleFetchCart(getToken, getTokenUserId);
 
@@ -36,15 +35,14 @@ const Cart = ({ handleFetchCart }) => {
 
     const userEmail = await myData.email;
     const userToken = await myData.token;
-    console.log(userEmail, itemId, userToken);
     const tryLogin = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/user/removeFromCart`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": `Bearer ${userToken}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'x-access-token': `Bearer ${userToken}`,
         },
         body: JSON.stringify({
           email: userEmail,
@@ -53,19 +51,13 @@ const Cart = ({ handleFetchCart }) => {
       }
     );
     if (tryLogin.status == 200) {
-      console.log("success");
       dispatch(removeFromCart(itemId));
       return tryLogin.json();
     } else {
-      console.log("fail");
-      return "invalid credentials";
+      return 'invalid credentials';
     }
   };
   useEffect(() => {
-    console.log("state : ", item);
-  }, [item]);
-  useEffect(() => {
-    // updateCartState();
     getCart();
   }, []);
   return (
@@ -80,7 +72,7 @@ const Cart = ({ handleFetchCart }) => {
           {item?.map((data, index) => {
             return (
               <div
-                style={{ position: "relative" }}
+                style={{ position: 'relative' }}
                 className={styles.gridItemMainContainer}
                 key={item.id}
               >

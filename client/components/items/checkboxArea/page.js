@@ -1,24 +1,19 @@
-import React, { useEffect, useState } from "react";
-import styles from "../../../styles/checkBoxArea/checkboxarea.module.css";
+import React, { useEffect, useState } from 'react';
+import styles from '../../../styles/checkBoxArea/checkboxarea.module.css';
 
 const CheckBoxArea = ({ sectionTitle, checkboxItems }) => {
   const [checkItems, setCheckItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-    console.log(name, checked);
     setSelectedItems({ ...selectedItems, [name]: checked });
   };
-  useEffect(() => {
-    console.log(checkItems);
-  }, [checkItems]);
+  useEffect(() => {}, [checkItems]);
   useEffect(() => {
     // checkboxItems.size > 0 && setCheckItems(checkboxItems);
     checkboxItems && setCheckItems(checkboxItems);
   }, [checkboxItems]);
-  useEffect(() => {
-    console.log(selectedItems);
-  }, [selectedItems]);
+  useEffect(() => {}, [selectedItems]);
   return (
     <div className={styles.checkBoxAreaContainer}>
       <div className={styles.sectionTitle}>{sectionTitle}</div>
