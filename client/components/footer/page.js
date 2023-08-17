@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "../../styles/footer/footer.module.css";
-import Link from "next/link";
+import React from 'react';
+import styles from '../../styles/footer/footer.module.css';
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -19,12 +19,12 @@ const Footer = () => {
           </div>
         </div> */}
         <div className={styles.footerSiteInfo}>
-          This site is a project developed by{" "}
-          <a target="_blank" href={"https://github.com/gagantripathi22"}>
+          This site is a project developed by{' '}
+          <a target="_blank" href={'https://github.com/gagantripathi22'}>
             <span className={styles.footerSiteInfoLink}>@gagantripathi22</span>
           </a>
-          . Check out{" "}
-          <a target="_blank" href={"https://gagan.vercel.app"}>
+          . Check out{' '}
+          <a target="_blank" href={'https://gagan.vercel.app'}>
             <span className={styles.footerSiteInfoLink}>portfolio</span>
           </a>
           .

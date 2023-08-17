@@ -83,7 +83,7 @@ const Header = () => {
               className={styles.mobileNavBtn}
               style={{
                 transform: mobileNavVisible && 'rotate(180deg)',
-                opacity: scrollYPos < 50 ? 0 : 1,
+                // opacity: scrollYPos < 50 ? 0 : 1,
               }}
               onClick={() => setMobileNavVisible((prev) => !prev)}
             >
