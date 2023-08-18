@@ -16,12 +16,19 @@
 ## Running the Project
 
 - Clone this project
+  
   `git clone < project-url.git >`
+
   
 - Install dependencies
+  
   `npm install`
+  
   Install dependencies in both **client** and **server** folder.
   
+  
 - Run
+
   `npm run both-dev`
+  
   Run this command inside the **server** folder.
