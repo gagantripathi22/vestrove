@@ -143,7 +143,8 @@
 }
 
 .heroCardButton {
-  padding: 12px 45px;
+  height: 40px;
+  width: 120px;
   flex-shrink: 0;
   border: 1px solid #444444;
   display: flex;

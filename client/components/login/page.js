@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import VerifyToken from '../../services/verifyToken';
 import jwt_decode from 'jwt-decode';
 import InitializeData from '@/app/Redux/features/initialize/initialize';
+import LoginHero from '../../public/women.webp';
 import { useDispatch } from 'react-redux';
 import {
   addToWishlist,
@@ -74,6 +75,7 @@ const Login = ({ handleLogin, handleSignUp }) => {
       signupEmail,
       signupPassword
     );
+    console.log(res);
     if (res.token) {
       await localStorage.setItem('access-token', res.token);
       await addDataToRedux(res.token);
@@ -131,14 +133,15 @@ const Login = ({ handleLogin, handleSignUp }) => {
           <div className={styles.showcaseImageContainer}>
             <Image
               alt=""
-              src={showcaseImages[currentShowcaseImage]?.src}
+              // src={showcaseImages[currentShowcaseImage]?.src}
+              src={LoginHero}
               width={400}
               height={100}
               className={styles.showcaseImage}
             />
-            <div className={styles.categoryNewArrivalItemText}>
+            {/* <div className={styles.categoryNewArrivalItemText}>
               {showcaseImages[currentShowcaseImage]?.name}
-            </div>
+            </div> */}
             <div className={getCurrentImageEffectClass()}></div>
           </div>
         </div>
@@ -146,13 +149,13 @@ const Login = ({ handleLogin, handleSignUp }) => {
           {showLogin ? (
             <div className={styles.loginFormContainer}>
               <h2 className={styles.loginSectionHeading}>Log In</h2>
-
               <form className={styles.loginForm}>
                 <div className={styles.plainInputContainer}>
                   <h5 className={styles.plainInputName}>email</h5>
                   <input
-                    type="text"
+                    type="email"
                     value={loginEmail}
+                    name="email"
                     onChange={(e) => setLoginEmail(e.target.value)}
                     className={styles.plainInputField}
                   ></input>
@@ -161,6 +164,7 @@ const Login = ({ handleLogin, handleSignUp }) => {
                   <h5 className={styles.plainInputName}>password</h5>
                   <input
                     type="password"
+                    name="password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     className={styles.plainInputField}
@@ -182,7 +186,7 @@ const Login = ({ handleLogin, handleSignUp }) => {
             <div className={styles.loginFormContainer}>
               <h2 className={styles.loginSectionHeading}>Sign Up</h2>
 
-              <form className={styles.loginForm}>
+              <form className={styles.loginForm} autoComplete="off">
                 <div className={styles.plainInputContainer}>
                   <h5 className={styles.plainInputName}>first name</h5>
                   <input
@@ -214,6 +218,7 @@ const Login = ({ handleLogin, handleSignUp }) => {
                   <h5 className={styles.plainInputName}>password</h5>
                   <input
                     type="password"
+                    autoComplete="off"
                     value={signupPassword}
                     onChange={(e) => setSignupPassword(e.target.value)}
                     className={styles.plainInputField}

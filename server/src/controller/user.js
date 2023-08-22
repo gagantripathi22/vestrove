@@ -1,7 +1,7 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
-const Item = require("../models/item");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user');
+const Item = require('../models/item');
 
 const saltRounds = 10;
 
@@ -18,21 +18,26 @@ const signUp = async (req, res) => {
     _id: data._id,
   };
   try {
-    bcrypt.hash(data.password, saltRounds).then(async function (hash) {
-      data.password = hash;
-      console.log(data);
-      const dataToSave = await data.save();
-      res.status(200);
-      console.log(dataToSave);
-      jwt.sign(
-        { fetchedUserTokenData },
-        process.env.JWT_SECRET_KEY,
-        { expiresIn: "86400s" },
-        (err, token) => {
-          res.json({ token, user: dataToSave });
-        }
-      );
-    });
+    const findEmail = await User.find({ email: req.body.email });
+    if (findEmail.length > 0) {
+      res.status(409).json({ message: 'This email is already registered' });
+    } else {
+      bcrypt.hash(data.password, saltRounds).then(async function (hash) {
+        data.password = hash;
+        console.log(data);
+        const dataToSave = await data.save();
+        res.status(200);
+        console.log(dataToSave);
+        jwt.sign(
+          { fetchedUserTokenData },
+          process.env.JWT_SECRET_KEY,
+          { expiresIn: '86400s' },
+          (err, token) => {
+            res.json({ token, user: dataToSave });
+          }
+        );
+      });
+    }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -57,7 +62,7 @@ const login = async (req, res) => {
         jwt.sign(
           { fetchedUserTokenData },
           process.env.JWT_SECRET_KEY,
-          { expiresIn: "86400s" },
+          { expiresIn: '86400s' },
           (err, token) => {
             res.json({
               token,
@@ -66,10 +71,10 @@ const login = async (req, res) => {
           }
         );
       } else {
-        res.status(400).json("Incorrect Credentials");
+        res.status(400).json('Incorrect Credentials');
       }
     } else {
-      res.status(400).json("Invalid Credentials");
+      res.status(400).json('Invalid Credentials');
     }
   } catch (err) {
     res.status(400).json({ message: err });
@@ -133,7 +138,7 @@ const removeFromWishlist = async (req, res) => {
 };
 
 const getUserInfo = async (req, res) => {
-  console.log("getuserinfo inside");
+  console.log('getuserinfo inside');
   try {
     const userIdToFetch = req.body.userId;
     const fetchUser = await User.find({ _id: userIdToFetch });
@@ -253,7 +258,7 @@ const updatePassword = async (req, res) => {
         res.status(400).json(error);
       }
     } else {
-      res.status(400).json("Incorrect Current Password");
+      res.status(400).json('Incorrect Current Password');
     }
   } catch (error) {
     res.status(400).json(error.messsage);
