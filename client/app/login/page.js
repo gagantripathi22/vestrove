@@ -18,7 +18,7 @@ async function handleLogin(email, password) {
       }),
     }
   );
-  if (tryLogin.status == 200) {
+  if (tryLogin.status == 200 || tryLogin.status == 409) {
     return tryLogin.json();
   } else {
     return 'invalid credentials';
@@ -44,7 +44,7 @@ async function handleSignUp(firstname, lastname, email, password) {
       }),
     }
   );
-  if (trySignup.status == 200) {
+  if (trySignup.status == 200 || trySignup.status == 409) {
     return trySignup.json();
   } else {
     return 'error signing up';

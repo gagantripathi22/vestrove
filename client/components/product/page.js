@@ -8,6 +8,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import Head from 'next/head';
 import WishlistIcon from '../../public/wishlist.svg';
 import WishlistIconRed from '../../public/wishlist-red.svg';
+import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   addToCart,
@@ -21,6 +22,7 @@ import LoadingSvg from '../../public/loading-sphere.svg';
 const Product = ({ handleProductFetch }) => {
   const dispatch = useDispatch();
   const userSelector = (state) => state.user;
+  const router = useRouter();
   const userData = useSelector(userSelector);
   const productId = usePathname().split('/')[2];
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
@@ -61,29 +63,33 @@ const Product = ({ handleProductFetch }) => {
     // setProductData(productData);
   };
   const handleAddToWishlist = async () => {
-    setIsLoadingBtn(true);
-    const tryAddToWishlist = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToWishlist`,
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'x-access-token': `Bearer ${userData.token}`,
-        },
-        body: JSON.stringify({
-          email: userData.email,
-          itemId: productId,
-        }),
+    if (userData._id !== '') {
+      setIsLoadingBtn(true);
+      const tryAddToWishlist = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToWishlist`,
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': `Bearer ${userData.token}`,
+          },
+          body: JSON.stringify({
+            email: userData.email,
+            itemId: productId,
+          }),
+        }
+      );
+      if (tryAddToWishlist.status == 200) {
+        setIsLoadingBtn(false);
+        dispatch(addToWishlist(productId));
+        setIsProductInWishlist((prev) => !prev);
+      } else {
+        setIsLoadingBtn(false);
+        return 'invalid credentials';
       }
-    );
-    if (tryAddToWishlist.status == 200) {
-      setIsLoadingBtn(false);
-      dispatch(addToWishlist(productId));
-      setIsProductInWishlist((prev) => !prev);
     } else {
-      setIsLoadingBtn(false);
-      return 'invalid credentials';
+      router.push('/login');
     }
   };
   const handleRemoveFromWishlist = async () => {
@@ -113,29 +119,33 @@ const Product = ({ handleProductFetch }) => {
     }
   };
   const handleAddToCart = async () => {
-    setIsLoadingBtn(true);
-    const tryAddToCart = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToCart`,
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'x-access-token': `Bearer ${userData.token}`,
-        },
-        body: JSON.stringify({
-          email: userData.email,
-          itemId: productId,
-        }),
+    if (userData._id !== '') {
+      setIsLoadingBtn(true);
+      const tryAddToCart = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/user/addToCart`,
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            'x-access-token': `Bearer ${userData.token}`,
+          },
+          body: JSON.stringify({
+            email: userData.email,
+            itemId: productId,
+          }),
+        }
+      );
+      if (tryAddToCart.status == 200) {
+        setIsLoadingBtn(false);
+        dispatch(addToCart(productId));
+        setIsProductInCart((prev) => !prev);
+      } else {
+        setIsLoadingBtn(false);
+        return 'invalid credentials';
       }
-    );
-    if (tryAddToCart.status == 200) {
-      setIsLoadingBtn(false);
-      dispatch(addToCart(productId));
-      setIsProductInCart((prev) => !prev);
     } else {
-      setIsLoadingBtn(false);
-      return 'invalid credentials';
+      router.push('/login');
     }
   };
   const handleRemoveFromCart = async () => {

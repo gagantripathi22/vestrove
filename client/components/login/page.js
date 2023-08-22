@@ -64,23 +64,34 @@ const Login = ({ handleLogin, handleSignUp }) => {
       await addDataToRedux(res.token);
     } else {
       setUserInputInfo(res);
+      setSignupLoading(false);
     }
   };
 
   const handleSignUpBtnClick = async () => {
-    setSignupLoading(true);
-    const res = await handleSignUp(
-      signupFirstname,
-      signupLastname,
-      signupEmail,
-      signupPassword
-    );
-    console.log(res);
-    if (res.token) {
-      await localStorage.setItem('access-token', res.token);
-      await addDataToRedux(res.token);
+    if (signupPassword.length >= 8) {
+      setSignupLoading(true);
+      const res = await handleSignUp(
+        signupFirstname,
+        signupLastname,
+        signupEmail,
+        signupPassword
+      );
+      console.log(res);
+      if (res.message) {
+        console.log('409');
+        setUserInputInfo(res.message);
+        setSignupLoading(false);
+      } else if (res.token) {
+        console.log('200');
+        await localStorage.setItem('access-token', res.token);
+        await addDataToRedux(res.token);
+      } else {
+        console.log('404');
+        setUserInputInfo(false);
+      }
     } else {
-      setUserInputInfo(res);
+      setUserInputInfo('Password should be atleast 8 character long');
     }
   };
 
@@ -175,7 +186,10 @@ const Login = ({ handleLogin, handleSignUp }) => {
                 </div>
                 <div
                   className={styles.createAccText}
-                  onClick={() => setShowLogin((prev) => !prev)}
+                  onClick={() => {
+                    setShowLogin((prev) => !prev);
+                    setUserInputInfo('');
+                  }}
                 >
                   Create New Account ?
                 </div>
@@ -229,10 +243,14 @@ const Login = ({ handleLogin, handleSignUp }) => {
                 </div>
                 <div
                   className={styles.createAccText}
-                  onClick={() => setShowLogin((prev) => !prev)}
+                  onClick={() => {
+                    setShowLogin((prev) => !prev);
+                    setUserInputInfo('');
+                  }}
                 >
                   Already Have An Account ?
                 </div>
+                <div className={styles.userInputInfo}>{userInputInfo}</div>
               </form>
             </div>
           )}
